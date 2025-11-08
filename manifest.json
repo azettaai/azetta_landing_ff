@@ -1,5 +1,5 @@
 {
-  "name": "Azetta.ai - Transparent AI Architecture",
+  "name": "Azetta.ai -  AI systems built from first principles",
   "short_name": "Azetta.ai",
   "description": "Revolutionary white-box AI architecture built from first principles",
   "start_url": "/",
@@ -9,13 +9,12 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
     },
     {
-      "src": "/icon-512x512.png",
+      "src": "/logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
