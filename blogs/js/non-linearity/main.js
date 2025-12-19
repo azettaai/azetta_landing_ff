@@ -15,6 +15,8 @@ import { initVizEntropy } from './viz-entropy.js';
 import { initVizDimensions } from './viz-dimensions.js';
 import { initVizYatMatrix } from './viz-yat-matrix.js';
 import { initVizMetricCompare } from './viz-metric-compare.js';
+import { initVizGradients } from './viz-gradients.js';
+import { initVizBoundaries } from './viz-boundaries.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     initViz2D();
@@ -29,4 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initVizDimensions();
     initVizYatMatrix();
     initVizMetricCompare();
+    initVizGradients();
+    initVizBoundaries();
 });

@@ -596,6 +596,144 @@
                 </section>
 
                 <section>
+                    <h2>The Gradient Fields</h2>
+                    <p>
+                        To truly understand how different metrics "see" space, we must examine their
+                        <strong>gradients</strong>—the direction each metric tells you to move to increase
+                        similarity. Like electric field lines around charges, these gradients reveal the
+                        fundamental geometry of each metric.
+                    </p>
+                    <p>
+                        <strong>Euclidean Distance</strong> has simple gradients: they point radially away from
+                        the anchor (or toward it, for similarity). The field is symmetric and uniform—every
+                        direction away from the anchor is equivalent.
+                    </p>
+                    <p>
+                        <strong>Dot Product</strong> gradients are even simpler: they're constant everywhere,
+                        pointing in the direction of the anchor vector itself. No matter where you are,
+                        the gradient always points the same way.
+                    </p>
+                    <p>
+                        <strong>Yat</strong> is where it gets interesting. Its gradients curve and spiral around
+                        anchors, creating complex field patterns that capture both alignment and distance
+                        simultaneously. Add multiple anchors and watch how the gradient field changes—like
+                        superimposed electric fields from multiple charges.
+                    </p>
+
+                    <!-- Gradient Field Viz -->
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Gradient Field Comparison</span>
+                            <span class="viz-hint">Click to add anchors • Buttons to switch metrics</span>
+                        </div>
+                        <canvas id="viz-gradients" class="viz-canvas" style="height: 400px;"></canvas>
+                        <div class="viz-controls"
+                            style="display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; background: rgba(0,0,0,0.3);">
+                            <button id="viz-grad-yat"
+                                style="padding: 8px 16px; background: rgba(27,153,139,0.5); border: 1px solid #1b998b; color: #1b998b; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold;">Yat</button>
+                            <button id="viz-grad-euclidean"
+                                style="padding: 8px 16px; background: rgba(244,162,97,0.3); border: 1px solid #f4a261; color: #f4a261; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Euclidean</button>
+                            <button id="viz-grad-dot"
+                                style="padding: 8px 16px; background: rgba(155,93,229,0.3); border: 1px solid #9b5de5; color: #9b5de5; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Dot
+                                Product</button>
+                            <button id="viz-grad-add"
+                                style="padding: 8px 16px; background: rgba(230,126,163,0.3); border: 1px solid #e67ea3; color: #e67ea3; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">+
+                                Add Anchor</button>
+                            <button id="viz-grad-reset"
+                                style="padding: 8px 16px; background: rgba(100,100,100,0.3); border: 1px solid #888; color: #aaa; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Reset</button>
+                        </div>
+                        <div class="viz-caption">
+                            <strong>Electrostatic analogy:</strong> Each anchor is a "charge" creating a gradient field.
+                            Arrows show the direction of steepest increase. Notice how Yat gradients <em>curve</em>
+                            around anchors while Euclidean gradients point straight outward.
+                        </div>
+                    </div>
+
+                    <div class="insight-box">
+                        <strong>The Key Insight:</strong> Euclidean distance treats all directions equally—it only
+                        cares about "how far." Dot product only cares about "which direction." The Yat combines
+                        both, creating gradient fields that curve based on the <em>relationship</em> between
+                        position and anchor—not just their separation.
+                    </div>
+
+                    <p>
+                        When you add multiple anchors, you see how gradient fields superimpose.
+                        Euclidean gradients simply add radially. Dot product gradients stack in parallel.
+                        But Yat gradients twist and curve, creating complex flow patterns that reflect
+                        the interplay of angle and distance from each anchor.
+                    </p>
+                    <p>
+                        This is why Yat-based methods can solve problems that seem "non-linear" to traditional
+                        metrics—they're not actually non-linear at all. The space was always curved; we just
+                        weren't measuring it correctly.
+                    </p>
+                </section>
+
+                <section>
+                    <h2>Decision Boundaries & The Polarity Paradox</h2>
+                    <p>
+                        Gradients tell us which way to move, but <strong>decision boundaries</strong> tell us
+                        which anchor "wins" at each point. When we apply softmax across anchors, each metric
+                        creates radically different decision surfaces.
+                    </p>
+                    <p>
+                        Here's where Yat reveals something surprising. Because it uses the <em>squared</em>
+                        dot product, <strong>opposite vectors activate the same anchor</strong>. A vector pointing
+                        at $(-1, -1)$ activates anchor $(1, 1)$ just as strongly as $(1, 1)$ itself does—both
+                        are "aligned" in Yat's view, just with opposite polarity.
+                    </p>
+                    <p>
+                        This is the <strong>superposition</strong> effect: the Yat metric sees parallel and
+                        anti-parallel as equally "linear" relationships. This is mathematically correct—
+                        anti-parallel vectors <em>are</em> linearly related (one is just the negative of the other).
+                    </p>
+
+                    <!-- Boundaries Viz -->
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Decision Boundaries (Softmax)</span>
+                            <span class="viz-hint">Click to add anchors • Compare how each metric partitions
+                                space</span>
+                        </div>
+                        <canvas id="viz-boundaries" class="viz-canvas" style="height: 400px;"></canvas>
+                        <div class="viz-controls"
+                            style="display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; background: rgba(0,0,0,0.3);">
+                            <button id="viz-bound-yat"
+                                style="padding: 8px 16px; background: rgba(27,153,139,0.5); border: 1px solid #1b998b; color: #1b998b; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold;">Yat</button>
+                            <button id="viz-bound-euclidean"
+                                style="padding: 8px 16px; background: rgba(244,162,97,0.3); border: 1px solid #f4a261; color: #f4a261; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Euclidean</button>
+                            <button id="viz-bound-dot"
+                                style="padding: 8px 16px; background: rgba(155,93,229,0.3); border: 1px solid #9b5de5; color: #9b5de5; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Dot
+                                Product</button>
+                            <button id="viz-bound-add"
+                                style="padding: 8px 16px; background: rgba(230,126,163,0.3); border: 1px solid #e67ea3; color: #e67ea3; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">+
+                                Add Anchor</button>
+                            <button id="viz-bound-reset"
+                                style="padding: 8px 16px; background: rgba(100,100,100,0.3); border: 1px solid #888; color: #aaa; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Reset</button>
+                        </div>
+                        <div class="viz-caption">
+                            <strong>The Polarity Paradox:</strong> With Yat, notice how anchor A's region extends to the
+                            <em>opposite</em> side of the origin. The squared dot product $(x \cdot a)^2$ treats
+                            parallel and anti-parallel equally—both represent linear relationships.
+                        </div>
+                    </div>
+
+                    <div class="insight-box">
+                        <strong>Why This Matters:</strong> Traditional dot product gives negative values for opposite
+                        vectors, treating them as "dissimilar." Yat's squared formulation recognizes that
+                        $-\vec{v}$ and $\vec{v}$ carry the <em>same information</em> about linearity—they're
+                        both perfectly aligned, just with flipped sign. This is geometrically correct.
+                    </div>
+
+                    <p>
+                        Compare the three metrics: Euclidean creates classic Voronoi-like regions based purely on
+                        proximity. Dot product creates linear hyperplane boundaries. But Yat creates <em>curved,
+                            bipolar</em> regions that wrap around the origin—reflecting its understanding that
+                        alignment matters more than direction.
+                    </p>
+                </section>
+
+                <section>
                     <h2>Why This Matters</h2>
                     <p>
                         This isn't abstract theory. It's a practical framework that changes how we
