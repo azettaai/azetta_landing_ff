@@ -22,9 +22,9 @@ export function initVizPaths() {
     const biologyParticles = [];
     const physicsParticles = [];
 
-    for (let i = 0; i < 8; i++) {
-        biologyParticles.push({ progress: Math.random(), speed: 0.002 + Math.random() * 0.002 });
-        physicsParticles.push({ progress: Math.random(), speed: 0.003 + Math.random() * 0.002 });
+    for (let i = 0; i < 5; i++) {
+        biologyParticles.push({ progress: Math.random(), speed: 0.002 + Math.random() * 0.001 });
+        physicsParticles.push({ progress: Math.random(), speed: 0.003 + Math.random() * 0.001 });
     }
 
     function draw() {
@@ -34,193 +34,182 @@ export function initVizPaths() {
         ctx.fillStyle = '#0d0d15';
         ctx.fillRect(0, 0, w, h);
 
-        const startX = w * 0.12;
-        const endX = w * 0.88;
+        // Generous spacing
+        const startX = w * 0.08;
+        const endX = w * 0.92;
+        const topPathY = h * 0.22;
+        const bottomPathY = h * 0.78;
         const centerY = h * 0.5;
-        const topPathY = h * 0.28;
-        const bottomPathY = h * 0.72;
 
-        // === STARTING POINT ===
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        // Divider line
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 6]);
         ctx.beginPath();
-        ctx.arc(startX, centerY, 30, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-        ctx.lineWidth = 2;
+        ctx.moveTo(startX + 60, centerY);
+        ctx.lineTo(endX - 60, centerY);
         ctx.stroke();
-        drawText(ctx, 'TODAY', startX, centerY + 4, { color: '#888', size: 9 });
-        drawText(ctx, 'Current AI', startX, centerY + 45, { color: '#555', size: 8 });
+        ctx.setLineDash([]);
 
-        // === BIOLOGY PATH (TOP) - Chaotic, uncertain, dead end ===
-        // Dark fog effect
-        const fogGrad = ctx.createLinearGradient(startX, topPathY - 40, endX - 80, topPathY - 40);
-        fogGrad.addColorStop(0, 'rgba(237, 33, 124, 0)');
-        fogGrad.addColorStop(0.3, 'rgba(237, 33, 124, 0.08)');
-        fogGrad.addColorStop(0.7, 'rgba(237, 33, 124, 0.15)');
-        fogGrad.addColorStop(1, 'rgba(237, 33, 124, 0.05)');
-        ctx.fillStyle = fogGrad;
-        ctx.fillRect(startX + 30, topPathY - 60, w * 0.55, 80);
+        // === TOP: BIOLOGY PATH ===
+        const bioStartY = topPathY + 30;
+        const wallX = endX - 80;
 
-        // Wavy uncertain path
+        // Background fog
+        ctx.fillStyle = 'rgba(237, 33, 124, 0.05)';
+        ctx.fillRect(startX, topPathY - 20, wallX - startX + 20, h * 0.25);
+
+        // Chaotic wavy path
         ctx.strokeStyle = COLORS.secondary;
         ctx.lineWidth = 3;
-        ctx.setLineDash([8, 4]);
+        ctx.setLineDash([6, 4]);
         ctx.beginPath();
-        ctx.moveTo(startX + 28, centerY - 15);
+        ctx.moveTo(startX + 20, bioStartY);
 
-        const wallX = endX - 100;
-        for (let x = startX + 40; x < wallX; x += 4) {
+        for (let x = startX + 30; x < wallX - 20; x += 5) {
             const progress = (x - startX) / (wallX - startX);
-            const baseY = centerY - 15 + (topPathY - centerY + 15) * Math.sin(progress * Math.PI * 0.9);
-            const chaos = Math.sin(x * 0.15 + time * 0.04) * 12 + Math.sin(x * 0.08) * 8;
-            ctx.lineTo(x, baseY + chaos);
+            const wave1 = Math.sin(x * 0.08 + time * 0.03) * 15;
+            const wave2 = Math.sin(x * 0.12) * 10;
+            const drift = Math.sin(progress * Math.PI) * -20;
+            ctx.lineTo(x, bioStartY + wave1 + wave2 + drift);
         }
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // DEAD END WALL
-        ctx.fillStyle = 'rgba(237, 33, 124, 0.2)';
-        ctx.fillRect(wallX - 10, topPathY - 50, 20, 100);
+        // Dead end wall
+        ctx.fillStyle = 'rgba(237, 33, 124, 0.25)';
+        ctx.fillRect(wallX - 8, topPathY - 10, 16, h * 0.22);
+        ctx.strokeStyle = COLORS.secondary;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(wallX - 8, topPathY - 10, 16, h * 0.22);
+
+        // X mark on wall
         ctx.strokeStyle = COLORS.secondary;
         ctx.lineWidth = 3;
-        ctx.strokeRect(wallX - 10, topPathY - 50, 20, 100);
-
-        // X mark
-        ctx.strokeStyle = COLORS.secondary;
-        ctx.lineWidth = 4;
         ctx.beginPath();
-        ctx.moveTo(wallX - 15, topPathY - 15);
-        ctx.lineTo(wallX + 15, topPathY + 15);
-        ctx.moveTo(wallX + 15, topPathY - 15);
-        ctx.lineTo(wallX - 15, topPathY + 15);
+        ctx.moveTo(wallX - 12, topPathY + 30);
+        ctx.lineTo(wallX + 12, topPathY + 60);
+        ctx.moveTo(wallX + 12, topPathY + 30);
+        ctx.lineTo(wallX - 12, topPathY + 60);
         ctx.stroke();
 
-        // Biology particles (wandering, confused)
-        biologyParticles.forEach((p, i) => {
+        // Biology particles
+        biologyParticles.forEach(p => {
             p.progress += p.speed;
-            if (p.progress > 0.95) p.progress = 0;
+            if (p.progress > 0.92) p.progress = 0;
 
-            const px = startX + 40 + (wallX - startX - 60) * p.progress;
-            const baseY = centerY - 15 + (topPathY - centerY + 15) * Math.sin(p.progress * Math.PI * 0.9);
-            const chaos = Math.sin(px * 0.15 + time * 0.04) * 12 + Math.sin(px * 0.08) * 8;
-            const py = baseY + chaos;
+            const px = startX + 20 + (wallX - startX - 50) * p.progress;
+            const progress = p.progress;
+            const wave1 = Math.sin(px * 0.08 + time * 0.03) * 15;
+            const wave2 = Math.sin(px * 0.12) * 10;
+            const drift = Math.sin(progress * Math.PI) * -20;
+            const py = bioStartY + wave1 + wave2 + drift;
 
-            ctx.fillStyle = `rgba(237, 33, 124, ${0.4 + p.progress * 0.3})`;
+            ctx.fillStyle = COLORS.secondary;
             ctx.beginPath();
             ctx.arc(px, py, 4, 0, Math.PI * 2);
             ctx.fill();
         });
 
-        // Labels
-        drawText(ctx, 'BIOLOGY PATH', w * 0.4, topPathY - 55, { color: COLORS.secondary, size: 10 });
-        drawText(ctx, '"Scale it up and hope"', w * 0.4, topPathY - 40, { color: '#666', size: 8 });
-        drawText(ctx, 'DEAD', wallX, topPathY + 55, { color: COLORS.secondary, size: 10 });
-        drawText(ctx, 'END', wallX, topPathY + 68, { color: COLORS.secondary, size: 10 });
+        // Biology labels
+        drawText(ctx, 'BIOLOGY PATH', startX + 20, topPathY - 30, { color: COLORS.secondary, size: 11, align: 'left' });
+        drawText(ctx, '"Scale it up and hope for emergence"', startX + 20, topPathY - 15, { color: '#555', size: 8, align: 'left' });
+        drawText(ctx, 'DEAD END', wallX, topPathY + h * 0.25 + 15, { color: COLORS.secondary, size: 10 });
 
-        // === PHYSICS PATH (BOTTOM) - Clean, direct, reaches goal ===
+        // === BOTTOM: PHYSICS PATH ===
+        const physStartY = bottomPathY - 30;
+        const goalX = endX - 40;
+
         // Light trail glow
-        const trailGrad = ctx.createLinearGradient(startX, bottomPathY, endX, bottomPathY);
-        trailGrad.addColorStop(0, 'rgba(27, 153, 139, 0)');
-        trailGrad.addColorStop(0.3, 'rgba(27, 153, 139, 0.15)');
-        trailGrad.addColorStop(0.7, 'rgba(27, 153, 139, 0.25)');
-        trailGrad.addColorStop(1, 'rgba(27, 153, 139, 0.4)');
-        ctx.fillStyle = trailGrad;
-        ctx.beginPath();
-        ctx.moveTo(startX + 30, centerY + 15);
-        ctx.quadraticCurveTo(w * 0.4, centerY + 40, w * 0.55, bottomPathY);
-        ctx.lineTo(endX - 35, centerY);
-        ctx.lineTo(endX - 35, centerY + 20);
-        ctx.quadraticCurveTo(w * 0.55, bottomPathY + 30, startX + 30, centerY + 30);
-        ctx.closePath();
-        ctx.fill();
+        ctx.fillStyle = 'rgba(27, 153, 139, 0.08)';
+        ctx.fillRect(startX, bottomPathY - h * 0.12, endX - startX, h * 0.25);
 
-        // Clean direct path
+        // Clean smooth path
         ctx.strokeStyle = COLORS.primary;
         ctx.lineWidth = 4;
         ctx.beginPath();
-        ctx.moveTo(startX + 28, centerY + 15);
-        ctx.quadraticCurveTo(w * 0.35, centerY + 30, w * 0.5, bottomPathY);
-        ctx.quadraticCurveTo(w * 0.7, bottomPathY - 10, endX - 35, centerY);
+        ctx.moveTo(startX + 20, physStartY);
+        ctx.bezierCurveTo(
+            w * 0.35, physStartY + 20,
+            w * 0.65, physStartY - 20,
+            goalX - 35, physStartY
+        );
         ctx.stroke();
 
-        // Glow on path
-        ctx.strokeStyle = 'rgba(27, 153, 139, 0.3)';
+        // Glow effect
+        ctx.strokeStyle = 'rgba(27, 153, 139, 0.2)';
         ctx.lineWidth = 12;
         ctx.beginPath();
-        ctx.moveTo(startX + 28, centerY + 15);
-        ctx.quadraticCurveTo(w * 0.35, centerY + 30, w * 0.5, bottomPathY);
-        ctx.quadraticCurveTo(w * 0.7, bottomPathY - 10, endX - 35, centerY);
+        ctx.moveTo(startX + 20, physStartY);
+        ctx.bezierCurveTo(
+            w * 0.35, physStartY + 20,
+            w * 0.65, physStartY - 20,
+            goalX - 35, physStartY
+        );
         ctx.stroke();
 
-        // Physics particles (smooth, directed)
-        physicsParticles.forEach((p, i) => {
+        // Physics particles with trails
+        physicsParticles.forEach(p => {
             p.progress += p.speed;
             if (p.progress > 1) p.progress = 0;
 
-            // Bezier curve position
             const t = p.progress;
-            const t2 = t * t;
             const mt = 1 - t;
-            const mt2 = mt * mt;
 
-            // Two-segment bezier approximation
-            let px, py;
-            if (t < 0.5) {
-                const st = t * 2;
-                px = startX + 28 + (w * 0.5 - startX - 28) * st;
-                py = centerY + 15 + (bottomPathY - centerY - 15) * Math.sin(st * Math.PI / 2);
-            } else {
-                const st = (t - 0.5) * 2;
-                px = w * 0.5 + (endX - 35 - w * 0.5) * st;
-                py = bottomPathY + (centerY - bottomPathY) * Math.sin(st * Math.PI / 2);
-            }
+            // Bezier position
+            const px = mt * mt * mt * (startX + 20) +
+                3 * mt * mt * t * (w * 0.35) +
+                3 * mt * t * t * (w * 0.65) +
+                t * t * t * (goalX - 35);
+            const py = mt * mt * mt * physStartY +
+                3 * mt * mt * t * (physStartY + 20) +
+                3 * mt * t * t * (physStartY - 20) +
+                t * t * t * physStartY;
 
-            ctx.fillStyle = `rgba(27, 153, 139, ${0.6 + t * 0.4})`;
+            // Trail
+            ctx.fillStyle = 'rgba(27, 153, 139, 0.3)';
+            ctx.beginPath();
+            ctx.arc(px - 10, py, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Particle
+            ctx.fillStyle = COLORS.primary;
             ctx.beginPath();
             ctx.arc(px, py, 5, 0, Math.PI * 2);
             ctx.fill();
-
-            // Trail
-            ctx.fillStyle = `rgba(27, 153, 139, ${0.2})`;
-            ctx.beginPath();
-            ctx.arc(px - 8, py, 3, 0, Math.PI * 2);
-            ctx.fill();
         });
 
-        // Labels
-        drawText(ctx, 'PHYSICS PATH', w * 0.5, bottomPathY + 35, { color: COLORS.primary, size: 10 });
-        drawText(ctx, '"First principles"', w * 0.5, bottomPathY + 50, { color: '#666', size: 8 });
+        // Physics labels
+        drawText(ctx, 'PHYSICS PATH', startX + 20, bottomPathY + h * 0.15, { color: COLORS.primary, size: 11, align: 'left' });
+        drawText(ctx, '"Understand first principles"', startX + 20, bottomPathY + h * 0.15 + 15, { color: '#555', size: 8, align: 'left' });
 
         // === AGI GOAL ===
-        const pulse = Math.sin(time * 0.04) * 0.3 + 0.7;
+        const pulse = Math.sin(time * 0.04) * 0.2 + 0.8;
 
-        // Outer glow rings
-        for (let r = 50; r > 30; r -= 8) {
-            ctx.fillStyle = `rgba(27, 153, 139, ${0.1 * pulse * (50 - r) / 20})`;
+        // Outer rings
+        for (let r = 40; r > 25; r -= 6) {
+            ctx.fillStyle = `rgba(27, 153, 139, ${0.15 * pulse * (40 - r) / 15})`;
             ctx.beginPath();
-            ctx.arc(endX, centerY, r, 0, Math.PI * 2);
+            ctx.arc(goalX, physStartY, r, 0, Math.PI * 2);
             ctx.fill();
         }
 
-        // Goal circle
-        const goalGrad = ctx.createRadialGradient(endX, centerY, 0, endX, centerY, 30);
+        // Core
+        const goalGrad = ctx.createRadialGradient(goalX, physStartY, 0, goalX, physStartY, 25);
         goalGrad.addColorStop(0, `rgba(27, 153, 139, ${pulse})`);
-        goalGrad.addColorStop(0.7, `rgba(27, 153, 139, ${0.7 * pulse})`);
-        goalGrad.addColorStop(1, `rgba(27, 153, 139, ${0.4 * pulse})`);
+        goalGrad.addColorStop(1, `rgba(27, 153, 139, ${0.5 * pulse})`);
         ctx.fillStyle = goalGrad;
         ctx.beginPath();
-        ctx.arc(endX, centerY, 30, 0, Math.PI * 2);
+        ctx.arc(goalX, physStartY, 25, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.fillStyle = '#0d0d15';
-        ctx.font = 'bold 12px "Courier New", monospace';
+        ctx.font = 'bold 10px "Courier New", monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('AGI', endX, centerY + 5);
-
-        drawText(ctx, 'True Intelligence', endX, centerY + 48, { color: COLORS.primary, size: 8 });
+        ctx.fillText('AGI', goalX, physStartY + 4);
 
         // Title
-        drawText(ctx, 'Two Paths to Intelligence', w / 2, 18, { color: '#555', size: 10 });
+        drawText(ctx, 'TWO PATHS TO INTELLIGENCE', w / 2, 18, { color: '#666', size: 10 });
 
         time++;
         requestAnimationFrame(draw);
