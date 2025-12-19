@@ -1,241 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <title>The Black Box Dilemma - Azetta.ai Blog</title>
-    <meta
-      name="title"
-      content="The Black Box Dilemma - Azetta.ai Blog"
-    />
-    <meta
-      name="description"
-      content="Exploring why modern AI systems remain opaque and the fundamental problems with black-box architectures in critical applications."
-    />
-    <meta name="author" content="Taha Bouhsine" />
-    <meta name="robots" content="index, follow" />
+<head>
+  <!-- Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://azetta.ai/blogs/black-box-dilemma.html" />
-    <meta
-      property="og:title"
-      content="The Black Box Dilemma - Azetta.ai Blog"
-    />
-    <meta
-      property="og:description"
-      content="Exploring why modern AI systems remain opaque and the fundamental problems with black-box architectures in critical applications."
-    />
-    <meta property="article:published_time" content="2025-11-08" />
-    <meta property="article:author" content="Taha Bouhsine" />
+  <!-- Primary Meta Tags -->
+  <title>The Black Box Dilemma - Azetta.ai Blog</title>
+  <meta name="title" content="The Black Box Dilemma - Azetta.ai Blog" />
+  <meta name="description"
+    content="Exploring why modern AI systems remain opaque and the fundamental problems with black-box architectures in critical applications." />
+  <meta name="author" content="Taha Bouhsine" />
+  <meta name="robots" content="index, follow" />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://azetta.ai/blogs/black-box-dilemma.html" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://azetta.ai/blogs/black-box-dilemma.html" />
+  <meta property="og:title" content="The Black Box Dilemma - Azetta.ai Blog" />
+  <meta property="og:description"
+    content="Exploring why modern AI systems remain opaque and the fundamental problems with black-box architectures in critical applications." />
+  <meta property="article:published_time" content="2025-11-08" />
+  <meta property="article:author" content="Taha Bouhsine" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://azetta.ai/blogs/black-box-dilemma.html" />
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#1b998b" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
 
-    <!-- Stylesheets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles.css" />
-  </head>
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1b998b" />
 
-  <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-container">
-        <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
-          <span>Azetta.ai</span><span class="brand-accent"></span>
-        </a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-        <nav class="primary-nav" id="primary-navigation">
-          <ul class="nav-list">
-            <li><a href="../index.html#hero">Overview</a></li>
-            <li><a href="../index.html#products">Products</a></li>
-            <li><a href="../index.html#system-architecture">Architecture</a></li>
-            <li><a href="../index.html#connect">Contact</a></li>
-            <li><a href="../manifesto.html">Manifesto</a></li>
-            <li><a href="../blogs.html" class="active">Blog</a></li>
-            <li><a href="../news.html">Newsroom</a></li>
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
+        <span>Azetta.ai</span><span class="brand-accent"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html#hero">Overview</a></li>
+          <li><a href="../index.html#products">Products</a></li>
+          <li><a href="../index.html#system-architecture">Architecture</a></li>
+          <li><a href="../index.html#connect">Contact</a></li>
+          <li><a href="../manifesto.html">Manifesto</a></li>
+          <li><a href="../blogs.html" class="active">Blog</a></li>
+          <li><a href="../news.html">Newsroom</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">Join
+            Waitlist</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Article Header -->
+    <article class="blog-article">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="blog-tag">AI Architecture</span>
+          <time class="blog-date" datetime="2025-11-08">November 8, 2025</time>
+        </div>
+        <h1 class="article-title">The Black Box Dilemma</h1>
+        <p class="article-subtitle">
+          Why opacity in AI systems is not just a technical limitation, but a fundamental design flaw
+        </p>
+        <div class="article-author">
+          <span class="author-name">By Taha Bouhsine</span>
+          <span class="read-time">8 min read</span>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="article-content">
+        <section>
+          <h2>The Promise and the Problem</h2>
+          <p>
+            Modern AI systems have achieved remarkable capabilities—from diagnosing diseases to
+            driving cars, from writing code to generating art. Yet beneath this veneer of intelligence
+            lies a troubling reality: we don't truly understand how these systems arrive at their decisions.
+          </p>
+          <p>
+            This is the black box dilemma: the more powerful our AI becomes, the less transparent
+            its reasoning becomes. And this isn't merely an academic concern—it's a critical barrier
+            to deploying AI in high-stakes domains where understanding the "why" is as important as
+            getting the "what" right.
+          </p>
+        </section>
+
+        <section>
+          <h2>The Cost of Opacity</h2>
+          <p>
+            Consider a medical diagnosis system that recommends a treatment plan. The patient asks
+            the doctor: "Why this treatment?" The doctor consults the AI and can only say: "The model
+            says so." This is not just unsatisfying—it's dangerous.
+          </p>
+          <p>
+            In critical applications, opacity creates cascading problems:
+          </p>
+          <ul>
+            <li><strong>Accountability vacuum:</strong> When something goes wrong, who is responsible? The engineer who
+              trained the model? The company that deployed it? The model itself?</li>
+            <li><strong>Debugging impossibility:</strong> When a black box fails, we can't pinpoint why. We can only
+              retrain and hope.</li>
+            <li><strong>Bias amplification:</strong> Hidden biases in training data become invisible biases in
+              deployment, perpetuating and even amplifying societal inequities.</li>
+            <li><strong>Trust erosion:</strong> Users are asked to trust systems they cannot understand, creating a
+              dangerous precedent.</li>
           </ul>
-          <div class="nav-cta">
-            <a
-              class="btn btn-primary"
-              href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist"
-              >Join Waitlist</a
-            >
-          </div>
+        </section>
+
+        <section>
+          <h2>Post-Hoc Explanations Are Not Enough</h2>
+          <p>
+            The industry's current answer to the black box problem is post-hoc explainability:
+            techniques like LIME, SHAP, or attention visualization that attempt to explain
+            what a model did after the fact.
+          </p>
+          <p>
+            But these are approximations of approximations. They don't reveal the model's actual
+            reasoning—they create plausible narratives that may or may not reflect reality. It's
+            like asking a fortune teller to explain quantum mechanics: you'll get an answer, but
+            it won't be grounded in truth.
+          </p>
+        </section>
+
+        <section>
+          <h2>A Different Path Forward</h2>
+          <p>
+            The solution is not to add explainability as an afterthought. It's to build
+            transparency into the architecture itself. This requires rethinking AI from
+            first principles:
+          </p>
+          <ul>
+            <li>What if every computation had semantic meaning?</li>
+            <li>What if we could trace every decision back to its inputs?</li>
+            <li>What if interpretability wasn't a feature, but a fundamental property?</li>
+          </ul>
+          <p>
+            This is the philosophy behind Azetta's approach. We're not trying to explain
+            black boxes—we're building glass boxes from the ground up.
+          </p>
+        </section>
+
+        <section>
+          <h2>The Path to Transparent Intelligence</h2>
+          <p>
+            Creating truly transparent AI systems requires us to reconsider our foundational
+            assumptions. Instead of optimizing for accuracy alone, we must optimize for
+            accuracy AND interpretability simultaneously. This constraint, far from limiting
+            capability, forces us to design more elegant, more robust systems.
+          </p>
+          <p>
+            The black box dilemma is not inevitable. It's a choice—one we can unmake by
+            rebuilding AI with transparency as a core principle, not an afterthought.
+          </p>
+          <p>
+            But building transparent systems isn't just about architecture—it's about choosing
+            the right <em>mathematical foundations</em>. How we <strong>measure</strong> similarity
+            between observations determines whether our reasoning is principled or arbitrary. The
+            metrics we choose encode our assumptions about reality. Choose the wrong metric, and
+            even a perfectly transparent system will give you the wrong answers.
+          </p>
+        </section>
+
+        <!-- Series Navigation -->
+        <nav class="article-series" aria-label="Article series navigation">
+          <h3>Part of the series: Understanding Information</h3>
+          <ul class="series-list">
+            <li class="series-current">
+              <span class="series-number">01</span>
+              <span class="series-title">The Black Box Dilemma</span>
+            </li>
+            <li>
+              <span class="series-number">02</span>
+              <a href="meaning-of-information.html" class="series-title">The Meaning of Information</a>
+            </li>
+            <li>
+              <span class="series-number">03</span>
+              <a href="beyond-the-brain.html" class="series-title">Beyond the Brain: Why Mimicking Biology Won't Lead to
+                AGI</a>
+            </li>
+            <li>
+              <span class="series-number">04</span>
+              <a href="meaning-of-non-linearity.html" class="series-title">The Meaning of Non-Linearity</a>
+            </li>
+          </ul>
         </nav>
       </div>
-    </header>
 
-    <main>
-      <!-- Article Header -->
-      <article class="blog-article">
-        <header class="article-header">
-          <div class="article-meta">
-            <span class="blog-tag">AI Architecture</span>
-            <time class="blog-date" datetime="2025-11-08">November 8, 2025</time>
-          </div>
-          <h1 class="article-title">The Black Box Dilemma</h1>
-          <p class="article-subtitle">
-            Why opacity in AI systems is not just a technical limitation, but a fundamental design flaw
-          </p>
-          <div class="article-author">
-            <span class="author-name">By Taha Bouhsine</span>
-            <span class="read-time">8 min read</span>
-          </div>
-        </header>
-
-        <!-- Article Content -->
-        <div class="article-content">
-          <section>
-            <h2>The Promise and the Problem</h2>
-            <p>
-              Modern AI systems have achieved remarkable capabilities—from diagnosing diseases to 
-              driving cars, from writing code to generating art. Yet beneath this veneer of intelligence 
-              lies a troubling reality: we don't truly understand how these systems arrive at their decisions.
-            </p>
-            <p>
-              This is the black box dilemma: the more powerful our AI becomes, the less transparent 
-              its reasoning becomes. And this isn't merely an academic concern—it's a critical barrier 
-              to deploying AI in high-stakes domains where understanding the "why" is as important as 
-              getting the "what" right.
-            </p>
-          </section>
-
-          <section>
-            <h2>The Cost of Opacity</h2>
-            <p>
-              Consider a medical diagnosis system that recommends a treatment plan. The patient asks 
-              the doctor: "Why this treatment?" The doctor consults the AI and can only say: "The model 
-              says so." This is not just unsatisfying—it's dangerous.
-            </p>
-            <p>
-              In critical applications, opacity creates cascading problems:
-            </p>
-            <ul>
-              <li><strong>Accountability vacuum:</strong> When something goes wrong, who is responsible? The engineer who trained the model? The company that deployed it? The model itself?</li>
-              <li><strong>Debugging impossibility:</strong> When a black box fails, we can't pinpoint why. We can only retrain and hope.</li>
-              <li><strong>Bias amplification:</strong> Hidden biases in training data become invisible biases in deployment, perpetuating and even amplifying societal inequities.</li>
-              <li><strong>Trust erosion:</strong> Users are asked to trust systems they cannot understand, creating a dangerous precedent.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Post-Hoc Explanations Are Not Enough</h2>
-            <p>
-              The industry's current answer to the black box problem is post-hoc explainability: 
-              techniques like LIME, SHAP, or attention visualization that attempt to explain 
-              what a model did after the fact.
-            </p>
-            <p>
-              But these are approximations of approximations. They don't reveal the model's actual 
-              reasoning—they create plausible narratives that may or may not reflect reality. It's 
-              like asking a fortune teller to explain quantum mechanics: you'll get an answer, but 
-              it won't be grounded in truth.
-            </p>
-          </section>
-
-          <section>
-            <h2>A Different Path Forward</h2>
-            <p>
-              The solution is not to add explainability as an afterthought. It's to build 
-              transparency into the architecture itself. This requires rethinking AI from 
-              first principles:
-            </p>
-            <ul>
-              <li>What if every computation had semantic meaning?</li>
-              <li>What if we could trace every decision back to its inputs?</li>
-              <li>What if interpretability wasn't a feature, but a fundamental property?</li>
-            </ul>
-            <p>
-              This is the philosophy behind Azetta's approach. We're not trying to explain 
-              black boxes—we're building glass boxes from the ground up.
-            </p>
-          </section>
-
-          <section>
-            <h2>The Path to Transparent Intelligence</h2>
-            <p>
-              Creating truly transparent AI systems requires us to reconsider our foundational 
-              assumptions. Instead of optimizing for accuracy alone, we must optimize for 
-              accuracy AND interpretability simultaneously. This constraint, far from limiting 
-              capability, forces us to design more elegant, more robust systems.
-            </p>
-            <p>
-              The black box dilemma is not inevitable. It's a choice—one we can unmake by 
-              rebuilding AI with transparency as a core principle, not an afterthought.
-            </p>
-          </section>
-
-          <!-- Series Navigation -->
-          <nav class="article-series" aria-label="Article series navigation">
-            <h3>Part of the series: Understanding Information</h3>
-            <ul class="series-list">
-              <li class="series-current">
-                <span class="series-number">01</span>
-                <span class="series-title">The Black Box Dilemma</span>
-              </li>
-              <li>
-                <span class="series-number">02</span>
-                <a href="meaning-of-information.html" class="series-title">The Meaning of Information</a>
-              </li>
-              <li>
-                <span class="series-number">03</span>
-                <a href="beyond-the-brain.html" class="series-title">Beyond the Brain: Why Mimicking Biology Won't Lead to AGI</a>
-              </li>
-            </ul>
-          </nav>
+      <!-- Article Footer -->
+      <footer class="article-footer">
+        <div class="article-tags">
+          <span class="tag-label">Tags:</span>
+          <a href="../blogs.html" class="article-tag">Explainable AI</a>
+          <a href="../blogs.html" class="article-tag">AI Architecture</a>
+          <a href="../blogs.html" class="article-tag">Transparency</a>
         </div>
 
-        <!-- Article Footer -->
-        <footer class="article-footer">
-          <div class="article-tags">
-            <span class="tag-label">Tags:</span>
-            <a href="../blogs.html" class="article-tag">Explainable AI</a>
-            <a href="../blogs.html" class="article-tag">AI Architecture</a>
-            <a href="../blogs.html" class="article-tag">Transparency</a>
-          </div>
-          
-          <div class="article-cta">
-            <h3>Want to build transparent AI?</h3>
-            <p>Join us in revolutionizing AI architecture from first principles.</p>
-            <a class="btn btn-primary" href="mailto:contact@azetta.ai">Get in Touch</a>
-          </div>
+        <div class="article-cta">
+          <h3>Want to build transparent AI?</h3>
+          <p>Join us in revolutionizing AI architecture from first principles.</p>
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai">Get in Touch</a>
+        </div>
 
-          <nav class="article-nav" aria-label="Adjacent articles">
-            <a href="../blogs.html" class="nav-back">← Back to Blog</a>
-            <a href="meaning-of-information.html" class="nav-next">Next Article →</a>
-          </nav>
-        </footer>
-      </article>
-    </main>
+        <nav class="article-nav" aria-label="Adjacent articles">
+          <a href="../blogs.html" class="nav-back">← Back to Blog</a>
+          <a href="meaning-of-information.html" class="nav-next">Next Article →</a>
+        </nav>
+      </footer>
+    </article>
+  </main>
 
-    <!-- External Scripts -->
-    <script src="../main.js" defer></script>
-  </body>
+  <!-- External Scripts -->
+  <script src="../main.js" defer></script>
+</body>
+
 </html>
