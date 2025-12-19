@@ -1,231 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <title>Newsroom - Azetta.ai | Talks, Press, Media</title>
-    <meta
-      name="title"
-      content="Newsroom - Azetta.ai | Talks, Press, Media"
-    />
-    <meta
-      name="description"
-      content="Talks, press mentions, podcasts, and media appearances featuring Azetta.ai. Explore our public presence and credibility milestones."
-    />
-    <meta
-      name="keywords"
-      content="Azetta News, Azetta Talks, Azetta Media, AI Press, Explainable AI News, Whitebox AI Talks"
-    />
-    <meta name="author" content="Azetta.ai" />
-    <meta name="robots" content="index, follow" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsroom - Azetta.ai | Talks, Press, Media</title>
+  <meta name="description" content="Talks, press mentions, podcasts, and media appearances featuring Azetta.ai." />
+  <meta name="author" content="Azetta.ai" />
+  <link rel="canonical" href="https://azetta.ai/news.html" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1b998b" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/listing-page.css" />
+</head>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://azetta.ai/news.html" />
-    <meta
-      property="og:title"
-      content="Newsroom - Azetta.ai | Talks, Press, Media"
-    />
-    <meta
-      property="og:description"
-      content="Talks, press mentions, podcasts, and media appearances featuring Azetta.ai."
-    />
-    <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a class="brand-mark" href="index.html#hero" aria-label="Azetta.ai home">
+        <span>Azetta.ai</span><span class="brand-accent"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="index.html#hero">Overview</a></li>
+          <li><a href="index.html#products">Products</a></li>
+          <li><a href="index.html#system-architecture">Architecture</a></li>
+          <li><a href="index.html#connect">Contact</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="news.html" class="active">Newsroom</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">Join
+            Waitlist</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://azetta.ai/news.html" />
-    <meta
-      name="twitter:title"
-      content="Newsroom - Azetta.ai | Talks, Press, Media"
-    />
-    <meta
-      name="twitter:description"
-      content="Talks, press mentions, podcasts, and media appearances featuring Azetta.ai."
-    />
-    <meta name="twitter:image" content="https://azetta.ai/twitter-image.jpg" />
+  <main class="news-listing" data-listing="news-grid" data-filter-field="type" data-items-per-page="6">
+    <!-- Compact Hero -->
+    <section class="listing-hero" aria-label="Newsroom page header">
+      <div class="section-shell">
+        <h1 class="flow-title">NEWSROOM</h1>
+        <p class="flow-subtitle">// Talks, panels & media appearances</p>
+      </div>
+    </section>
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://azetta.ai/news.html" />
+    <section class="blog-grid-section" aria-labelledby="news-grid-title">
+      <div class="section-shell">
+        <h2 id="news-grid-title" class="sr-only">Talks and Media</h2>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#1b998b" />
-
-    <!-- Stylesheets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-container">
-        <a class="brand-mark" href="index.html#hero" aria-label="Azetta.ai home">
-          <span>Azetta.ai</span><span class="brand-accent"></span>
-        </a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-        <nav class="primary-nav" id="primary-navigation">
-          <ul class="nav-list">
-            <li><a href="index.html#hero">Overview</a></li>
-            <li><a href="index.html#products">Products</a></li>
-            <li><a href="index.html#system-architecture">Architecture</a></li>
-            <li><a href="index.html#connect">Contact</a></li>
-            <li><a href="manifesto.html">Manifesto</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-            <li><a href="news.html" class="active">Newsroom</a></li>
-          </ul>
-          <div class="nav-cta">
-            <a
-              class="btn btn-primary"
-              href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist"
-              >Join Waitlist</a
-            >
+        <!-- Controls -->
+        <div class="listing-controls">
+          <div class="listing-controls-left">
+            <div class="view-toggle">
+              <button id="grid-view-btn" class="active">▦ Grid</button>
+              <button id="list-view-btn">☰ List</button>
+            </div>
           </div>
+          <div class="listing-controls-right">
+            <select class="filter-select" id="filter-select">
+              <option value="all">All Types</option>
+              <option value="talk">Talks</option>
+              <option value="panel">Panels</option>
+              <option value="podcast">Podcasts</option>
+            </select>
+            <select class="sort-select" id="sort-select">
+              <option value="date-desc">Newest</option>
+              <option value="date-asc">Oldest</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="blog-grid listing-grid" id="news-grid">
+          <!-- Talk: DevFest Brooklyn/Queens -->
+          <article class="blog-card" data-type="talk" data-date="2025-11-18">
+            <div class="type-badge talk listing-badge">🎤 Talk</div>
+            <div class="blog-card-header">
+              <span class="blog-tag">Google DevFest</span>
+              <time class="blog-date" datetime="2025-11-18">Nov 18, 2025</time>
+            </div>
+            <h3 class="blog-card-title"><a href="news/devfest-brooklyn-queens-2025.html">AI 2.0: Superintelligence</a>
+            </h3>
+            <time class="date-inline" datetime="2025-11-18">Nov 18</time>
+            <p class="blog-card-excerpt">Mathematical constraints preventing AI superintelligence, and solutions from
+              first principles.</p>
+            <div class="blog-card-meta"><span class="blog-author">Taha Bouhsine</span><span class="blog-series">DevFest
+                Brooklyn/Queens</span></div>
+            <div class="blog-card-footer"><a href="news/devfest-brooklyn-queens-2025.html" class="blog-read-more">View
+                →</a></div>
+          </article>
+
+          <!-- Talk: DevFest Silicon Valley -->
+          <article class="blog-card" data-type="talk" data-date="2025-11-07">
+            <div class="type-badge talk listing-badge">🎤 Talk</div>
+            <div class="blog-card-header">
+              <span class="blog-tag">Google DevFest</span>
+              <time class="blog-date" datetime="2025-11-07">Nov 7, 2025</time>
+            </div>
+            <h3 class="blog-card-title"><a href="news/devfest-in-siliconvalley-2025.html">No More DeLuLu</a></h3>
+            <time class="date-inline" datetime="2025-11-07">Nov 7</time>
+            <p class="blog-card-excerpt">Physics-grounded AI—letting information dictate model behavior.</p>
+            <div class="blog-card-meta"><span class="blog-author">Taha Bouhsine</span><span class="blog-series">DevFest
+                Silicon Valley</span></div>
+            <div class="blog-card-footer"><a href="news/devfest-in-siliconvalley-2025.html" class="blog-read-more">View
+                →</a></div>
+          </article>
+
+          <!-- Panel: DevFest Modesto -->
+          <article class="blog-card" data-type="panel" data-date="2025-10-25">
+            <div class="type-badge panel listing-badge">💬 Panel</div>
+            <div class="blog-card-header">
+              <span class="blog-tag">DevFest Modesto</span>
+              <time class="blog-date" datetime="2025-10-25">Oct 25, 2025</time>
+            </div>
+            <h3 class="blog-card-title"><a href="news/devfest-modesto-2025.html">AI 2.0: What's Next?</a></h3>
+            <time class="date-inline" datetime="2025-10-25">Oct 25</time>
+            <p class="blog-card-excerpt">AI 2.0 is emerging while humanity operates on outdated ethics.</p>
+            <div class="blog-card-meta"><span class="blog-author">Taha Bouhsine</span><span class="blog-series">DevFest
+                Modesto</span></div>
+            <div class="blog-card-footer"><a href="news/devfest-modesto-2025.html" class="blog-read-more">View →</a>
+            </div>
+          </article>
+        </div>
+
+        <!-- Pagination -->
+        <div class="listing-pagination">
+          <button id="prev-page" disabled>← Prev</button>
+          <span class="pagination-info" id="page-info">1 / 1</span>
+          <button id="next-page" disabled>Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" aria-labelledby="press-kit-title">
+      <div class="cta-box">
+        <h2 id="press-kit-title" class="cta-title">SHARE OUR STORY</h2>
+        <p class="cta-subtitle">Need a quote, demo, or press kit?</p>
+        <nav class="cta-buttons">
+          <a class="btn btn-primary" href="mailto:press@azetta.ai?subject=Press%20Inquiry">Contact Press</a>
+          <a class="btn" href="mailto:contact@azetta.ai?subject=Book%20a%20Talk">Book a Talk</a>
         </nav>
       </div>
-    </header>
+    </section>
+  </main>
 
-    <main>
-      <section class="blog-hero" aria-label="Newsroom page header">
-        <div class="section-shell">
-          <h1 class="flow-title">NEWSROOM</h1>
-          <p class="flow-subtitle">
-            // Talks, press mentions, podcast appearances, and community highlights
-          </p>
-        </div>
-      </section>
+  <script src="main.js" defer></script>
+  <script src="js/listing-page.js" defer></script>
+</body>
 
-      <section class="blog-grid-section" aria-labelledby="news-grid-title">
-        <div class="section-shell">
-          <h2 id="news-grid-title" class="sr-only">Talks and Media</h2>
-
-          <div class="blog-grid">
-            <article class="blog-card" aria-labelledby="talk-devfest-nyc-title">
-              <div class="blog-card-header">
-                <span class="blog-tag">Talk</span>
-                <time class="blog-date" datetime="2025-11-18">Nov 18, 2025</time>
-              </div>
-              <h3 id="talk-devfest-nyc-title" class="blog-card-title">
-                <a href="news/devfest-brooklyn-queens-2025.html">
-                  AI 2.0: Superintelligence
-                </a>
-              </h3>
-              <p class="blog-card-excerpt">
-                Addressing mathematical constraints preventing AI from achieving superintelligence, and why brain-inspired neural networks lead to black boxes. Solutions from first principles, validated on production hardware.
-              </p>
-              <div class="blog-card-meta">
-                <span class="blog-author">Speaker: Taha Bouhsine</span>
-                <span class="blog-series">Google DevFest Brooklyn/Queens 2025</span>
-              </div>
-              <div class="blog-card-footer">
-                <a href="news/devfest-brooklyn-queens-2025.html" class="blog-read-more">
-                  Read More →
-                </a>
-                <span class="blog-read-time">Nov 18, 2025</span>
-              </div>
-            </article>
-
-            <article class="blog-card" aria-labelledby="talk-devfest-title">
-              <div class="blog-card-header">
-                <span class="blog-tag">Talk</span>
-                <time class="blog-date" datetime="2025-11-07">Nov 7, 2025</time>
-              </div>
-              <h3 id="talk-devfest-title" class="blog-card-title">
-                <a href="news/devfest-in-siliconvalley-2025.html">
-                  No More DeLuLu: What Happens When We Let Information Speak for Itself
-                </a>
-              </h3>
-              <p class="blog-card-excerpt">
-                Taha Bouhsine shared Azetta's physics-grounded approach to explainable AI at Google DevFest Silicon Valley, focusing on letting information dictate model behavior instead of heuristics.
-              </p>
-              <div class="blog-card-meta">
-                <span class="blog-author">Speaker: Taha Bouhsine</span>
-                <span class="blog-series">Google DevFest Silicon Valley 2025</span>
-              </div>
-              <div class="blog-card-footer">
-                <a href="news/devfest-in-siliconvalley-2025.html" class="blog-read-more">
-                  Read More →
-                </a>
-                <span class="blog-read-time">Nov 7, 2025</span>
-              </div>
-            </article>
-
-            <article class="blog-card" aria-labelledby="talk-devfest-modesto-title">
-              <div class="blog-card-header">
-                <span class="blog-tag">Panel</span>
-                <time class="blog-date" datetime="2025-10-25">Oct 25, 2025</time>
-              </div>
-              <h3 id="talk-devfest-modesto-title" class="blog-card-title">
-                <a href="news/devfest-modesto-2025.html">
-                  AI 2.0: What's Next for Intelligence?
-                </a>
-              </h3>
-              <p class="blog-card-excerpt">
-                A panel discussion on the existential crisis we face: AI 2.0 is emerging while humanity operates on outdated ethics and goals. Why whitebox AI matters for humanity's future.
-              </p>
-              <div class="blog-card-meta">
-                <span class="blog-author">Panelist: Taha Bouhsine</span>
-                <span class="blog-series">DevFest Modesto 2025</span>
-              </div>
-              <div class="blog-card-footer">
-                <a href="news/devfest-modesto-2025.html" class="blog-read-more">
-                  Read More →
-                </a>
-                <span class="blog-read-time">Oct 25, 2025</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="cta-section" aria-labelledby="press-kit-title">
-        <div class="cta-box">
-          <h2 id="press-kit-title" class="cta-title">
-            SHARE OUR STORY
-          </h2>
-          <p class="cta-subtitle">
-            Need a quote, demo, or press kit? Reach out and we'll respond quickly.
-          </p>
-          <nav class="cta-buttons" aria-label="Press and media actions">
-            <a
-              class="btn btn-primary"
-              href="mailto:press@azetta.ai?subject=Press%20Inquiry"
-              >Contact Press</a
-            >
-            <a
-              class="btn"
-              href="mailto:contact@azetta.ai?subject=Book%20a%20Talk"
-              >Book a Talk</a
-            >
-          </nav>
-        </div>
-      </section>
-    </main>
-
-    <!-- External Scripts -->
-    <script src="main.js" defer></script>
-  </body>
 </html>

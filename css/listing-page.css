@@ -1,0 +1,264 @@
+/* ==========================================================================
+   LISTING PAGE STYLES
+   Shared styles for blog and news listing pages
+   ========================================================================== */
+
+/* Compact Hero - Minimal space */
+.listing-hero {
+    padding: 0.75rem 0 0.25rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+    text-align: center;
+}
+
+.listing-hero .flow-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.1rem;
+    letter-spacing: 0.1em;
+}
+
+.listing-hero .flow-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.6;
+    margin-bottom: 0;
+}
+
+/* Override section padding for listing pages */
+.blog-listing .blog-grid-section,
+.news-listing .blog-grid-section {
+    padding-top: 0.5rem;
+}
+
+/* Controls Bar */
+.listing-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.2));
+}
+
+.listing-controls-left,
+.listing-controls-right {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* View Toggle */
+.view-toggle {
+    display: flex;
+    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.4));
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.view-toggle button {
+    padding: 0.35rem 0.6rem;
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    transition: all 0.15s;
+}
+
+.view-toggle button.active {
+    background: var(--listing-accent-bg, rgba(27, 153, 139, 0.25));
+    color: var(--listing-accent-color, #1b998b);
+}
+
+.view-toggle button:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Selects */
+.filter-select,
+.sort-select {
+    padding: 0.35rem 0.6rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.3));
+    border-radius: 3px;
+    color: #aaa;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.filter-select:focus,
+.sort-select:focus {
+    outline: none;
+    border-color: var(--listing-accent-color, #1b998b);
+}
+
+/* Badge Base */
+.listing-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.6rem;
+    margin-bottom: 0.3rem;
+}
+
+.listing-badge .badge-number {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.05rem 0.3rem;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Series Badge (Blog) */
+.series-badge {
+    background: rgba(27, 153, 139, 0.12);
+    border: 1px solid rgba(27, 153, 139, 0.35);
+    color: #1b998b;
+}
+
+/* Type Badges (News) */
+.type-badge {
+    background: rgba(237, 33, 124, 0.12);
+    border: 1px solid rgba(237, 33, 124, 0.35);
+    color: #ed217c;
+}
+
+.type-badge.talk {
+    background: rgba(27, 153, 139, 0.12);
+    border-color: rgba(27, 153, 139, 0.35);
+    color: #1b998b;
+}
+
+.type-badge.panel {
+    background: rgba(155, 93, 229, 0.12);
+    border-color: rgba(155, 93, 229, 0.35);
+    color: #9b5de5;
+}
+
+.type-badge.podcast {
+    background: rgba(244, 162, 97, 0.12);
+    border-color: rgba(244, 162, 97, 0.35);
+    color: #f4a261;
+}
+
+/* List View */
+.listing-grid.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.listing-grid.list-view .blog-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+}
+
+.listing-grid.list-view .blog-card-header,
+.listing-grid.list-view .blog-card-excerpt,
+.listing-grid.list-view .blog-card-meta {
+    display: none;
+}
+
+.listing-grid.list-view .blog-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.listing-grid.list-view .listing-badge,
+.listing-grid.list-view .series-badge,
+.listing-grid.list-view .type-badge {
+    margin-bottom: 0;
+}
+
+.listing-grid.list-view .blog-card-title {
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.date-inline {
+    display: none;
+    color: #555;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    white-space: nowrap;
+}
+
+.listing-grid.list-view .date-inline {
+    display: block;
+}
+
+.listing-grid.list-view .blog-read-more {
+    font-size: 0.65rem;
+}
+
+/* Filtered Out */
+.blog-card.filtered-out {
+    display: none !important;
+}
+
+/* Pagination */
+.listing-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+}
+
+.listing-pagination button {
+    padding: 0.4rem 0.75rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.3));
+    border-radius: 3px;
+    color: #777;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.listing-pagination button:hover:not(:disabled) {
+    background: var(--listing-accent-bg, rgba(27, 153, 139, 0.15));
+    color: var(--listing-accent-color, #1b998b);
+}
+
+.listing-pagination button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    color: #555;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    margin: 0 0.3rem;
+}
+
+/* Blog-specific accent */
+.blog-listing {
+    --listing-accent: rgba(27, 153, 139, 0.25);
+    --listing-accent-bg: rgba(27, 153, 139, 0.2);
+    --listing-accent-color: #1b998b;
+}
+
+/* News-specific accent */
+.news-listing {
+    --listing-accent: rgba(237, 33, 124, 0.25);
+    --listing-accent-bg: rgba(237, 33, 124, 0.2);
+    --listing-accent-color: #ed217c;
+}

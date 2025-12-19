@@ -2,230 +2,22 @@
 <html lang="en">
 
 <head>
-  <!-- Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Primary Meta Tags -->
   <title>Blog - Azetta.ai | AI Insights & Research</title>
-  <meta name="title" content="Blog - Azetta.ai | AI Insights & Research" />
   <meta name="description"
     content="Deep dives into transparent AI architecture, physics-inspired machine learning, and the future of explainable AI systems." />
-  <meta name="keywords"
-    content="AI Blog, Machine Learning, Explainable AI, White-box AI, AI Research, Transparent AI, Physics-inspired AI" />
   <meta name="author" content="Azetta.ai" />
-  <meta name="robots" content="index, follow" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://azetta.ai/blogs.html" />
-  <meta property="og:title" content="Blog - Azetta.ai | AI Insights & Research" />
-  <meta property="og:description"
-    content="Deep dives into transparent AI architecture, physics-inspired machine learning, and the future of explainable AI systems." />
-  <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://azetta.ai/blogs.html" />
-  <meta name="twitter:title" content="Blog - Azetta.ai | AI Insights & Research" />
-  <meta name="twitter:description"
-    content="Deep dives into transparent AI architecture, physics-inspired machine learning, and the future of explainable AI systems." />
-  <meta name="twitter:image" content="https://azetta.ai/twitter-image.jpg" />
-
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://azetta.ai/blogs.html" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" href="/logo.png" />
-  <link rel="apple-touch-icon" href="/logo.png" />
-
-  <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#1b998b" />
-
-  <!-- Stylesheets -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-
-  <style>
-    /* Blog Controls */
-    .blog-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      border: 1px solid rgba(27, 153, 139, 0.2);
-    }
-
-    .blog-controls-left {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
-    .blog-controls-right {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    .view-toggle {
-      display: flex;
-      gap: 0;
-      border: 1px solid rgba(27, 153, 139, 0.4);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .view-toggle button {
-      padding: 0.5rem 1rem;
-      background: transparent;
-      border: none;
-      color: #888;
-      cursor: pointer;
-      font-family: 'Courier New', monospace;
-      font-size: 0.8rem;
-      transition: all 0.2s;
-    }
-
-    .view-toggle button.active {
-      background: rgba(27, 153, 139, 0.3);
-      color: #1b998b;
-    }
-
-    .view-toggle button:hover:not(.active) {
-      background: rgba(255, 255, 255, 0.05);
-      color: #aaa;
-    }
-
-    .filter-select,
-    .sort-select {
-      padding: 0.5rem 1rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(27, 153, 139, 0.3);
-      border-radius: 4px;
-      color: #ccc;
-      font-family: 'Courier New', monospace;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    .filter-select:focus,
-    .sort-select:focus {
-      outline: none;
-      border-color: #1b998b;
-    }
-
-    /* Series Badge */
-    .series-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0.75rem;
-      background: rgba(27, 153, 139, 0.15);
-      border: 1px solid rgba(27, 153, 139, 0.4);
-      border-radius: 20px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.7rem;
-      color: #1b998b;
-      margin-bottom: 0.5rem;
-    }
-
-    .series-badge .series-number {
-      background: rgba(27, 153, 139, 0.4);
-      padding: 0.1rem 0.4rem;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    /* Compact List View */
-    .blog-grid.list-view {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .blog-grid.list-view .blog-card {
-      display: grid;
-      grid-template-columns: auto 1fr auto auto;
-      gap: 1rem;
-      align-items: center;
-      padding: 1rem 1.5rem;
-    }
-
-    .blog-grid.list-view .blog-card-header {
-      display: none;
-    }
-
-    .blog-grid.list-view .blog-card-excerpt {
-      display: none;
-    }
-
-    .blog-grid.list-view .blog-card-meta {
-      display: none;
-    }
-
-    .blog-grid.list-view .blog-card-footer {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 0;
-      padding-top: 0;
-      border-top: none;
-    }
-
-    .blog-grid.list-view .series-badge {
-      margin-bottom: 0;
-    }
-
-    .blog-grid.list-view .blog-card-title {
-      font-size: 1rem;
-      margin: 0;
-    }
-
-    .blog-grid.list-view .blog-date-inline {
-      color: #666;
-      font-family: 'Courier New', monospace;
-      font-size: 0.75rem;
-      white-space: nowrap;
-    }
-
-    .blog-date-inline {
-      display: none;
-    }
-
-    .blog-grid.list-view .blog-date-inline {
-      display: block;
-    }
-
-    /* Hide elements in list view */
-    .blog-grid.list-view .blog-read-more {
-      font-size: 0.75rem;
-    }
-
-    /* Transition for view switch */
-    .blog-grid {
-      transition: all 0.3s ease;
-    }
-
-    .blog-card {
-      transition: all 0.3s ease;
-    }
-
-    /* Filter highlight */
-    .blog-card.filtered-out {
-      display: none !important;
-    }
-  </style>
+  <link rel="stylesheet" href="css/listing-page.css" />
 </head>
 
 <body>
@@ -258,242 +50,141 @@
     </div>
   </header>
 
-  <main>
-    <!-- Blog Hero Section -->
-    <section class="blog-hero" aria-label="Blog page header">
+  <main class="blog-listing" data-listing="blog-grid" data-filter-field="series" data-items-per-page="6">
+    <!-- Compact Hero -->
+    <section class="listing-hero" aria-label="Blog page header">
       <div class="section-shell">
         <h1 class="flow-title">BLOG</h1>
-        <p class="flow-subtitle">
-          // Insights on transparent AI, physics-inspired architecture, and the future of explainable systems
-        </p>
+        <p class="flow-subtitle">// Transparent AI & physics-inspired architecture</p>
       </div>
     </section>
 
-    <!-- Blog Grid Section -->
     <section class="blog-grid-section" aria-labelledby="blog-grid-title">
       <div class="section-shell">
         <h2 id="blog-grid-title" class="sr-only">Blog Posts</h2>
 
         <!-- Controls -->
-        <div class="blog-controls">
-          <div class="blog-controls-left">
+        <div class="listing-controls">
+          <div class="listing-controls-left">
             <div class="view-toggle">
-              <button id="grid-view-btn" class="active" title="Grid View">▦ Grid</button>
-              <button id="list-view-btn" title="List View">☰ List</button>
+              <button id="grid-view-btn" class="active">▦ Grid</button>
+              <button id="list-view-btn">☰ List</button>
             </div>
           </div>
-          <div class="blog-controls-right">
-            <select class="filter-select" id="series-filter">
+          <div class="listing-controls-right">
+            <select class="filter-select" id="filter-select">
               <option value="all">All Posts</option>
-              <option value="understanding-information">Understanding Information Series</option>
+              <option value="understanding-information">Understanding Information</option>
             </select>
             <select class="sort-select" id="sort-select">
-              <option value="date-desc">Newest First</option>
-              <option value="date-asc">Oldest First</option>
-              <option value="series">By Series Order</option>
+              <option value="series">Series Order</option>
+              <option value="date-desc">Newest</option>
+              <option value="date-asc">Oldest</option>
             </select>
           </div>
         </div>
 
-        <div class="blog-grid" id="blog-grid">
-          <!-- 01: The Black Box Dilemma -->
+        <div class="blog-grid listing-grid" id="blog-grid">
+          <!-- 01 -->
           <article class="blog-card" data-series="understanding-information" data-series-order="1"
             data-date="2025-11-08">
-            <div class="series-badge">
-              <span class="series-number">01</span>
-              <span>Understanding Information</span>
-            </div>
+            <div class="series-badge listing-badge"><span class="badge-number">01</span> Understanding Information</div>
             <div class="blog-card-header">
               <span class="blog-tag">AI Architecture</span>
               <time class="blog-date" datetime="2025-11-08">Nov 8, 2025</time>
             </div>
-            <h3 class="blog-card-title">
-              <a href="blogs/black-box-dilemma.html">The Black Box Dilemma</a>
-            </h3>
-            <time class="blog-date-inline" datetime="2025-11-08">Nov 8, 2025</time>
-            <p class="blog-card-excerpt">
-              Why opacity in AI systems is not just a technical limitation, but a fundamental
-              design flaw. Exploring the critical problems with black-box architectures and
-              why post-hoc explanations aren't enough.
-            </p>
-            <div class="blog-card-meta">
-              <span class="blog-author">By Taha Bouhsine</span>
-            </div>
+            <h3 class="blog-card-title"><a href="blogs/black-box-dilemma.html">The Black Box Dilemma</a></h3>
+            <time class="date-inline" datetime="2025-11-08">Nov 8</time>
+            <p class="blog-card-excerpt">Why opacity in AI is a fundamental design flaw, not just a technical
+              limitation.</p>
+            <div class="blog-card-meta"><span class="blog-author">Taha Bouhsine</span></div>
             <div class="blog-card-footer">
-              <a href="blogs/black-box-dilemma.html" class="blog-read-more">Read More →</a>
+              <a href="blogs/black-box-dilemma.html" class="blog-read-more">Read →</a>
               <span class="blog-read-time">8 min</span>
             </div>
           </article>
 
-          <!-- 02: The Meaning of Information -->
+          <!-- 02 -->
           <article class="blog-card" data-series="understanding-information" data-series-order="2"
             data-date="2025-11-08">
-            <div class="series-badge">
-              <span class="series-number">02</span>
-              <span>Understanding Information</span>
-            </div>
+            <div class="series-badge listing-badge"><span class="badge-number">02</span> Understanding Information</div>
             <div class="blog-card-header">
               <span class="blog-tag">Information Theory</span>
               <time class="blog-date" datetime="2025-11-08">Nov 8, 2025</time>
             </div>
-            <h3 class="blog-card-title">
-              <a href="blogs/meaning-of-information.html">The Meaning of Information</a>
-            </h3>
-            <time class="blog-date-inline" datetime="2025-11-08">Nov 8, 2025</time>
-            <p class="blog-card-excerpt">
-              Beyond bits and bytes: exploring what information truly means in the context of
-              AI systems. Why semantic grounding in physical relationships matters more than
-              statistical patterns alone.
+            <h3 class="blog-card-title"><a href="blogs/meaning-of-information.html">The Meaning of Information</a></h3>
+            <time class="date-inline" datetime="2025-11-08">Nov 8</time>
+            <p class="blog-card-excerpt">Why semantic grounding in physical relationships matters more than statistics.
             </p>
-            <div class="blog-card-meta">
-              <span class="blog-author">By Taha Bouhsine</span>
-            </div>
+            <div class="blog-card-meta"><span class="blog-author">Taha Bouhsine</span></div>
             <div class="blog-card-footer">
-              <a href="blogs/meaning-of-information.html" class="blog-read-more">Read More →</a>
+              <a href="blogs/meaning-of-information.html" class="blog-read-more">Read →</a>
               <span class="blog-read-time">10 min</span>
             </div>
           </article>
 
-          <!-- 03: Beyond the Brain -->
+          <!-- 03 -->
           <article class="blog-card" data-series="understanding-information" data-series-order="3"
             data-date="2025-11-08">
-            <div class="series-badge">
-              <span class="series-number">03</span>
-              <span>Understanding Information</span>
-            </div>
+            <div class="series-badge listing-badge"><span class="badge-number">03</span> Understanding Information</div>
             <div class="blog-card-header">
               <span class="blog-tag">AI Philosophy</span>
               <time class="blog-date" datetime="2025-11-08">Nov 8, 2025</time>
             </div>
-            <h3 class="blog-card-title">
-              <a href="blogs/beyond-the-brain.html">Beyond the Brain</a>
-            </h3>
-            <time class="blog-date-inline" datetime="2025-11-08">Nov 8, 2025</time>
-            <p class="blog-card-excerpt">
-              The fallacy of reverse-engineering a black box we don't understand. Why the path
-              to artificial superintelligence lies in physics and cosmic intelligence, not
-              neuroscience and biological mimicry.
-            </p>
-            <div class="blog-card-meta">
-              <span class="blog-author">By Taha Bouhsine</span>
-            </div>
+            <h3 class="blog-card-title"><a href="blogs/beyond-the-brain.html">Beyond the Brain</a></h3>
+            <time class="date-inline" datetime="2025-11-08">Nov 8</time>
+            <p class="blog-card-excerpt">Why superintelligence lies in physics, not neuroscience.</p>
+            <div class="blog-card-meta"><span class="blog-author">Taha Bouhsine</span></div>
             <div class="blog-card-footer">
-              <a href="blogs/beyond-the-brain.html" class="blog-read-more">Read More →</a>
+              <a href="blogs/beyond-the-brain.html" class="blog-read-more">Read →</a>
               <span class="blog-read-time">12 min</span>
             </div>
           </article>
 
-          <!-- 04: The Meaning of Non-Linearity -->
+          <!-- 04 -->
           <article class="blog-card" data-series="understanding-information" data-series-order="4"
             data-date="2025-12-18">
-            <div class="series-badge">
-              <span class="series-number">04</span>
-              <span>Understanding Information</span>
-            </div>
+            <div class="series-badge listing-badge"><span class="badge-number">04</span> Understanding Information</div>
             <div class="blog-card-header">
               <span class="blog-tag">Information Geometry</span>
               <time class="blog-date" datetime="2025-12-18">Dec 18, 2025</time>
             </div>
-            <h3 class="blog-card-title">
-              <a href="blogs/meaning-of-non-linearity.html">The Meaning of Non-Linearity</a>
+            <h3 class="blog-card-title"><a href="blogs/meaning-of-non-linearity.html">The Meaning of Non-Linearity</a>
             </h3>
-            <time class="blog-date-inline" datetime="2025-12-18">Dec 18, 2025</time>
-            <p class="blog-card-excerpt">
-              Beyond scatter plots: non-linearity isn't about curves between features—it's about
-              orthogonality and distance in high-dimensional spaces. Exploring the geometry of
-              information with interactive visualizations.
-            </p>
-            <div class="blog-card-meta">
-              <span class="blog-author">By Taha Bouhsine</span>
-            </div>
+            <time class="date-inline" datetime="2025-12-18">Dec 18</time>
+            <p class="blog-card-excerpt">You've been thinking about non-linearity wrong. Here's why it changes
+              everything.</p>
+            <div class="blog-card-meta"><span class="blog-author">Taha Bouhsine</span></div>
             <div class="blog-card-footer">
-              <a href="blogs/meaning-of-non-linearity.html" class="blog-read-more">Read More →</a>
+              <a href="blogs/meaning-of-non-linearity.html" class="blog-read-more">Read →</a>
               <span class="blog-read-time">15 min</span>
             </div>
           </article>
+        </div>
 
+        <!-- Pagination -->
+        <div class="listing-pagination">
+          <button id="prev-page" disabled>← Prev</button>
+          <span class="pagination-info" id="page-info">1 / 1</span>
+          <button id="next-page" disabled>Next →</button>
         </div>
       </div>
     </section>
 
-    <!-- Newsletter CTA Section -->
     <section class="cta-section" aria-labelledby="newsletter-title">
       <div class="cta-box">
-        <h2 id="newsletter-title" class="cta-title">
-          STAY UPDATED
-        </h2>
-        <p class="cta-subtitle">
-          Get notified when we publish new insights on transparent AI
-        </p>
-        <nav class="cta-buttons" aria-label="Newsletter subscription">
-          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Subscribe%20to%20Azetta%20Blog">Subscribe to
-            Updates</a>
-          <a class="btn" href="index.html">Back to Home</a>
+        <h2 id="newsletter-title" class="cta-title">STAY UPDATED</h2>
+        <p class="cta-subtitle">Get notified when we publish new insights</p>
+        <nav class="cta-buttons">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Subscribe">Subscribe</a>
+          <a class="btn" href="index.html">Home</a>
         </nav>
       </div>
     </section>
   </main>
 
-  <!-- External Scripts -->
   <script src="main.js" defer></script>
-
-  <!-- Blog Controls Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const blogGrid = document.getElementById('blog-grid');
-      const gridViewBtn = document.getElementById('grid-view-btn');
-      const listViewBtn = document.getElementById('list-view-btn');
-      const seriesFilter = document.getElementById('series-filter');
-      const sortSelect = document.getElementById('sort-select');
-
-      // View Toggle
-      gridViewBtn.addEventListener('click', () => {
-        blogGrid.classList.remove('list-view');
-        gridViewBtn.classList.add('active');
-        listViewBtn.classList.remove('active');
-      });
-
-      listViewBtn.addEventListener('click', () => {
-        blogGrid.classList.add('list-view');
-        listViewBtn.classList.add('active');
-        gridViewBtn.classList.remove('active');
-      });
-
-      // Filter by Series
-      seriesFilter.addEventListener('change', () => {
-        const value = seriesFilter.value;
-        const cards = blogGrid.querySelectorAll('.blog-card');
-
-        cards.forEach(card => {
-          if (value === 'all' || card.dataset.series === value) {
-            card.classList.remove('filtered-out');
-          } else {
-            card.classList.add('filtered-out');
-          }
-        });
-      });
-
-      // Sort
-      sortSelect.addEventListener('change', () => {
-        const value = sortSelect.value;
-        const cards = Array.from(blogGrid.querySelectorAll('.blog-card'));
-
-        cards.sort((a, b) => {
-          if (value === 'date-desc') {
-            return new Date(b.dataset.date) - new Date(a.dataset.date);
-          } else if (value === 'date-asc') {
-            return new Date(a.dataset.date) - new Date(b.dataset.date);
-          } else if (value === 'series') {
-            return parseInt(a.dataset.seriesOrder) - parseInt(b.dataset.seriesOrder);
-          }
-          return 0;
-        });
-
-        // Re-append in sorted order
-        cards.forEach(card => blogGrid.appendChild(card));
-      });
-    });
-  </script>
+  <script src="js/listing-page.js" defer></script>
 </body>
 
 </html>
