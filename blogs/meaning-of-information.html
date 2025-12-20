@@ -2,6 +2,39 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C8V5SB2QZY');
+    document.addEventListener('DOMContentLoaded', function () {
+      gtag('event', 'blog_view', { 'event_category': 'content', 'event_label': document.title });
+      document.querySelectorAll('.viz-canvas').forEach(function (canvas) {
+        canvas.addEventListener('click', function () {
+          gtag('event', 'viz_interaction', { 'event_category': 'engagement', 'event_label': this.id || 'visualization' });
+        });
+      });
+      document.querySelectorAll('.series-list a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          gtag('event', 'series_navigation', { 'event_category': 'content', 'event_label': this.textContent.trim() });
+        });
+      });
+      var scrollDepths = [25, 50, 75, 100], scrolledDepths = [];
+      window.addEventListener('scroll', function () {
+        var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        scrollDepths.forEach(function (depth) {
+          if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+            scrolledDepths.push(depth);
+            gtag('event', 'blog_read_progress', { 'event_category': 'engagement', 'value': depth });
+          }
+        });
+      });
+      [30, 60, 120, 180, 300].forEach(function (s) { setTimeout(function () { gtag('event', 'blog_reading_time', { 'event_category': 'engagement', 'value': s }); }, s * 1000); });
+    });
+  </script>
+
   <!-- Meta Tags -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />

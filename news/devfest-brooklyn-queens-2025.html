@@ -1,173 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI 2.0: Superintelligence - DevFest NYC 2025 | Azetta.ai Newsroom</title>
-    <meta
-      name="description"
-      content="Taha Bouhsine's DevFest Brooklyn/Queens 2025 talk on mathematical constraints preventing superintelligence and physics-grounded solutions validated on production hardware."
-    />
-    <meta name="author" content="Azetta.ai" />
-    <meta name="robots" content="index, follow" />
 
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="AI 2.0: Superintelligence - DevFest NYC 2025" />
-    <meta
-      property="og:description"
-      content="Mathematical constraints preventing superintelligence, why brain-inspired neural networks create black boxes, and physics-grounded solutions."
-    />
-    <meta property="og:url" content="https://azetta.ai/news/devfest-brooklyn-queens-2025.html" />
-    <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
-    <meta property="article:published_time" content="2025-11-18" />
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C8V5SB2QZY');
+    document.addEventListener('DOMContentLoaded', function () {
+      gtag('event', 'article_view', { 'event_category': 'content', 'event_label': document.title });
+      document.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          gtag('event', 'link_click', { 'event_category': 'engagement', 'event_label': this.textContent.trim().substring(0, 50) });
+        });
+      });
+      var scrollDepths = [25, 50, 75, 100], scrolledDepths = [];
+      window.addEventListener('scroll', function () {
+        var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        scrollDepths.forEach(function (depth) {
+          if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+            scrolledDepths.push(depth);
+            gtag('event', 'article_read_progress', { 'event_category': 'engagement', 'value': depth });
+          }
+        });
+      });
+      [30, 60, 120, 300].forEach(function (s) { setTimeout(function () { gtag('event', 'reading_time', { 'event_category': 'engagement', 'value': s }); }, s * 1000); });
+    });
+  </script>
 
-    <link rel="canonical" href="https://azetta.ai/news/devfest-brooklyn-queens-2025.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 2.0: Superintelligence - DevFest NYC 2025 | Azetta.ai Newsroom</title>
+  <meta name="description"
+    content="Taha Bouhsine's DevFest Brooklyn/Queens 2025 talk on mathematical constraints preventing superintelligence and physics-grounded solutions validated on production hardware." />
+  <meta name="author" content="Azetta.ai" />
+  <meta name="robots" content="index, follow" />
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AI 2.0: Superintelligence - DevFest NYC 2025" />
+  <meta property="og:description"
+    content="Mathematical constraints preventing superintelligence, why brain-inspired neural networks create black boxes, and physics-grounded solutions." />
+  <meta property="og:url" content="https://azetta.ai/news/devfest-brooklyn-queens-2025.html" />
+  <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
+  <meta property="article:published_time" content="2025-11-18" />
 
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#1b998b" />
+  <link rel="canonical" href="https://azetta.ai/news/devfest-brooklyn-queens-2025.html" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles.css" />
-  </head>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
 
-  <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-container">
-        <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
-          <span>Azetta.ai</span><span class="brand-accent"></span>
-        </a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-        <nav class="primary-nav" id="primary-navigation">
-          <ul class="nav-list">
-            <li><a href="../index.html#hero">Overview</a></li>
-            <li><a href="../index.html#products">Products</a></li>
-            <li><a href="../index.html#system-architecture">Architecture</a></li>
-            <li><a href="../index.html#connect">Contact</a></li>
-            <li><a href="../manifesto.html">Manifesto</a></li>
-            <li><a href="../blogs.html">Blog</a></li>
-            <li><a href="../news.html" class="active">Newsroom</a></li>
-          </ul>
-          <div class="nav-cta">
-            <a
-              class="btn btn-primary"
-              href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist"
-              >Join Waitlist</a
-            >
-          </div>
-        </nav>
-      </div>
-    </header>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1b998b" />
 
-    <main>
-      <article class="blog-article">
-        <header class="article-header">
-          <div class="article-meta">
-            <span class="blog-tag">Talk</span>
-            <time class="blog-date" datetime="2025-11-18">November 18, 2025</time>
-          </div>
-          <h1 class="article-title">AI 2.0: Superintelligence</h1>
-          <p class="article-subtitle">
-            Live at Google DevFest NYC Pier 57 — addressing mathematical constraints preventing superintelligence and demonstrating physics-grounded solutions.
-          </p>
-          <div class="article-author">
-            <span class="author-name">Taha Bouhsine — Co-founder, Head of Research & AI, Google Developer Expert</span>
-            <span class="read-time">Talk</span>
-          </div>
-        </header>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
 
-        <div class="article-content">
-          <section>
-            <h2>The fundamental misconception</h2>
-            <p>
-              This talk addressed the mathematical constraints preventing artificial intelligence from achieving superintelligence. The core argument: the current literature's reliance on brain-inspired neural networks is a fundamental misconception that leads to opaque, "black box" systems.
-            </p>
-            <p>
-              We cannot reverse-engineer superintelligence from a biological system we don't fully understand. The brain is evolution's solution to survival, not a blueprint for optimal intelligence. Copying it gives us the same opacity that blocks progress.
-            </p>
-          </section>
-
-          <section>
-            <h2>A solution from first principles</h2>
-            <p>
-              Instead of mimicking biology, we must derive intelligence from physics and first principles. This approach provides:
-            </p>
-            <ul>
-              <li><strong>Mathematical rigor:</strong> Every operation grounded in provable relationships, not empirical heuristics.</li>
-              <li><strong>Transparency by design:</strong> No black boxes—every decision traceable to its information-theoretic foundation.</li>
-              <li><strong>Physics-grounded philosophy:</strong> Intelligence emerges from physical laws governing information, not biological accidents.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Validated on production hardware</h2>
-            <p>
-              The presentation demonstrated this solution implemented and validated on production-grade infrastructure, proving that:
-            </p>
-            <ul>
-              <li>Physics-grounded architectures scale efficiently on modern accelerators.</li>
-              <li>Whitebox systems don't sacrifice performance—they enhance it through mathematical clarity.</li>
-              <li>First-principles design translates effectively to real-world compute environments.</li>
-              <li>These methods are production-ready, not just theoretical.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Solving the black box problem</h2>
-            <p>
-              This approach solves the black box problem fundamentally:
-            </p>
-            <ul>
-              <li>No reliance on activation functions that obscure information flow.</li>
-              <li>Every transformation has clear semantic meaning.</li>
-              <li>Models can be audited, debugged, and understood at every layer.</li>
-              <li>The architecture provides the mathematical rigor necessary for future superintelligent systems.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Why this matters for AI 2.0</h2>
-            <p>
-              AI 2.0 isn't about scaling AI 1.0. It's about rebuilding intelligence on foundations that can support superintelligence:
-            </p>
-            <ul>
-              <li>Physics-derived, not brain-inspired.</li>
-              <li>Mathematically rigorous, not empirically tuned.</li>
-              <li>Transparent and auditable, not opaque.</li>
-              <li>Validated on real hardware, not just theory.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Resources</h2>
-            <ul>
-              <li><a href="https://gdg.community.dev/events/details/google-gdg-brooklyn-presents-devfest-brooklyn-queens-at-pier-57-tues-nov-18/" target="_blank" rel="noopener">Event page (DevFest Brooklyn/Queens)</a></li>
-              <li><a href="mailto:press@azetta.ai?subject=DevFest%20NYC%20Talk%20Details">Request slides or recording</a></li>
-              <li><a href="../news.html">Back to Newsroom</a></li>
-            </ul>
-          </section>
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
+        <span>Azetta.ai</span><span class="brand-accent"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html#hero">Overview</a></li>
+          <li><a href="../index.html#products">Products</a></li>
+          <li><a href="../index.html#system-architecture">Architecture</a></li>
+          <li><a href="../index.html#connect">Contact</a></li>
+          <li><a href="../manifesto.html">Manifesto</a></li>
+          <li><a href="../blogs.html">Blog</a></li>
+          <li><a href="../news.html" class="active">Newsroom</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">Join
+            Waitlist</a>
         </div>
-      </article>
-    </main>
+      </nav>
+    </div>
+  </header>
 
-    <script src="../main.js" defer></script>
-  </body>
+  <main>
+    <article class="blog-article">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="blog-tag">Talk</span>
+          <time class="blog-date" datetime="2025-11-18">November 18, 2025</time>
+        </div>
+        <h1 class="article-title">AI 2.0: Superintelligence</h1>
+        <p class="article-subtitle">
+          Live at Google DevFest NYC Pier 57 — addressing mathematical constraints preventing superintelligence and
+          demonstrating physics-grounded solutions.
+        </p>
+        <div class="article-author">
+          <span class="author-name">Taha Bouhsine — Co-founder, Head of Research & AI, Google Developer Expert</span>
+          <span class="read-time">Talk</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <section>
+          <h2>The fundamental misconception</h2>
+          <p>
+            This talk addressed the mathematical constraints preventing artificial intelligence from achieving
+            superintelligence. The core argument: the current literature's reliance on brain-inspired neural networks is
+            a fundamental misconception that leads to opaque, "black box" systems.
+          </p>
+          <p>
+            We cannot reverse-engineer superintelligence from a biological system we don't fully understand. The brain
+            is evolution's solution to survival, not a blueprint for optimal intelligence. Copying it gives us the same
+            opacity that blocks progress.
+          </p>
+        </section>
+
+        <section>
+          <h2>A solution from first principles</h2>
+          <p>
+            Instead of mimicking biology, we must derive intelligence from physics and first principles. This approach
+            provides:
+          </p>
+          <ul>
+            <li><strong>Mathematical rigor:</strong> Every operation grounded in provable relationships, not empirical
+              heuristics.</li>
+            <li><strong>Transparency by design:</strong> No black boxes—every decision traceable to its
+              information-theoretic foundation.</li>
+            <li><strong>Physics-grounded philosophy:</strong> Intelligence emerges from physical laws governing
+              information, not biological accidents.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Validated on production hardware</h2>
+          <p>
+            The presentation demonstrated this solution implemented and validated on production-grade infrastructure,
+            proving that:
+          </p>
+          <ul>
+            <li>Physics-grounded architectures scale efficiently on modern accelerators.</li>
+            <li>Whitebox systems don't sacrifice performance—they enhance it through mathematical clarity.</li>
+            <li>First-principles design translates effectively to real-world compute environments.</li>
+            <li>These methods are production-ready, not just theoretical.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Solving the black box problem</h2>
+          <p>
+            This approach solves the black box problem fundamentally:
+          </p>
+          <ul>
+            <li>No reliance on activation functions that obscure information flow.</li>
+            <li>Every transformation has clear semantic meaning.</li>
+            <li>Models can be audited, debugged, and understood at every layer.</li>
+            <li>The architecture provides the mathematical rigor necessary for future superintelligent systems.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why this matters for AI 2.0</h2>
+          <p>
+            AI 2.0 isn't about scaling AI 1.0. It's about rebuilding intelligence on foundations that can support
+            superintelligence:
+          </p>
+          <ul>
+            <li>Physics-derived, not brain-inspired.</li>
+            <li>Mathematically rigorous, not empirically tuned.</li>
+            <li>Transparent and auditable, not opaque.</li>
+            <li>Validated on real hardware, not just theory.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li><a
+                href="https://gdg.community.dev/events/details/google-gdg-brooklyn-presents-devfest-brooklyn-queens-at-pier-57-tues-nov-18/"
+                target="_blank" rel="noopener">Event page (DevFest Brooklyn/Queens)</a></li>
+            <li><a href="mailto:press@azetta.ai?subject=DevFest%20NYC%20Talk%20Details">Request slides or recording</a>
+            </li>
+            <li><a href="../news.html">Back to Newsroom</a></li>
+          </ul>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <script src="../main.js" defer></script>
+</body>
+
 </html>

@@ -1,150 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Azetta Manifesto | Accessible Whitebox Intelligence</title>
-    <meta
-      name="description"
-      content="The Azetta manifesto: a declaration for accessible, explainable, fully auditable AI systems built in service of everyone."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  </head>
-  <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-container">
-        <a class="brand-mark" href="index.html" aria-label="Azetta.ai home">
-          <span>Azetta.ai</span><span class="brand-accent"></span>
-        </a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-        <nav class="primary-nav" id="primary-navigation">
-          <ul class="nav-list">
-            <li><a href="index.html#hero">Overview</a></li>
-            <li><a href="index.html#products">Products</a></li>
-            <li><a href="index.html#system-architecture">Architecture</a></li>
-            <li><a href="index.html#connect">Contact</a></li>
-            <li><a href="manifesto.html">Manifesto</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-            <li><a href="news.html">Newsroom</a></li>
-          </ul>
-          <div class="nav-cta">
-            <a
-              class="btn btn-primary"
-              href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist"
-            >
-              Join Waitlist
-            </a>
-          </div>
-        </nav>
-      </div>
-    </header>
 
-    <main class="manifesto-main">
-      <article class="manifesto-article">
-        <h1 class="manifesto-title">Azetta Manifesto</h1>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C8V5SB2QZY');
 
-        <h2>The Aetherial State of AI</h2>
+    // Enhanced Event Tracking for Manifesto
+    document.addEventListener('DOMContentLoaded', function () {
+      // Track button clicks
+      document.querySelectorAll('.btn, button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          gtag('event', 'button_click', {
+            'event_category': 'engagement',
+            'event_label': this.textContent.trim().substring(0, 50)
+          });
+        });
+      });
 
-        <p class="manifesto-lead">
-          Physics was once constrained by the concept of the "luminiferous aether" as a medium for light, a theory that failed to align with experimental evidence. Albert Einstein's 1905 theory of Special Relativity rendered the aether concept unnecessary, providing a new paradigm.
-        </p>
+      // Track scroll depth (reading progress)
+      var scrollDepths = [25, 50, 75, 100];
+      var scrolledDepths = [];
+      window.addEventListener('scroll', function () {
+        var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        scrollDepths.forEach(function (depth) {
+          if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+            scrolledDepths.push(depth);
+            gtag('event', 'manifesto_read_progress', {
+              'event_category': 'engagement',
+              'event_label': depth + '% read',
+              'value': depth
+            });
+          }
+        });
+      });
 
-        <p>
-          AI is facing a similar conceptual impasse, relying on foundational assumptions that obscure a more fundamental understanding and await a similar breakthrough.
-        </p>
+      // Track time spent reading
+      var timeIntervals = [30, 60, 120, 180, 300];
+      timeIntervals.forEach(function (seconds) {
+        setTimeout(function () {
+          gtag('event', 'manifesto_reading_time', {
+            'event_category': 'engagement',
+            'event_label': seconds + ' seconds',
+            'value': seconds
+          });
+        }, seconds * 1000);
+      });
+    });
+  </script>
 
-        <h2>The Blackbox Dilemma</h2>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azetta Manifesto | Accessible Whitebox Intelligence</title>
+  <meta name="description"
+    content="The Azetta manifesto: a declaration for accessible, explainable, fully auditable AI systems built in service of everyone." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+</head>
 
-        <p>
-          Optimizing for immediate utility creates unexplainable components, leaving critical questions unanswered:
-        </p>
-
-        <ul>
-          <li>What is information?</li>
-          <li>How is it structured and formed?</li>
-          <li>How can it be quantitatively measured, identified, and compared?</li>
-          <li>How can it be controlled and, ultimately, learned?</li>
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a class="brand-mark" href="index.html" aria-label="Azetta.ai home">
+        <span>Azetta.ai</span><span class="brand-accent"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="index.html#hero">Overview</a></li>
+          <li><a href="index.html#products">Products</a></li>
+          <li><a href="index.html#system-architecture">Architecture</a></li>
+          <li><a href="index.html#connect">Contact</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="news.html">Newsroom</a></li>
         </ul>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">
+            Join Waitlist
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-        <p>
-          At Azetta.ai, we have answered these questions. Our internal systems are built entirely on these first principles. Each component is interdependent and originates from our fundamental research into the nature of information and intelligence.
-        </p>
+  <main class="manifesto-main">
+    <article class="manifesto-article">
+      <h1 class="manifesto-title">Azetta Manifesto</h1>
 
-        <p>
-          Current AI development often deviates from this, building upon opaque, ambiguous, and opinionated research. The field has prioritized "making it work" heuristically over "building it right" from fundamentals.
-        </p>
+      <h2>The Aetherial State of AI</h2>
 
-        <h2>The Promise and Its Betrayal</h2>
+      <p class="manifesto-lead">
+        Physics was once constrained by the concept of the "luminiferous aether" as a medium for light, a theory that
+        failed to align with experimental evidence. Albert Einstein's 1905 theory of Special Relativity rendered the
+        aether concept unnecessary, providing a new paradigm.
+      </p>
 
-        <p>
-          The promise of AI began with a simple idea: extend human curiosity by
-          sharing methods, datasets, and ideas in the open.
-        </p>
+      <p>
+        AI is facing a similar conceptual impasse, relying on foundational assumptions that obscure a more fundamental
+        understanding and await a similar breakthrough.
+      </p>
 
-        <p>
-          The world we inhabit now looks different. High-compute budgets create
-          paywalls, sealed APIs hide reasoning, and data is harvested with
-          memorisation-heavy tricks no one can examine.
-        </p>
+      <h2>The Blackbox Dilemma</h2>
 
-        <p>
-          That shift turned intelligence into a luxury. Access flipped, pricing out
-          builders and silencing the communities that need these tools the most.
-        </p>
+      <p>
+        Optimizing for immediate utility creates unexplainable components, leaving critical questions unanswered:
+      </p>
 
-        <p>
-          Those pressures make verification rare, keep most of the world's
-          languages outside the loop, and ask institutions to trust black boxes
-          they can neither audit nor appeal.
-        </p>
+      <ul>
+        <li>What is information?</li>
+        <li>How is it structured and formed?</li>
+        <li>How can it be quantitatively measured, identified, and compared?</li>
+        <li>How can it be controlled and, ultimately, learned?</li>
+      </ul>
 
-        <h2>Our Response</h2>
+      <p>
+        At Azetta.ai, we have answered these questions. Our internal systems are built entirely on these first
+        principles. Each component is interdependent and originates from our fundamental research into the nature of
+        information and intelligence.
+      </p>
 
-        <p>
-          Our response is clear. Intelligence is infrastructure, so every training
-          run, dataset choice, and architectural decision must be documented,
-          explainable, and reviewable. Cost must fall, so we design for CPU-first
-          deployment, modest hardware, and transparent pricing. Knowledge must be
-          omnilingual, so our models speak across cultures without translation
-          tolls. And models must be whitebox by law—if a weight, gradient, or
-          explanation cannot be inspected, it has no place in production.
-        </p>
+      <p>
+        Current AI development often deviates from this, building upon opaque, ambiguous, and opinionated research. The
+        field has prioritized "making it work" heuristically over "building it right" from fundamentals.
+      </p>
 
-        <p>
-          We build from first principles, where every decision traces back to fundamental questions about information itself. We reject the heuristic shortcuts that create black boxes, choosing instead the rigor of explainable foundations.
-        </p>
+      <h2>The Promise and Its Betrayal</h2>
 
-        <p>
-          We end with the same invitation that drove the early promise: builders,
-          investors, and lawmakers must lower barriers, legislate whitebox
-          requirements, insist on omnilingual reach, and demand logs, proofs, and
-          plain language from every vendor. Together we keep AI open, democratic,
-          and worthy of public trust.
-        </p>
-      </article>
-    </main>
+      <p>
+        The promise of AI began with a simple idea: extend human curiosity by
+        sharing methods, datasets, and ideas in the open.
+      </p>
 
-    <footer class="manifesto-footer">
-      Drafted in solidarity by the Azetta team — builders of accessible,
-      accountable intelligence.
-    </footer>
+      <p>
+        The world we inhabit now looks different. High-compute budgets create
+        paywalls, sealed APIs hide reasoning, and data is harvested with
+        memorisation-heavy tricks no one can examine.
+      </p>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
-    <script src="main.js" defer></script>
-  </body>
+      <p>
+        That shift turned intelligence into a luxury. Access flipped, pricing out
+        builders and silencing the communities that need these tools the most.
+      </p>
+
+      <p>
+        Those pressures make verification rare, keep most of the world's
+        languages outside the loop, and ask institutions to trust black boxes
+        they can neither audit nor appeal.
+      </p>
+
+      <h2>Our Response</h2>
+
+      <p>
+        Our response is clear. Intelligence is infrastructure, so every training
+        run, dataset choice, and architectural decision must be documented,
+        explainable, and reviewable. Cost must fall, so we design for CPU-first
+        deployment, modest hardware, and transparent pricing. Knowledge must be
+        omnilingual, so our models speak across cultures without translation
+        tolls. And models must be whitebox by law—if a weight, gradient, or
+        explanation cannot be inspected, it has no place in production.
+      </p>
+
+      <p>
+        We build from first principles, where every decision traces back to fundamental questions about information
+        itself. We reject the heuristic shortcuts that create black boxes, choosing instead the rigor of explainable
+        foundations.
+      </p>
+
+      <p>
+        We end with the same invitation that drove the early promise: builders,
+        investors, and lawmakers must lower barriers, legislate whitebox
+        requirements, insist on omnilingual reach, and demand logs, proofs, and
+        plain language from every vendor. Together we keep AI open, democratic,
+        and worthy of public trust.
+      </p>
+    </article>
+  </main>
+
+  <footer class="manifesto-footer">
+    Drafted in solidarity by the Azetta team — builders of accessible,
+    accountable intelligence.
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
+
 </html>
-

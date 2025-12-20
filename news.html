@@ -2,6 +2,62 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C8V5SB2QZY');
+
+    // Enhanced Event Tracking
+    document.addEventListener('DOMContentLoaded', function () {
+      // Track button clicks
+      document.querySelectorAll('.btn, button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          gtag('event', 'button_click', {
+            'event_category': 'engagement',
+            'event_label': this.textContent.trim().substring(0, 50)
+          });
+        });
+      });
+
+      // Track article card clicks
+      document.querySelectorAll('.blog-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var title = this.querySelector('.blog-card-title') ? this.querySelector('.blog-card-title').textContent.trim() : 'Unknown';
+          gtag('event', 'article_click', {
+            'event_category': 'content',
+            'event_label': title
+          });
+        });
+      });
+
+      // Track filter/sort usage
+      document.querySelectorAll('#filter-select, #sort-select').forEach(function (select) {
+        select.addEventListener('change', function () {
+          gtag('event', 'filter_used', {
+            'event_category': 'engagement',
+            'event_label': this.id + ': ' + this.value
+          });
+        });
+      });
+
+      // Track scroll depth
+      var scrollDepths = [25, 50, 75, 100];
+      var scrolledDepths = [];
+      window.addEventListener('scroll', function () {
+        var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        scrollDepths.forEach(function (depth) {
+          if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+            scrolledDepths.push(depth);
+            gtag('event', 'scroll_depth', { 'event_category': 'engagement', 'value': depth });
+          }
+        });
+      });
+    });
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Newsroom - Azetta.ai | Talks, Press, Media</title>

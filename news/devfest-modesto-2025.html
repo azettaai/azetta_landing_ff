@@ -1,181 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI 2.0: What's Next for Intelligence? | Azetta.ai Newsroom</title>
-    <meta
-      name="description"
-      content="Panel discussion on the existential crisis: AI 2.0 is emerging while humanity operates on outdated ethics. Why Azetta builds whitebox AI to ensure humanity controls its future."
-    />
-    <meta name="author" content="Azetta.ai" />
-    <meta name="robots" content="index, follow" />
 
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="AI 2.0: What's Next for Intelligence?" />
-    <meta
-      property="og:description"
-      content="The existential crisis we face: AI 2.0 vs Humanity 1.0, and why whitebox AI matters for our future."
-    />
-    <meta property="og:url" content="https://azetta.ai/news/devfest-modesto-2025.html" />
-    <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C8V5SB2QZY');
 
-    <link rel="canonical" href="https://azetta.ai/news/devfest-modesto-2025.html" />
+    // Enhanced Event Tracking for Article
+    document.addEventListener('DOMContentLoaded', function () {
+      // Track article view with title
+      gtag('event', 'article_view', {
+        'event_category': 'content',
+        'event_label': document.title
+      });
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+      // Track link clicks
+      document.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          gtag('event', 'link_click', {
+            'event_category': 'engagement',
+            'event_label': this.textContent.trim().substring(0, 50),
+            'destination': this.href
+          });
+        });
+      });
 
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#1b998b" />
+      // Track scroll depth (reading progress)
+      var scrollDepths = [25, 50, 75, 100];
+      var scrolledDepths = [];
+      window.addEventListener('scroll', function () {
+        var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        scrollDepths.forEach(function (depth) {
+          if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+            scrolledDepths.push(depth);
+            gtag('event', 'article_read_progress', {
+              'event_category': 'engagement',
+              'event_label': depth + '% read',
+              'value': depth
+            });
+          }
+        });
+      });
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles.css" />
-  </head>
+      // Track time spent reading
+      var timeIntervals = [30, 60, 120, 180, 300];
+      timeIntervals.forEach(function (seconds) {
+        setTimeout(function () {
+          gtag('event', 'article_reading_time', {
+            'event_category': 'engagement',
+            'value': seconds
+          });
+        }, seconds * 1000);
+      });
+    });
+  </script>
 
-  <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-container">
-        <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
-          <span>Azetta.ai</span><span class="brand-accent"></span>
-        </a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-        <nav class="primary-nav" id="primary-navigation">
-          <ul class="nav-list">
-            <li><a href="../index.html#hero">Overview</a></li>
-            <li><a href="../index.html#products">Products</a></li>
-            <li><a href="../index.html#system-architecture">Architecture</a></li>
-            <li><a href="../index.html#connect">Contact</a></li>
-            <li><a href="../manifesto.html">Manifesto</a></li>
-            <li><a href="../blogs.html">Blog</a></li>
-            <li><a href="../news.html" class="active">Newsroom</a></li>
-          </ul>
-          <div class="nav-cta">
-            <a
-              class="btn btn-primary"
-              href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist"
-              >Join Waitlist</a
-            >
-          </div>
-        </nav>
-      </div>
-    </header>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 2.0: What's Next for Intelligence? | Azetta.ai Newsroom</title>
+  <meta name="description"
+    content="Panel discussion on the existential crisis: AI 2.0 is emerging while humanity operates on outdated ethics. Why Azetta builds whitebox AI to ensure humanity controls its future." />
+  <meta name="author" content="Azetta.ai" />
+  <meta name="robots" content="index, follow" />
 
-    <main>
-      <article class="blog-article">
-        <header class="article-header">
-          <div class="article-meta">
-            <span class="blog-tag">Panel</span>
-            <time class="blog-date" datetime="2025-10-25">October 25, 2025</time>
-          </div>
-          <h1 class="article-title">AI 2.0: What's Next for Intelligence?</h1>
-          <p class="article-subtitle">
-            A panel discussion at DevFest Modesto on the existential crisis we face: AI 2.0 is emerging while humanity operates on outdated ethics and goals.
-          </p>
-          <div class="article-author">
-            <span class="author-name">Taha Bouhsine — Co-founder, Head of Research & AI, Google Developer Expert</span>
-            <span class="read-time">Panel</span>
-          </div>
-        </header>
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AI 2.0: What's Next for Intelligence?" />
+  <meta property="og:description"
+    content="The existential crisis we face: AI 2.0 vs Humanity 1.0, and why whitebox AI matters for our future." />
+  <meta property="og:url" content="https://azetta.ai/news/devfest-modesto-2025.html" />
+  <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
 
-        <div class="article-content">
-          <section>
-            <h2>The existential crisis we're unaware of</h2>
-            <p>
-              We stand at the threshold of a higher realm of artificial intelligence—AI 2.0. Systems that will surpass human capability across domains, reshape economies, and redefine what intelligence means. Yet humanity continues operating on the goals, egos, and ethics of humanity 1.0.
-            </p>
-            <p>
-              This isn't just a technical challenge. It's an existential one. And most people remain unaware of the collision ahead.
-            </p>
-          </section>
+  <link rel="canonical" href="https://azetta.ai/news/devfest-modesto-2025.html" />
 
-          <section>
-            <h2>From survival to ego—and what comes next</h2>
-            <p>
-              Historically, humans were driven by survival. We optimized for staying alive: finding food, avoiding predators, protecting our communities. Over recent decades, that shifted. Most of us stopped optimizing for survival and started optimizing for ego—status, recognition, individual achievement.
-            </p>
-            <p>
-              Now, as AI democratizes knowledge and replaces jobs, these ego-driven decision frameworks are becoming obsolete. We follow outdated definitions of what good engineers do, where careers should go, what success looks like. We've lost sight of the initial goal that drove our species forward: using the tools we discover—the fire—to build, not to destroy.
-            </p>
-          </section>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
 
-          <section>
-            <h2>The skills humanity 2.0 requires</h2>
-            <p>
-              AI 2.0 demands that we evolve. Not just our technology, but our goals, ethics, and decision-making frameworks. Humanity 2.0 must learn:
-            </p>
-            <ul>
-              <li><strong>To prioritize collective benefit over individual ego.</strong> Intelligence amplification should serve humanity, not concentrate power.</li>
-              <li><strong>To question outdated beliefs and footsteps.</strong> What worked in the past won't work in an AI-saturated future.</li>
-              <li><strong>To demand transparency and control.</strong> We cannot trust what we cannot understand or govern.</li>
-              <li><strong>To align technology with enduring human values.</strong> Not the values of the industrial era, but values that preserve human agency and dignity.</li>
-            </ul>
-          </section>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1b998b" />
 
-          <section>
-            <h2>Why Azetta exists: Whitebox AI for humanity's future</h2>
-            <p>
-              This is why we build whitebox AI. Not because it's technically interesting, but because it's existentially necessary.
-            </p>
-            <p>
-              Black-box systems—opaque, uncontrollable, optimized for metrics we don't fully understand—are incompatible with humanity 2.0. They centralize power, obscure accountability, and erode trust. As AI becomes more capable, this opacity becomes more dangerous.
-            </p>
-            <p>
-              Whitebox AI gives humanity control. Every decision traceable. Every operation explainable. Every transformation auditable. This isn't just about better engineering—it's about ensuring AI remains a tool humanity wields, not a force that shapes humanity against its will.
-            </p>
-          </section>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
 
-          <section>
-            <h2>Building AI that serves, not destroys</h2>
-            <p>
-              At Azetta, we're motivated by a simple conviction: AI should strengthen the fabric of humanity, not tear it apart. That means:
-            </p>
-            <ul>
-              <li><strong>Transparency over performance alone.</strong> If we can't explain it, we shouldn't deploy it.</li>
-              <li><strong>Democratic access over gatekeeping.</strong> Intelligence tools should be available to everyone, not just those with massive compute budgets.</li>
-              <li><strong>Human oversight over autonomous optimization.</strong> Humans must remain in control of high-stakes decisions.</li>
-              <li><strong>Physics-grounded foundations over heuristic tricks.</strong> We need AI systems built on principles we can trust, not patterns we hope will hold.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>The choice ahead</h2>
-            <p>
-              AI 2.0 is coming whether we're ready or not. The question is: will humanity evolve to meet it? Will we build systems we can control, understand, and trust? Or will we sleepwalk into a future where intelligence is concentrated, opaque, and beyond our reach?
-            </p>
-            <p>
-              This panel was about confronting that choice. And at Azetta, we're building for the future where humanity chooses wisely.
-            </p>
-          </section>
-
-          <section>
-            <h2>Resources</h2>
-            <ul>
-              <li><a href="https://gdg.community.dev/events/details/google-gdg-modesto-presents-devfest-2025/" target="_blank" rel="noopener">Event page (DevFest Modesto)</a></li>
-              <li><a href="../manifesto.html">Read our manifesto on accessible, accountable AI</a></li>
-              <li><a href="mailto:contact@azetta.ai?subject=AI%202.0%20Discussion">Continue the conversation</a></li>
-              <li><a href="../news.html">Back to Newsroom</a></li>
-            </ul>
-          </section>
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
+        <span>Azetta.ai</span><span class="brand-accent"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html#hero">Overview</a></li>
+          <li><a href="../index.html#products">Products</a></li>
+          <li><a href="../index.html#system-architecture">Architecture</a></li>
+          <li><a href="../index.html#connect">Contact</a></li>
+          <li><a href="../manifesto.html">Manifesto</a></li>
+          <li><a href="../blogs.html">Blog</a></li>
+          <li><a href="../news.html" class="active">Newsroom</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">Join
+            Waitlist</a>
         </div>
-      </article>
-    </main>
+      </nav>
+    </div>
+  </header>
 
-    <script src="../main.js" defer></script>
-  </body>
+  <main>
+    <article class="blog-article">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="blog-tag">Panel</span>
+          <time class="blog-date" datetime="2025-10-25">October 25, 2025</time>
+        </div>
+        <h1 class="article-title">AI 2.0: What's Next for Intelligence?</h1>
+        <p class="article-subtitle">
+          A panel discussion at DevFest Modesto on the existential crisis we face: AI 2.0 is emerging while humanity
+          operates on outdated ethics and goals.
+        </p>
+        <div class="article-author">
+          <span class="author-name">Taha Bouhsine — Co-founder, Head of Research & AI, Google Developer Expert</span>
+          <span class="read-time">Panel</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <section>
+          <h2>The existential crisis we're unaware of</h2>
+          <p>
+            We stand at the threshold of a higher realm of artificial intelligence—AI 2.0. Systems that will surpass
+            human capability across domains, reshape economies, and redefine what intelligence means. Yet humanity
+            continues operating on the goals, egos, and ethics of humanity 1.0.
+          </p>
+          <p>
+            This isn't just a technical challenge. It's an existential one. And most people remain unaware of the
+            collision ahead.
+          </p>
+        </section>
+
+        <section>
+          <h2>From survival to ego—and what comes next</h2>
+          <p>
+            Historically, humans were driven by survival. We optimized for staying alive: finding food, avoiding
+            predators, protecting our communities. Over recent decades, that shifted. Most of us stopped optimizing for
+            survival and started optimizing for ego—status, recognition, individual achievement.
+          </p>
+          <p>
+            Now, as AI democratizes knowledge and replaces jobs, these ego-driven decision frameworks are becoming
+            obsolete. We follow outdated definitions of what good engineers do, where careers should go, what success
+            looks like. We've lost sight of the initial goal that drove our species forward: using the tools we
+            discover—the fire—to build, not to destroy.
+          </p>
+        </section>
+
+        <section>
+          <h2>The skills humanity 2.0 requires</h2>
+          <p>
+            AI 2.0 demands that we evolve. Not just our technology, but our goals, ethics, and decision-making
+            frameworks. Humanity 2.0 must learn:
+          </p>
+          <ul>
+            <li><strong>To prioritize collective benefit over individual ego.</strong> Intelligence amplification should
+              serve humanity, not concentrate power.</li>
+            <li><strong>To question outdated beliefs and footsteps.</strong> What worked in the past won't work in an
+              AI-saturated future.</li>
+            <li><strong>To demand transparency and control.</strong> We cannot trust what we cannot understand or
+              govern.</li>
+            <li><strong>To align technology with enduring human values.</strong> Not the values of the industrial era,
+              but values that preserve human agency and dignity.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why Azetta exists: Whitebox AI for humanity's future</h2>
+          <p>
+            This is why we build whitebox AI. Not because it's technically interesting, but because it's existentially
+            necessary.
+          </p>
+          <p>
+            Black-box systems—opaque, uncontrollable, optimized for metrics we don't fully understand—are incompatible
+            with humanity 2.0. They centralize power, obscure accountability, and erode trust. As AI becomes more
+            capable, this opacity becomes more dangerous.
+          </p>
+          <p>
+            Whitebox AI gives humanity control. Every decision traceable. Every operation explainable. Every
+            transformation auditable. This isn't just about better engineering—it's about ensuring AI remains a tool
+            humanity wields, not a force that shapes humanity against its will.
+          </p>
+        </section>
+
+        <section>
+          <h2>Building AI that serves, not destroys</h2>
+          <p>
+            At Azetta, we're motivated by a simple conviction: AI should strengthen the fabric of humanity, not tear it
+            apart. That means:
+          </p>
+          <ul>
+            <li><strong>Transparency over performance alone.</strong> If we can't explain it, we shouldn't deploy it.
+            </li>
+            <li><strong>Democratic access over gatekeeping.</strong> Intelligence tools should be available to everyone,
+              not just those with massive compute budgets.</li>
+            <li><strong>Human oversight over autonomous optimization.</strong> Humans must remain in control of
+              high-stakes decisions.</li>
+            <li><strong>Physics-grounded foundations over heuristic tricks.</strong> We need AI systems built on
+              principles we can trust, not patterns we hope will hold.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>The choice ahead</h2>
+          <p>
+            AI 2.0 is coming whether we're ready or not. The question is: will humanity evolve to meet it? Will we build
+            systems we can control, understand, and trust? Or will we sleepwalk into a future where intelligence is
+            concentrated, opaque, and beyond our reach?
+          </p>
+          <p>
+            This panel was about confronting that choice. And at Azetta, we're building for the future where humanity
+            chooses wisely.
+          </p>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="https://gdg.community.dev/events/details/google-gdg-modesto-presents-devfest-2025/"
+                target="_blank" rel="noopener">Event page (DevFest Modesto)</a></li>
+            <li><a href="../manifesto.html">Read our manifesto on accessible, accountable AI</a></li>
+            <li><a href="mailto:contact@azetta.ai?subject=AI%202.0%20Discussion">Continue the conversation</a></li>
+            <li><a href="../news.html">Back to Newsroom</a></li>
+          </ul>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <script src="../main.js" defer></script>
+</body>
+
 </html>

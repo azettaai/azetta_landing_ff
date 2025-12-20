@@ -1,86 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Meta Tags -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <title>
-      Azetta.ai - Whitebox AI Systems | Explainable & Physics-Grounded
-      AI
-    </title>
-    <meta
-      name="title"
-      content="Azetta.ai - Whitebox AI Systems | Explainable & Physics-Grounded AI"
-    />
-    <meta
-      name="description"
-      content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone."
-    />
-    <meta
-      name="keywords"
-      content="AI, Artificial Intelligence, Explainable AI, White-box AI, Transparent AI, Physics-inspired AI, Machine Learning, Low-compute AI, Multimodal AI, Safe AI, Azetta"
-    />
-    <meta name="author" content="Azetta.ai" />
-    <meta name="robots" content="index, follow" />
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C8V5SB2QZY');
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://azetta.ai/" />
-    <meta
-      property="og:title"
-      content="Azetta.ai - Transparent AI Architecture"
-    />
-    <meta
-      property="og:description"
-      content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone."
-    />
-    <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
-    <meta property="og:site_name" content="Azetta.ai" />
-    <meta property="og:locale" content="en_US" />
+    // Enhanced Event Tracking
+    document.addEventListener('DOMContentLoaded', function () {
+      // Track button clicks
+      document.querySelectorAll('.btn, button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          gtag('event', 'button_click', {
+            'event_category': 'engagement',
+            'event_label': this.textContent.trim().substring(0, 50),
+            'button_class': this.className
+          });
+        });
+      });
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://azetta.ai/" />
-    <meta
-      name="twitter:title"
-      content="Azetta.ai - Transparent AI Architecture"
-    />
-    <meta
-      name="twitter:description"
-      content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone."
-    />
-    <meta name="twitter:image" content="https://azetta.ai/twitter-image.jpg" />
-    <meta name="twitter:creator" content="@azettaai" />
+      // Track navigation clicks
+      document.querySelectorAll('.nav-list a, .nav-cta a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          gtag('event', 'navigation_click', {
+            'event_category': 'navigation',
+            'event_label': this.textContent.trim(),
+            'destination': this.href
+          });
+        });
+      });
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://azetta.ai/" />
+      // Track external links
+      document.querySelectorAll('a[href^="http"], a[href^="mailto:"]').forEach(function (link) {
+        link.addEventListener('click', function () {
+          gtag('event', 'outbound_click', {
+            'event_category': 'outbound',
+            'event_label': this.href
+          });
+        });
+      });
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+      // Track scroll depth
+      var scrollDepths = [25, 50, 75, 100];
+      var scrolledDepths = [];
+      window.addEventListener('scroll', function () {
+        var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        scrollDepths.forEach(function (depth) {
+          if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+            scrolledDepths.push(depth);
+            gtag('event', 'scroll_depth', {
+              'event_category': 'engagement',
+              'event_label': depth + '%',
+              'value': depth
+            });
+          }
+        });
+      });
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#1b998b" />
+      // Track time on page
+      var timeIntervals = [30, 60, 120, 300];
+      timeIntervals.forEach(function (seconds) {
+        setTimeout(function () {
+          gtag('event', 'time_on_page', {
+            'event_category': 'engagement',
+            'event_label': seconds + ' seconds',
+            'value': seconds
+          });
+        }, seconds * 1000);
+      });
 
-    <!-- Preconnect for Performance -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+      // Track product card interactions
+      document.querySelectorAll('.product-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          var productName = this.querySelector('h3') ? this.querySelector('h3').textContent.trim() : 'Unknown';
+          gtag('event', 'product_interest', {
+            'event_category': 'products',
+            'event_label': productName
+          });
+        });
+      });
+    });
+  </script>
 
-    <!-- Stylesheets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
+  <!-- Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
+  <!-- Primary Meta Tags -->
+  <title>
+    Azetta.ai - Whitebox AI Systems | Explainable & Physics-Grounded
+    AI
+  </title>
+  <meta name="title" content="Azetta.ai - Whitebox AI Systems | Explainable & Physics-Grounded AI" />
+  <meta name="description"
+    content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone." />
+  <meta name="keywords"
+    content="AI, Artificial Intelligence, Explainable AI, White-box AI, Transparent AI, Physics-inspired AI, Machine Learning, Low-compute AI, Multimodal AI, Safe AI, Azetta" />
+  <meta name="author" content="Azetta.ai" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://azetta.ai/" />
+  <meta property="og:title" content="Azetta.ai - Transparent AI Architecture" />
+  <meta property="og:description"
+    content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone." />
+  <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
+  <meta property="og:site_name" content="Azetta.ai" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://azetta.ai/" />
+  <meta name="twitter:title" content="Azetta.ai - Transparent AI Architecture" />
+  <meta name="twitter:description"
+    content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone." />
+  <meta name="twitter:image" content="https://azetta.ai/twitter-image.jpg" />
+  <meta name="twitter:creator" content="@azettaai" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://azetta.ai/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1b998b" />
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
@@ -102,7 +168,7 @@
       }
     </script>
 
-    <script type="application/ld+json">
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -130,7 +196,7 @@
       }
     </script>
 
-    <script type="application/ld+json">
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
@@ -143,328 +209,242 @@
         }
       }
     </script>
-  </head>
+</head>
 
-  <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-container">
-        <a class="brand-mark" href="#hero" aria-label="Azetta.ai home">
-          <span>Azetta.ai</span><span class="brand-accent"></span>
-        </a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-        <nav class="primary-nav" id="primary-navigation">
-          <ul class="nav-list">
-            <li><a href="#hero">Overview</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#system-architecture">Architecture</a></li>
-            <li><a href="#connect">Contact</a></li>
-            <li><a href="manifesto.html">Manifesto</a></li>
-            <li><a href="blogs.html">Blog</a></li>
-            <li><a href="news.html">Newsroom</a></li>
-          </ul>
-          <div class="nav-cta">
-            <a
-              class="btn btn-primary"
-              href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist"
-              >Join Waitlist</a
-            >
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a class="brand-mark" href="#hero" aria-label="Azetta.ai home">
+        <span>Azetta.ai</span><span class="brand-accent"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="#hero">Overview</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#system-architecture">Architecture</a></li>
+          <li><a href="#connect">Contact</a></li>
+          <li><a href="manifesto.html">Manifesto</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="news.html">Newsroom</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">Join
+            Waitlist</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero" aria-label="Hero section with animated background">
+      <canvas id="circuit-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero-content">
+        <div class="logo-box" aria-label="Azetta.ai logo">
+          <div class="svg-container">
+            <svg width="512" height="512" viewBox="0 0 512 512" role="img"
+              aria-label="Azetta tech logo with circuit design">
+              <title>Azetta.ai Logo</title>
+              <path fill="#FCFCFC" transform="scale(0.5 0.5)"
+                d="M511.513 171.769C514.089 172.418 540.136 199.44 544.062 203.416L583.687 242.986L753.262 412.478L796.535 455.334C801.942 460.768 811.812 470.142 816.115 475.808C813.287 480.222 802.346 490.027 797.826 494.575L747.936 544.362L581.976 710.245C558.923 733.284 535.372 756.424 512.62 779.701C510.199 779.03 502.181 770.791 499.724 768.379L293.195 562.264L233.352 502.453C227.447 496.46 212.251 481.602 208.052 475.746C210.615 472.312 215.934 467.225 219.125 464.028C226.592 456.569 234.109 449.16 241.678 441.804L306.749 376.916L511.513 171.769ZM380.733 330.515C388.967 340.869 406.707 356.876 416.589 366.728L447.505 397.715C453.894 404.12 460.947 411.437 467.65 417.334L468 386.018C462.056 384.674 457.63 383.284 453.947 377.759C450.933 373.238 449.727 366.148 451.103 360.895C452.357 356.167 455.516 352.171 459.826 349.859C464.469 347.34 469.977 347 474.984 348.584C479.718 350.037 483.678 353.316 485.987 357.697C490.61 366.607 486.298 371.482 484.481 379.454C483.834 382.293 484.291 390.325 484.324 393.66L484.587 418.71C491.913 415.424 495.518 414.639 503.417 413.346C503.328 383.784 503.039 353.141 503.642 323.651C495.875 322.016 488.653 316.23 484.371 309.655C479.863 302.645 478.284 294.148 479.972 285.986C483.476 269.333 498.753 260.199 515.121 261.129C549.955 266.635 553.999 312.354 519.74 323.54C519.393 332.647 519.435 342.447 519.566 351.597C519.861 372.124 519.219 392.975 519.721 413.464C526.628 414.023 532.52 416.298 538.932 418.808C537.832 407.723 539.266 392.898 538.385 381.441C537.821 374.103 533.765 371.848 533.989 365.448C534.171 361.4 535.618 357.51 538.127 354.328C544.524 346.275 557.183 344.513 565.151 351.281C569.027 354.588 571.432 359.298 571.839 364.377C572.258 369.778 570.416 375.111 566.754 379.103C563.208 383.038 559.898 384.423 554.989 385.731C554.768 395.738 554.449 407.123 554.86 417.068C562.204 411.838 575.159 398.367 582.08 391.456L623.064 350.731C628.724 345.123 637.827 335.569 643.424 330.593C632.642 318.883 514.551 199.792 511.269 198.834L411.052 299.738C400.915 309.94 390.973 320.473 380.733 330.515ZM519.633 627.314C528.326 630.106 536.004 634.888 540.162 643.285C552.872 668.95 527.883 697.046 500.77 687.948C473.863 678.919 470.807 641.93 496.51 629.842C498.679 628.819 500.929 628.13 503.216 627.394C503.396 609.588 503.453 591.781 503.389 573.974C503.389 562.829 503.733 548.781 503.016 537.874C495.582 536.367 491.614 535.2 484.448 532.449C484.397 545.102 484.223 557.836 484.434 570.481C484.528 576.102 488.456 579.871 487.97 586.446C486.704 603.555 465.717 611.152 454.424 597.597C451.146 593.635 449.657 588.492 450.311 583.392C451.599 573.112 459.425 568.919 468.158 565.999C468.761 556.224 468.362 543.193 468.315 533.141L415.432 586.778L393.483 608.717C389.625 612.588 384.118 617.866 380.716 621.973L467.98 709.312C482.483 723.774 497.761 738.595 511.9 753.323C526.709 737.7 542.642 722.434 557.912 707.239L628.82 636.451C632.634 632.693 639.643 625.34 643.471 622.148C632.592 610.089 616.55 595.448 604.625 583.706C587.765 566.831 571.058 549.803 554.508 532.623C554.604 542.985 554.455 554.987 554.977 565.19C566.994 569.763 577.366 578.618 570.996 592.817C568.816 597.691 564.749 601.469 559.729 603.286C548.295 607.298 537.844 600.474 534.978 589.294C532.939 581.342 538.182 577.574 538.58 570.079C538.87 557.555 538.416 544.779 538.51 532.242C531.881 535.271 527.314 536.802 520.1 537.848C519.124 542.621 519.515 560.957 519.519 566.982L519.633 627.314ZM587.054 452.343C581.576 451.863 576.111 451.983 570.612 451.999C571.986 457.177 573.559 462.904 574.554 468.135L633.702 468.06C644.688 468.067 657.224 467.775 668.047 468.216C671.406 458.714 675.334 452.099 684.89 447.556C692.667 443.91 701.579 443.523 709.643 446.482C717.824 449.543 724.965 456.382 728.475 464.374C731.542 471.425 731.66 479.41 728.804 486.548C722.052 503.191 702.815 512.581 685.788 505.091C675.94 500.759 671.755 494.062 667.811 484.461L588.805 484.483C584.088 484.434 578.906 484.487 574.231 484.248C573.078 489.616 571.722 494.937 570.165 500.202C575.523 500.703 581.263 500.518 586.669 500.477C607.074 481.936 616.241 499.42 629.8 513.218L664.329 547.67L715.74 548.012C719.614 545.447 729.287 535.603 733.157 531.806C745.266 519.974 757.255 508.021 769.122 495.948C773.301 491.716 785.859 479.771 789.069 475.853C765.012 451.791 742.161 428.229 717.626 404.603C706.456 404.512 695.285 404.481 684.115 404.509C678.028 404.507 670.069 404.285 664.108 404.615L629.162 439.562C615.943 453.008 606.778 470.144 587.054 452.343ZM234.892 475.69C237.702 479.462 242.437 483.803 245.867 487.185L263.244 504.307L291.17 531.975C296.252 537.046 302.124 543.243 307.344 548.029C324.448 548.128 341.552 548.117 358.656 547.995C371.039 536.81 382.46 524.335 394.366 512.66C400.027 507.108 405.509 499.307 412.071 495.059C420.93 489.323 430.503 493.908 436.935 500.643L452.818 500.613L449.722 484.431L379.75 484.366C371.79 484.376 363.57 484.279 355.632 484.433C351.798 494.182 346.419 501.05 336.474 505.281C329.02 508.464 320.6 508.523 313.102 505.444C286.453 494.284 285.314 457.841 313.017 447.211C329.18 441.01 348.185 448.253 354.589 464.811C355.011 465.919 355.421 467.031 355.818 468.149C385.944 467.699 418.747 467.588 448.915 468.03C450.285 462.496 451.825 457.152 453.211 451.691C447.603 452.179 441.759 451.548 435.756 452.06C428.659 458.441 421.013 463.835 411.234 457.195C404.588 452.683 399.53 445.209 393.644 439.743C382.187 428.317 370.88 416.303 359.203 405.139C351.402 404.165 338.571 404.489 330.266 404.49C323.875 404.491 312.874 404.108 306.802 404.505C293.152 416.475 276.988 434.195 263.603 446.966C257.266 453.013 239.66 469.882 234.892 475.69ZM353.303 594.85C358.202 599.526 363.572 605.229 368.282 610.17C386.027 593.674 405.116 573.103 422.445 555.907L447.306 531.233C451.496 527.051 457.772 521.224 461.15 516.571C454.132 516.505 445.752 516.259 438.848 516.652C436.233 522.222 433.128 526.866 427.016 529.218C422.319 531.024 417.083 530.804 412.553 528.612C410.047 527.386 408.418 525.747 406.654 523.647C402.256 526.827 397.922 531.89 393.965 535.701C384.853 544.477 374.906 555.972 365.394 564.101C354.841 564.781 332.136 563.354 323.908 564.79C326.821 568.531 331.523 572.939 334.971 576.38C341.133 582.485 347.244 588.642 353.303 594.85ZM699.628 564.5C691.948 564.357 664.992 564.907 659.769 563.883C655.06 562.959 629.942 536.427 625.713 532.037C622.931 529.112 620.121 526.213 617.284 523.341C603.914 535.189 592.392 531.905 584.506 516.54C577.431 516.463 569.505 516.216 562.51 516.553C565.207 520.88 580.752 535.017 585.731 540.053L621.96 576.524C632.448 587.203 644.225 599.578 655.233 609.575C663.687 601.618 673.502 592.168 681.505 583.763C686.617 578.426 695.204 570 699.628 564.5ZM556.275 594.049C560.922 592.635 563.537 587.717 562.111 583.074C560.685 578.432 555.759 575.83 551.121 577.269C546.5 578.702 543.911 583.604 545.331 588.229C546.752 592.854 551.647 595.457 556.275 594.049ZM426.075 504.41C422.446 503.072 421.37 502.626 417.389 503.125C414.655 504.802 412.55 506.622 411.657 509.883C411.125 511.839 411.422 513.928 412.476 515.658C415.212 520.223 419.274 520.072 423.823 519.944C431 515.87 431.49 510.401 426.075 504.41ZM604.814 449.423C607.991 448.623 610.477 446.151 611.294 442.978C612.111 439.805 611.128 436.439 608.733 434.204C606.337 431.97 602.911 431.223 599.803 432.258C595.238 433.778 592.693 438.636 594.041 443.254C595.39 447.872 600.148 450.597 604.814 449.423ZM471.274 594.169C476.006 592.789 478.712 587.823 477.307 583.099C475.902 578.374 470.922 575.694 466.206 577.124C461.523 578.543 458.867 583.478 460.262 588.168C461.656 592.857 466.578 595.539 471.274 594.169ZM471.264 375.069C474.421 374.205 476.858 371.693 477.626 368.511C478.394 365.329 477.372 361.982 474.957 359.773C472.542 357.563 469.117 356.842 466.016 357.889C463.163 358.853 460.983 361.181 460.208 364.09C459.433 366.999 460.167 370.103 462.163 372.358C464.432 374.922 467.961 375.973 471.264 375.069ZM552.586 357.278C549.381 357.647 546.635 359.741 545.43 362.733C544.225 365.726 544.755 369.139 546.81 371.626C548.865 374.113 552.116 375.276 555.282 374.657C559.921 373.751 563.015 369.342 562.291 364.671C561.566 360.001 557.282 356.737 552.586 357.278ZM460.822 434.943C431.739 404.348 398.701 372.465 368.695 342.573C360.207 349.983 350.536 360.406 342.335 368.427C337.469 373.187 327.069 383.327 323.358 388.273C334.071 388.271 354.176 387.704 364.088 388.561C368.732 391.332 372.14 395.611 376.1 399.135C386.112 408.046 396.119 420.073 405.914 428.754C411.906 423.877 413.534 422.277 421.284 421.756C431.251 422.924 434.323 426.882 439.258 434.961C446.648 435.129 453.428 435.234 460.822 434.943ZM418.651 432.24C415.516 432.908 412.992 435.227 412.062 438.295C411.132 441.362 411.944 444.692 414.18 446.989C416.416 449.285 419.724 450.184 422.815 449.335C427.406 448.075 430.162 443.391 429.036 438.765C427.909 434.14 423.308 431.248 418.651 432.24ZM599.136 503.195C594.618 505.066 592.453 510.231 594.289 514.764C596.124 519.298 601.272 521.503 605.82 519.703C610.419 517.884 612.654 512.665 610.798 508.081C608.942 503.496 603.706 501.303 599.136 503.195ZM601.121 422.032C608.35 422.268 611.963 423.843 617.462 428.739L643.704 402.449C647.16 399 654.692 391.234 658.348 388.658C672.255 387.911 686.549 388.753 700.389 387.989C688.373 372.991 668.753 356.882 655.73 341.971C651.434 345.359 645.219 351.951 641.122 356.011L610.853 386.353C599.886 397.063 588.976 407.829 578.121 418.651C573.01 423.716 566.304 429.769 561.893 435.123C569.397 435.222 576.758 434.935 584.254 434.644C588.73 426.737 591.667 423.463 601.121 422.032ZM505.827 432.71C482.031 435.872 465.249 457.649 468.255 481.465C471.261 505.281 492.928 522.206 516.763 519.356C540.821 516.479 557.937 494.567 554.903 470.529C551.869 446.491 529.845 429.518 505.827 432.71Z" />
+              <path class="logo-glow-center" fill="#FCFCFC" transform="scale(0.5 0.5)"
+                d="M508.211 448.197C523.484 446.355 537.377 457.197 539.302 472.46C541.227 487.723 530.461 501.674 515.209 503.682C499.839 505.706 485.756 494.839 483.816 479.458C481.876 464.077 492.82 450.054 508.211 448.197Z" />
+              <path fill="#D87455" transform="scale(0.5 0.5)"
+                d="M510.312 641.198C519.589 640.578 527.625 647.567 528.297 656.84C528.969 666.113 522.025 674.188 512.756 674.912C503.413 675.642 495.26 668.631 494.582 659.284C493.905 649.937 500.961 641.823 510.312 641.198Z" />
+              <path fill="#D87455" transform="scale(0.5 0.5)"
+                d="M510.054 276.055C519.201 275.248 527.288 281.967 528.173 291.107C529.057 300.247 522.407 308.391 513.274 309.353C504.032 310.326 495.768 303.578 494.873 294.328C493.979 285.077 500.796 276.871 510.054 276.055Z" />
+              <path fill="#D87455" transform="scale(0.5 0.5)"
+                d="M324.255 459.601C333.473 459.315 341.175 466.561 341.451 475.78C341.728 484.999 334.474 492.693 325.255 492.961C316.049 493.228 308.367 485.986 308.091 476.78C307.815 467.574 315.049 459.885 324.255 459.601Z" />
+              <path fill="#D87455" transform="scale(0.5 0.5)"
+                d="M694.942 460.041C703.924 457.821 712.997 463.336 715.16 472.332C717.324 481.327 711.752 490.365 702.744 492.472C693.814 494.561 684.873 489.049 682.729 480.133C680.584 471.217 686.04 462.242 694.942 460.041Z" />
+            </svg>
           </div>
+        </div>
+
+        <h1 class="hero-tagline">intelligence made from first principles</h1>
+
+        <div class="hero-buttons" role="group" aria-label="Primary actions">
+          <a class="btn btn-primary" href="#products">Explore Products</a>
+          <a class="btn btn-outline" href="manifesto.html">Read Manifesto</a>
+          <a class="btn" href="mailto:contact@azetta.ai?subject=Schedule%20a%20briefing">Book Briefing</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products" aria-labelledby="products-title">
+      <div class="section-shell">
+        <h2 id="products-title" class="flow-title">PRODUCT_SUITE</h2>
+        <p class="flow-subtitle">
+          // Stack components built for auditable intelligence and
+          multilingual reach
+        </p>
+
+        <div class="products-grid">
+          <article class="product-card" aria-labelledby="product-cosmadb-title">
+            <header class="product-header">
+              <span class="product-tag">Vector Search</span>
+              <h3 id="product-cosmadb-title">CosmaDB</h3>
+            </header>
+            <p class="product-desc">
+              A vector database that processes each vector independently,
+              avoiding the costly memory-intensive network construction
+              required by methods like HNSW. Built with proprietary hash
+              indexing and native SQL semantics for millisecond recall.
+            </p>
+            <ul class="product-highlights">
+              <li>
+                Significantly lower cost than traditional vector databases
+              </li>
+              <li>
+                Per-vector indexing without expensive network build overhead
+              </li>
+              <li>Hash-native indexing with predictable latency</li>
+            </ul>
+            <div class="product-actions">
+              <a class="product-link" href="mailto:contact@azetta.ai?subject=CosmaDB%20Beta%20Access">Request beta
+                access</a>
+              <span class="product-status">Beta invitations open</span>
+            </div>
+          </article>
+
+          <article class="product-card" aria-labelledby="product-omniem-title">
+            <header class="product-header">
+              <span class="product-tag">Information Representation Model</span>
+              <h3 id="product-omniem-title">OmniEm</h3>
+            </header>
+            <p class="product-desc">
+              Omnilingual embedding models that collapse language barriers; if
+              knowledge matches, the vectors align—regardless of how it is
+              written or spoken.
+            </p>
+            <ul class="product-highlights">
+              <li>Unified latent space for 200+ languages</li>
+              <li>Knowledge-first similarity, not surface tokens</li>
+              <li>Drop-in adapters for existing inference stacks</li>
+            </ul>
+            <div class="product-actions">
+              <a class="product-link" href="mailto:contact@azetta.ai?subject=OmniEm%20Pilot">Book a multilingual
+                pilot</a>
+              <span class="product-status">Enterprise early access</span>
+            </div>
+          </article>
+
+          <article class="product-card" aria-labelledby="product-perdiodica-title">
+            <header class="product-header">
+              <span class="product-tag">Explainability Ops</span>
+              <h3 id="product-perdiodica-title">Perdiodica</h3>
+            </header>
+            <p class="product-desc">
+              Continuous explainability tooling to monitor, interrogate, and
+              control models while they learn—before drift or anomalies ship.
+            </p>
+            <ul class="product-highlights">
+              <li>Training-time governance dashboards</li>
+              <li>Real-time constraint enforcement and alerts</li>
+              <li>Regulatory-grade audit exports by default</li>
+            </ul>
+            <div class="product-actions">
+              <a class="product-link" href="mailto:contact@azetta.ai?subject=Perdiodica%20Demo">Schedule a live demo</a>
+              <span class="product-status">Observer suite preview</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Architecture Section -->
+    <section class="architecture" id="system-architecture" aria-labelledby="system-architecture-title">
+      <div class="arch-container">
+        <h2 id="system-architecture-title" class="flow-title">
+          SYSTEM_ARCHITECTURE
+        </h2>
+        <p class="flow-subtitle">
+          // Rebuilt from first principles of physics
+        </p>
+
+        <div class="arch-visual" aria-label="System architecture diagram showing data flow">
+          <article class="arch-layer">
+            <h4>INPUT_LAYER</h4>
+            <p>Multimodal ingestion</p>
+            <p>Universal tokenization</p>
+            <p>Context preservation</p>
+            <p>Signal processing</p>
+          </article>
+
+          <div class="arch-connector" aria-hidden="true"></div>
+
+          <div class="arch-center">
+            <div class="arch-center-content">
+              <div class="arch-center-label">PHYSICS_CORE</div>
+              <div class="arch-center-title">
+                Omnilingual<br />Information<br />Engine
+              </div>
+            </div>
+          </div>
+
+          <div class="arch-connector" aria-hidden="true"></div>
+
+          <article class="arch-layer">
+            <h4>OUTPUT_LAYER</h4>
+            <p>Traceable decisions</p>
+            <p>Confidence metrics</p>
+            <p>Explanation paths</p>
+            <p>Safety validation</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terminal Demo Section -->
+    <section class="terminal" id="terminal-demo" aria-labelledby="terminal-title">
+      <div class="terminal-window">
+        <header class="terminal-header">
+          <div class="terminal-dot dot-red" aria-hidden="true"></div>
+          <div class="terminal-dot dot-yellow" aria-hidden="true"></div>
+          <div class="terminal-dot dot-green" aria-hidden="true"></div>
+          <span id="terminal-title" class="terminal-title">azetta.core</span>
+        </header>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="output">We're not iterating on existing architectures. We're rebuilding
+              AI from first principles up—creating systems where every
+              computation is meaningful, every decision is traceable, and
+              every resource is optimized.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="connect" aria-labelledby="cta-title">
+      <div class="cta-box">
+        <h2 id="cta-title" class="cta-title">
+          READY TO BUILD<br />TRANSPARENT AI?
+        </h2>
+        <p class="cta-subtitle">
+          Join us in revolutionizing AI from the ground up
+        </p>
+        <nav class="cta-buttons" aria-label="Call to action buttons">
+          <a class="btn btn-primary" aria-label="Contact Us" href="mailto:contact@azetta.ai">Contact Us</a>
+          <a class="btn" aria-label="Read our whitepaper"
+            href="https://www.tahabouhsine.com/nmn/assets/iclr_delulu_free.pdf" target="_blank" rel="noopener">Read
+            Whitepaper</a>
         </nav>
       </div>
-    </header>
+    </section>
+  </main>
 
-    <main>
-      <!-- Hero Section -->
-      <section
-        class="hero"
-        id="hero"
-        aria-label="Hero section with animated background"
-      >
-        <canvas id="circuit-canvas" aria-hidden="true"></canvas>
+  <!-- External Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
+  <script src="main.js" defer></script>
+</body>
 
-        <div class="hero-content">
-          <div class="logo-box" aria-label="Azetta.ai logo">
-            <div class="svg-container">
-              <svg
-                width="512"
-                height="512"
-                viewBox="0 0 512 512"
-                role="img"
-                aria-label="Azetta tech logo with circuit design"
-              >
-                <title>Azetta.ai Logo</title>
-                <path
-                  fill="#FCFCFC"
-                  transform="scale(0.5 0.5)"
-                  d="M511.513 171.769C514.089 172.418 540.136 199.44 544.062 203.416L583.687 242.986L753.262 412.478L796.535 455.334C801.942 460.768 811.812 470.142 816.115 475.808C813.287 480.222 802.346 490.027 797.826 494.575L747.936 544.362L581.976 710.245C558.923 733.284 535.372 756.424 512.62 779.701C510.199 779.03 502.181 770.791 499.724 768.379L293.195 562.264L233.352 502.453C227.447 496.46 212.251 481.602 208.052 475.746C210.615 472.312 215.934 467.225 219.125 464.028C226.592 456.569 234.109 449.16 241.678 441.804L306.749 376.916L511.513 171.769ZM380.733 330.515C388.967 340.869 406.707 356.876 416.589 366.728L447.505 397.715C453.894 404.12 460.947 411.437 467.65 417.334L468 386.018C462.056 384.674 457.63 383.284 453.947 377.759C450.933 373.238 449.727 366.148 451.103 360.895C452.357 356.167 455.516 352.171 459.826 349.859C464.469 347.34 469.977 347 474.984 348.584C479.718 350.037 483.678 353.316 485.987 357.697C490.61 366.607 486.298 371.482 484.481 379.454C483.834 382.293 484.291 390.325 484.324 393.66L484.587 418.71C491.913 415.424 495.518 414.639 503.417 413.346C503.328 383.784 503.039 353.141 503.642 323.651C495.875 322.016 488.653 316.23 484.371 309.655C479.863 302.645 478.284 294.148 479.972 285.986C483.476 269.333 498.753 260.199 515.121 261.129C549.955 266.635 553.999 312.354 519.74 323.54C519.393 332.647 519.435 342.447 519.566 351.597C519.861 372.124 519.219 392.975 519.721 413.464C526.628 414.023 532.52 416.298 538.932 418.808C537.832 407.723 539.266 392.898 538.385 381.441C537.821 374.103 533.765 371.848 533.989 365.448C534.171 361.4 535.618 357.51 538.127 354.328C544.524 346.275 557.183 344.513 565.151 351.281C569.027 354.588 571.432 359.298 571.839 364.377C572.258 369.778 570.416 375.111 566.754 379.103C563.208 383.038 559.898 384.423 554.989 385.731C554.768 395.738 554.449 407.123 554.86 417.068C562.204 411.838 575.159 398.367 582.08 391.456L623.064 350.731C628.724 345.123 637.827 335.569 643.424 330.593C632.642 318.883 514.551 199.792 511.269 198.834L411.052 299.738C400.915 309.94 390.973 320.473 380.733 330.515ZM519.633 627.314C528.326 630.106 536.004 634.888 540.162 643.285C552.872 668.95 527.883 697.046 500.77 687.948C473.863 678.919 470.807 641.93 496.51 629.842C498.679 628.819 500.929 628.13 503.216 627.394C503.396 609.588 503.453 591.781 503.389 573.974C503.389 562.829 503.733 548.781 503.016 537.874C495.582 536.367 491.614 535.2 484.448 532.449C484.397 545.102 484.223 557.836 484.434 570.481C484.528 576.102 488.456 579.871 487.97 586.446C486.704 603.555 465.717 611.152 454.424 597.597C451.146 593.635 449.657 588.492 450.311 583.392C451.599 573.112 459.425 568.919 468.158 565.999C468.761 556.224 468.362 543.193 468.315 533.141L415.432 586.778L393.483 608.717C389.625 612.588 384.118 617.866 380.716 621.973L467.98 709.312C482.483 723.774 497.761 738.595 511.9 753.323C526.709 737.7 542.642 722.434 557.912 707.239L628.82 636.451C632.634 632.693 639.643 625.34 643.471 622.148C632.592 610.089 616.55 595.448 604.625 583.706C587.765 566.831 571.058 549.803 554.508 532.623C554.604 542.985 554.455 554.987 554.977 565.19C566.994 569.763 577.366 578.618 570.996 592.817C568.816 597.691 564.749 601.469 559.729 603.286C548.295 607.298 537.844 600.474 534.978 589.294C532.939 581.342 538.182 577.574 538.58 570.079C538.87 557.555 538.416 544.779 538.51 532.242C531.881 535.271 527.314 536.802 520.1 537.848C519.124 542.621 519.515 560.957 519.519 566.982L519.633 627.314ZM587.054 452.343C581.576 451.863 576.111 451.983 570.612 451.999C571.986 457.177 573.559 462.904 574.554 468.135L633.702 468.06C644.688 468.067 657.224 467.775 668.047 468.216C671.406 458.714 675.334 452.099 684.89 447.556C692.667 443.91 701.579 443.523 709.643 446.482C717.824 449.543 724.965 456.382 728.475 464.374C731.542 471.425 731.66 479.41 728.804 486.548C722.052 503.191 702.815 512.581 685.788 505.091C675.94 500.759 671.755 494.062 667.811 484.461L588.805 484.483C584.088 484.434 578.906 484.487 574.231 484.248C573.078 489.616 571.722 494.937 570.165 500.202C575.523 500.703 581.263 500.518 586.669 500.477C607.074 481.936 616.241 499.42 629.8 513.218L664.329 547.67L715.74 548.012C719.614 545.447 729.287 535.603 733.157 531.806C745.266 519.974 757.255 508.021 769.122 495.948C773.301 491.716 785.859 479.771 789.069 475.853C765.012 451.791 742.161 428.229 717.626 404.603C706.456 404.512 695.285 404.481 684.115 404.509C678.028 404.507 670.069 404.285 664.108 404.615L629.162 439.562C615.943 453.008 606.778 470.144 587.054 452.343ZM234.892 475.69C237.702 479.462 242.437 483.803 245.867 487.185L263.244 504.307L291.17 531.975C296.252 537.046 302.124 543.243 307.344 548.029C324.448 548.128 341.552 548.117 358.656 547.995C371.039 536.81 382.46 524.335 394.366 512.66C400.027 507.108 405.509 499.307 412.071 495.059C420.93 489.323 430.503 493.908 436.935 500.643L452.818 500.613L449.722 484.431L379.75 484.366C371.79 484.376 363.57 484.279 355.632 484.433C351.798 494.182 346.419 501.05 336.474 505.281C329.02 508.464 320.6 508.523 313.102 505.444C286.453 494.284 285.314 457.841 313.017 447.211C329.18 441.01 348.185 448.253 354.589 464.811C355.011 465.919 355.421 467.031 355.818 468.149C385.944 467.699 418.747 467.588 448.915 468.03C450.285 462.496 451.825 457.152 453.211 451.691C447.603 452.179 441.759 451.548 435.756 452.06C428.659 458.441 421.013 463.835 411.234 457.195C404.588 452.683 399.53 445.209 393.644 439.743C382.187 428.317 370.88 416.303 359.203 405.139C351.402 404.165 338.571 404.489 330.266 404.49C323.875 404.491 312.874 404.108 306.802 404.505C293.152 416.475 276.988 434.195 263.603 446.966C257.266 453.013 239.66 469.882 234.892 475.69ZM353.303 594.85C358.202 599.526 363.572 605.229 368.282 610.17C386.027 593.674 405.116 573.103 422.445 555.907L447.306 531.233C451.496 527.051 457.772 521.224 461.15 516.571C454.132 516.505 445.752 516.259 438.848 516.652C436.233 522.222 433.128 526.866 427.016 529.218C422.319 531.024 417.083 530.804 412.553 528.612C410.047 527.386 408.418 525.747 406.654 523.647C402.256 526.827 397.922 531.89 393.965 535.701C384.853 544.477 374.906 555.972 365.394 564.101C354.841 564.781 332.136 563.354 323.908 564.79C326.821 568.531 331.523 572.939 334.971 576.38C341.133 582.485 347.244 588.642 353.303 594.85ZM699.628 564.5C691.948 564.357 664.992 564.907 659.769 563.883C655.06 562.959 629.942 536.427 625.713 532.037C622.931 529.112 620.121 526.213 617.284 523.341C603.914 535.189 592.392 531.905 584.506 516.54C577.431 516.463 569.505 516.216 562.51 516.553C565.207 520.88 580.752 535.017 585.731 540.053L621.96 576.524C632.448 587.203 644.225 599.578 655.233 609.575C663.687 601.618 673.502 592.168 681.505 583.763C686.617 578.426 695.204 570 699.628 564.5ZM556.275 594.049C560.922 592.635 563.537 587.717 562.111 583.074C560.685 578.432 555.759 575.83 551.121 577.269C546.5 578.702 543.911 583.604 545.331 588.229C546.752 592.854 551.647 595.457 556.275 594.049ZM426.075 504.41C422.446 503.072 421.37 502.626 417.389 503.125C414.655 504.802 412.55 506.622 411.657 509.883C411.125 511.839 411.422 513.928 412.476 515.658C415.212 520.223 419.274 520.072 423.823 519.944C431 515.87 431.49 510.401 426.075 504.41ZM604.814 449.423C607.991 448.623 610.477 446.151 611.294 442.978C612.111 439.805 611.128 436.439 608.733 434.204C606.337 431.97 602.911 431.223 599.803 432.258C595.238 433.778 592.693 438.636 594.041 443.254C595.39 447.872 600.148 450.597 604.814 449.423ZM471.274 594.169C476.006 592.789 478.712 587.823 477.307 583.099C475.902 578.374 470.922 575.694 466.206 577.124C461.523 578.543 458.867 583.478 460.262 588.168C461.656 592.857 466.578 595.539 471.274 594.169ZM471.264 375.069C474.421 374.205 476.858 371.693 477.626 368.511C478.394 365.329 477.372 361.982 474.957 359.773C472.542 357.563 469.117 356.842 466.016 357.889C463.163 358.853 460.983 361.181 460.208 364.09C459.433 366.999 460.167 370.103 462.163 372.358C464.432 374.922 467.961 375.973 471.264 375.069ZM552.586 357.278C549.381 357.647 546.635 359.741 545.43 362.733C544.225 365.726 544.755 369.139 546.81 371.626C548.865 374.113 552.116 375.276 555.282 374.657C559.921 373.751 563.015 369.342 562.291 364.671C561.566 360.001 557.282 356.737 552.586 357.278ZM460.822 434.943C431.739 404.348 398.701 372.465 368.695 342.573C360.207 349.983 350.536 360.406 342.335 368.427C337.469 373.187 327.069 383.327 323.358 388.273C334.071 388.271 354.176 387.704 364.088 388.561C368.732 391.332 372.14 395.611 376.1 399.135C386.112 408.046 396.119 420.073 405.914 428.754C411.906 423.877 413.534 422.277 421.284 421.756C431.251 422.924 434.323 426.882 439.258 434.961C446.648 435.129 453.428 435.234 460.822 434.943ZM418.651 432.24C415.516 432.908 412.992 435.227 412.062 438.295C411.132 441.362 411.944 444.692 414.18 446.989C416.416 449.285 419.724 450.184 422.815 449.335C427.406 448.075 430.162 443.391 429.036 438.765C427.909 434.14 423.308 431.248 418.651 432.24ZM599.136 503.195C594.618 505.066 592.453 510.231 594.289 514.764C596.124 519.298 601.272 521.503 605.82 519.703C610.419 517.884 612.654 512.665 610.798 508.081C608.942 503.496 603.706 501.303 599.136 503.195ZM601.121 422.032C608.35 422.268 611.963 423.843 617.462 428.739L643.704 402.449C647.16 399 654.692 391.234 658.348 388.658C672.255 387.911 686.549 388.753 700.389 387.989C688.373 372.991 668.753 356.882 655.73 341.971C651.434 345.359 645.219 351.951 641.122 356.011L610.853 386.353C599.886 397.063 588.976 407.829 578.121 418.651C573.01 423.716 566.304 429.769 561.893 435.123C569.397 435.222 576.758 434.935 584.254 434.644C588.73 426.737 591.667 423.463 601.121 422.032ZM505.827 432.71C482.031 435.872 465.249 457.649 468.255 481.465C471.261 505.281 492.928 522.206 516.763 519.356C540.821 516.479 557.937 494.567 554.903 470.529C551.869 446.491 529.845 429.518 505.827 432.71Z"
-                />
-                <path
-                  class="logo-glow-center"
-                  fill="#FCFCFC"
-                  transform="scale(0.5 0.5)"
-                  d="M508.211 448.197C523.484 446.355 537.377 457.197 539.302 472.46C541.227 487.723 530.461 501.674 515.209 503.682C499.839 505.706 485.756 494.839 483.816 479.458C481.876 464.077 492.82 450.054 508.211 448.197Z"
-                />
-                <path
-                  fill="#D87455"
-                  transform="scale(0.5 0.5)"
-                  d="M510.312 641.198C519.589 640.578 527.625 647.567 528.297 656.84C528.969 666.113 522.025 674.188 512.756 674.912C503.413 675.642 495.26 668.631 494.582 659.284C493.905 649.937 500.961 641.823 510.312 641.198Z"
-                />
-                <path
-                  fill="#D87455"
-                  transform="scale(0.5 0.5)"
-                  d="M510.054 276.055C519.201 275.248 527.288 281.967 528.173 291.107C529.057 300.247 522.407 308.391 513.274 309.353C504.032 310.326 495.768 303.578 494.873 294.328C493.979 285.077 500.796 276.871 510.054 276.055Z"
-                />
-                <path
-                  fill="#D87455"
-                  transform="scale(0.5 0.5)"
-                  d="M324.255 459.601C333.473 459.315 341.175 466.561 341.451 475.78C341.728 484.999 334.474 492.693 325.255 492.961C316.049 493.228 308.367 485.986 308.091 476.78C307.815 467.574 315.049 459.885 324.255 459.601Z"
-                />
-                <path
-                  fill="#D87455"
-                  transform="scale(0.5 0.5)"
-                  d="M694.942 460.041C703.924 457.821 712.997 463.336 715.16 472.332C717.324 481.327 711.752 490.365 702.744 492.472C693.814 494.561 684.873 489.049 682.729 480.133C680.584 471.217 686.04 462.242 694.942 460.041Z"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <h1 class="hero-tagline">intelligence made from first principles</h1>
-
-          <div class="hero-buttons" role="group" aria-label="Primary actions">
-            <a class="btn btn-primary" href="#products">Explore Products</a>
-            <a class="btn btn-outline" href="manifesto.html">Read Manifesto</a>
-            <a
-              class="btn"
-              href="mailto:contact@azetta.ai?subject=Schedule%20a%20briefing"
-              >Book Briefing</a
-            >
-          </div>
-        </div>
-      </section>
-
-      <!-- Products Section -->
-      <section class="products" id="products" aria-labelledby="products-title">
-        <div class="section-shell">
-          <h2 id="products-title" class="flow-title">PRODUCT_SUITE</h2>
-          <p class="flow-subtitle">
-            // Stack components built for auditable intelligence and
-            multilingual reach
-          </p>
-
-          <div class="products-grid">
-            <article
-              class="product-card"
-              aria-labelledby="product-cosmadb-title"
-            >
-              <header class="product-header">
-                <span class="product-tag">Vector Search</span>
-                <h3 id="product-cosmadb-title">CosmaDB</h3>
-              </header>
-              <p class="product-desc">
-                A vector database that processes each vector independently,
-                avoiding the costly memory-intensive network construction
-                required by methods like HNSW. Built with proprietary hash
-                indexing and native SQL semantics for millisecond recall.
-              </p>
-              <ul class="product-highlights">
-                <li>
-                  Significantly lower cost than traditional vector databases
-                </li>
-                <li>
-                  Per-vector indexing without expensive network build overhead
-                </li>
-                <li>Hash-native indexing with predictable latency</li>
-              </ul>
-              <div class="product-actions">
-                <a
-                  class="product-link"
-                  href="mailto:contact@azetta.ai?subject=CosmaDB%20Beta%20Access"
-                  >Request beta access</a
-                >
-                <span class="product-status">Beta invitations open</span>
-              </div>
-            </article>
-
-            <article
-              class="product-card"
-              aria-labelledby="product-omniem-title"
-            >
-              <header class="product-header">
-                <span class="product-tag"
-                  >Information Representation Model</span
-                >
-                <h3 id="product-omniem-title">OmniEm</h3>
-              </header>
-              <p class="product-desc">
-                Omnilingual embedding models that collapse language barriers; if
-                knowledge matches, the vectors align—regardless of how it is
-                written or spoken.
-              </p>
-              <ul class="product-highlights">
-                <li>Unified latent space for 200+ languages</li>
-                <li>Knowledge-first similarity, not surface tokens</li>
-                <li>Drop-in adapters for existing inference stacks</li>
-              </ul>
-              <div class="product-actions">
-                <a
-                  class="product-link"
-                  href="mailto:contact@azetta.ai?subject=OmniEm%20Pilot"
-                  >Book a multilingual pilot</a
-                >
-                <span class="product-status">Enterprise early access</span>
-              </div>
-            </article>
-
-            <article
-              class="product-card"
-              aria-labelledby="product-perdiodica-title"
-            >
-              <header class="product-header">
-                <span class="product-tag">Explainability Ops</span>
-                <h3 id="product-perdiodica-title">Perdiodica</h3>
-              </header>
-              <p class="product-desc">
-                Continuous explainability tooling to monitor, interrogate, and
-                control models while they learn—before drift or anomalies ship.
-              </p>
-              <ul class="product-highlights">
-                <li>Training-time governance dashboards</li>
-                <li>Real-time constraint enforcement and alerts</li>
-                <li>Regulatory-grade audit exports by default</li>
-              </ul>
-              <div class="product-actions">
-                <a
-                  class="product-link"
-                  href="mailto:contact@azetta.ai?subject=Perdiodica%20Demo"
-                  >Schedule a live demo</a
-                >
-                <span class="product-status">Observer suite preview</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- System Architecture Section -->
-      <section
-        class="architecture"
-        id="system-architecture"
-        aria-labelledby="system-architecture-title"
-      >
-        <div class="arch-container">
-          <h2 id="system-architecture-title" class="flow-title">
-            SYSTEM_ARCHITECTURE
-          </h2>
-          <p class="flow-subtitle">
-            // Rebuilt from first principles of physics
-          </p>
-
-          <div
-            class="arch-visual"
-            aria-label="System architecture diagram showing data flow"
-          >
-            <article class="arch-layer">
-              <h4>INPUT_LAYER</h4>
-              <p>Multimodal ingestion</p>
-              <p>Universal tokenization</p>
-              <p>Context preservation</p>
-              <p>Signal processing</p>
-            </article>
-
-            <div class="arch-connector" aria-hidden="true"></div>
-
-            <div class="arch-center">
-              <div class="arch-center-content">
-                <div class="arch-center-label">PHYSICS_CORE</div>
-                <div class="arch-center-title">
-                  Omnilingual<br />Information<br />Engine
-                </div>
-              </div>
-            </div>
-
-            <div class="arch-connector" aria-hidden="true"></div>
-
-            <article class="arch-layer">
-              <h4>OUTPUT_LAYER</h4>
-              <p>Traceable decisions</p>
-              <p>Confidence metrics</p>
-              <p>Explanation paths</p>
-              <p>Safety validation</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- Terminal Demo Section -->
-      <section
-        class="terminal"
-        id="terminal-demo"
-        aria-labelledby="terminal-title"
-      >
-        <div class="terminal-window">
-          <header class="terminal-header">
-            <div class="terminal-dot dot-red" aria-hidden="true"></div>
-            <div class="terminal-dot dot-yellow" aria-hidden="true"></div>
-            <div class="terminal-dot dot-green" aria-hidden="true"></div>
-            <span id="terminal-title" class="terminal-title">azetta.core</span>
-          </header>
-          <div class="terminal-body">
-            <div class="terminal-line">
-              <span class="output"
-                >We're not iterating on existing architectures. We're rebuilding
-                AI from first principles up—creating systems where every
-                computation is meaningful, every decision is traceable, and
-                every resource is optimized.</span
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Call to Action Section -->
-      <section class="cta-section" id="connect" aria-labelledby="cta-title">
-        <div class="cta-box">
-          <h2 id="cta-title" class="cta-title">
-            READY TO BUILD<br />TRANSPARENT AI?
-          </h2>
-          <p class="cta-subtitle">
-            Join us in revolutionizing AI from the ground up
-          </p>
-          <nav class="cta-buttons" aria-label="Call to action buttons">
-            <a
-              class="btn btn-primary"
-              aria-label="Contact Us"
-              href="mailto:contact@azetta.ai"
-              >Contact Us</a
-            >
-            <a
-              class="btn"
-              aria-label="Read our whitepaper"
-              href="https://www.tahabouhsine.com/nmn/assets/iclr_delulu_free.pdf"
-              target="_blank"
-              rel="noopener"
-              >Read Whitepaper</a
-            >
-          </nav>
-        </div>
-      </section>
-    </main>
-
-    <!-- External Scripts -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
-      defer
-    ></script>
-    <script src="main.js" defer></script>
-  </body>
 </html>

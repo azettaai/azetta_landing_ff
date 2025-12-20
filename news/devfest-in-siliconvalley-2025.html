@@ -1,142 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>No More DeLuLu: DevFest Silicon Valley 2025 | Azetta.ai Newsroom</title>
-    <meta
-      name="description"
-      content="Taha Bouhsine's DevFest Silicon Valley 2025 talk on letting information speak for itself to build explainable, physics-grounded AI."
-    />
-    <meta name="author" content="Azetta.ai" />
-    <meta name="robots" content="index, follow" />
 
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="No More DeLuLu: DevFest Silicon Valley 2025" />
-    <meta
-      property="og:description"
-      content="Taha Bouhsine shared how Azetta builds whitebox AI by grounding models in information itself at Google DevFest Silicon Valley."
-    />
-    <meta property="og:url" content="https://azetta.ai/news/devfest-in-siliconvalley-2025.html" />
-    <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
-    <meta property="article:published_time" content="2025-11-07" />
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C8V5SB2QZY');
+    document.addEventListener('DOMContentLoaded', function () {
+      gtag('event', 'article_view', { 'event_category': 'content', 'event_label': document.title });
+      document.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          gtag('event', 'link_click', { 'event_category': 'engagement', 'event_label': this.textContent.trim().substring(0, 50) });
+        });
+      });
+      var scrollDepths = [25, 50, 75, 100], scrolledDepths = [];
+      window.addEventListener('scroll', function () {
+        var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        scrollDepths.forEach(function (depth) {
+          if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+            scrolledDepths.push(depth);
+            gtag('event', 'article_read_progress', { 'event_category': 'engagement', 'value': depth });
+          }
+        });
+      });
+      [30, 60, 120, 300].forEach(function (s) { setTimeout(function () { gtag('event', 'reading_time', { 'event_category': 'engagement', 'value': s }); }, s * 1000); });
+    });
+  </script>
 
-    <link rel="canonical" href="https://azetta.ai/news/devfest-in-siliconvalley-2025.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>No More DeLuLu: DevFest Silicon Valley 2025 | Azetta.ai Newsroom</title>
+  <meta name="description"
+    content="Taha Bouhsine's DevFest Silicon Valley 2025 talk on letting information speak for itself to build explainable, physics-grounded AI." />
+  <meta name="author" content="Azetta.ai" />
+  <meta name="robots" content="index, follow" />
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="No More DeLuLu: DevFest Silicon Valley 2025" />
+  <meta property="og:description"
+    content="Taha Bouhsine shared how Azetta builds whitebox AI by grounding models in information itself at Google DevFest Silicon Valley." />
+  <meta property="og:url" content="https://azetta.ai/news/devfest-in-siliconvalley-2025.html" />
+  <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
+  <meta property="article:published_time" content="2025-11-07" />
 
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#1b998b" />
+  <link rel="canonical" href="https://azetta.ai/news/devfest-in-siliconvalley-2025.html" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../styles.css" />
-  </head>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
 
-  <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <div class="nav-container">
-        <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
-          <span>Azetta.ai</span><span class="brand-accent"></span>
-        </a>
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-        >
-          <span class="sr-only">Toggle navigation</span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
-        <nav class="primary-nav" id="primary-navigation">
-          <ul class="nav-list">
-            <li><a href="../index.html#hero">Overview</a></li>
-            <li><a href="../index.html#products">Products</a></li>
-            <li><a href="../index.html#system-architecture">Architecture</a></li>
-            <li><a href="../index.html#connect">Contact</a></li>
-            <li><a href="../manifesto.html">Manifesto</a></li>
-            <li><a href="../blogs.html">Blog</a></li>
-            <li><a href="../news.html" class="active">Newsroom</a></li>
-          </ul>
-          <div class="nav-cta">
-            <a
-              class="btn btn-primary"
-              href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist"
-              >Join Waitlist</a
-            >
-          </div>
-        </nav>
-      </div>
-    </header>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1b998b" />
 
-    <main>
-      <article class="blog-article">
-        <header class="article-header">
-          <div class="article-meta">
-            <span class="blog-tag">Talk</span>
-            <time class="blog-date" datetime="2025-11-07">November 7, 2025</time>
-          </div>
-          <h1 class="article-title">No More DeLuLu: What Happens When We Let Information Speak for Itself</h1>
-          <p class="article-subtitle">
-            Live at Google DevFest Silicon Valley — how physics-grounded information flows build transparent, auditable AI.
-          </p>
-          <div class="article-author">
-            <span class="author-name">Taha Bouhsine — Co-founder, Head of Research & AI, Google Developer Expert</span>
-            <span class="read-time">Talk</span>
-          </div>
-        </header>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
 
-        <div class="article-content">
-          <section>
-            <h2>Where did we go wrong?</h2>
-            <p>
-              Current AI systems make fundamentally flawed architectural choices. In this talk, we traced the black-box problem back to its root: the reliance on activation functions. These non-linear transformations obscure information flow and make models opaque by design.
-            </p>
-            <p>
-              We also exposed a deeper issue: today's systems rely solely on angular information—measuring similarity by vector direction alone. But this means vectors pointing in opposite directions are considered maximally dissimilar, which contradicts linear algebra principles. True similarity requires both angular <em>and</em> spatial information.
-            </p>
-          </section>
-
-          <section>
-            <h2>Our solution: The Yat Product</h2>
-            <p>
-              We introduced a kernel that combines angular and spatial information, removing the need for activation functions to learn non-linear patterns. This approach is detailed in our technical report <em>"No More DeLuLu"</em>, which presents the <strong>yat product</strong>—a clear measure of how non-linear two things are.
-            </p>
-            <p>
-              The result: we successfully trained models without activation functions, maintaining full transparency while capturing complex, non-linear relationships. Every computation remains interpretable, every decision traceable.
-            </p>
-          </section>
-
-          <section>
-            <h2>Key takeaways</h2>
-            <ul>
-              <li>Activation functions are the main cause of black-box AI—they're not necessary for non-linearity.</li>
-              <li>Angular-only similarity measures are fundamentally incomplete.</li>
-              <li>Combining angular and spatial information via the yat product enables whitebox learning.</li>
-              <li>Models can be trained end-to-end without sacrificing interpretability.</li>
-              <li>This architecture grounds AI in physics and information theory, not heuristics.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Resources</h2>
-            <ul>
-              <li><a href="mailto:press@azetta.ai?subject=DevFest%20Talk%20Details">Request slides or recording</a></li>
-              <li><a href="../news.html">Back to Newsroom</a></li>
-            </ul>
-          </section>
+<body>
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a class="brand-mark" href="../index.html#hero" aria-label="Azetta.ai home">
+        <span>Azetta.ai</span><span class="brand-accent"></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+      <nav class="primary-nav" id="primary-navigation">
+        <ul class="nav-list">
+          <li><a href="../index.html#hero">Overview</a></li>
+          <li><a href="../index.html#products">Products</a></li>
+          <li><a href="../index.html#system-architecture">Architecture</a></li>
+          <li><a href="../index.html#connect">Contact</a></li>
+          <li><a href="../manifesto.html">Manifesto</a></li>
+          <li><a href="../blogs.html">Blog</a></li>
+          <li><a href="../news.html" class="active">Newsroom</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">Join
+            Waitlist</a>
         </div>
-      </article>
-    </main>
+      </nav>
+    </div>
+  </header>
 
-    <script src="../main.js" defer></script>
-  </body>
+  <main>
+    <article class="blog-article">
+      <header class="article-header">
+        <div class="article-meta">
+          <span class="blog-tag">Talk</span>
+          <time class="blog-date" datetime="2025-11-07">November 7, 2025</time>
+        </div>
+        <h1 class="article-title">No More DeLuLu: What Happens When We Let Information Speak for Itself</h1>
+        <p class="article-subtitle">
+          Live at Google DevFest Silicon Valley — how physics-grounded information flows build transparent, auditable
+          AI.
+        </p>
+        <div class="article-author">
+          <span class="author-name">Taha Bouhsine — Co-founder, Head of Research & AI, Google Developer Expert</span>
+          <span class="read-time">Talk</span>
+        </div>
+      </header>
+
+      <div class="article-content">
+        <section>
+          <h2>Where did we go wrong?</h2>
+          <p>
+            Current AI systems make fundamentally flawed architectural choices. In this talk, we traced the black-box
+            problem back to its root: the reliance on activation functions. These non-linear transformations obscure
+            information flow and make models opaque by design.
+          </p>
+          <p>
+            We also exposed a deeper issue: today's systems rely solely on angular information—measuring similarity by
+            vector direction alone. But this means vectors pointing in opposite directions are considered maximally
+            dissimilar, which contradicts linear algebra principles. True similarity requires both angular <em>and</em>
+            spatial information.
+          </p>
+        </section>
+
+        <section>
+          <h2>Our solution: The Yat Product</h2>
+          <p>
+            We introduced a kernel that combines angular and spatial information, removing the need for activation
+            functions to learn non-linear patterns. This approach is detailed in our technical report <em>"No More
+              DeLuLu"</em>, which presents the <strong>yat product</strong>—a clear measure of how non-linear two things
+            are.
+          </p>
+          <p>
+            The result: we successfully trained models without activation functions, maintaining full transparency while
+            capturing complex, non-linear relationships. Every computation remains interpretable, every decision
+            traceable.
+          </p>
+        </section>
+
+        <section>
+          <h2>Key takeaways</h2>
+          <ul>
+            <li>Activation functions are the main cause of black-box AI—they're not necessary for non-linearity.</li>
+            <li>Angular-only similarity measures are fundamentally incomplete.</li>
+            <li>Combining angular and spatial information via the yat product enables whitebox learning.</li>
+            <li>Models can be trained end-to-end without sacrificing interpretability.</li>
+            <li>This architecture grounds AI in physics and information theory, not heuristics.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="mailto:press@azetta.ai?subject=DevFest%20Talk%20Details">Request slides or recording</a></li>
+            <li><a href="../news.html">Back to Newsroom</a></li>
+          </ul>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <script src="../main.js" defer></script>
+</body>
+
 </html>
