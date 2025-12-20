@@ -152,6 +152,64 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Bibliography section */
+        .bibliography {
+            margin: var(--space-xxl) 0;
+            padding: var(--space-xl);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(27, 153, 139, 0.3);
+            border-radius: 4px;
+        }
+
+        .bibliography h2 {
+            font-size: 1.4rem;
+            margin-bottom: var(--space-lg);
+            color: var(--circuit-primary);
+            font-family: var(--font-mono);
+        }
+
+        .references-list {
+            list-style: none;
+            counter-reset: none;
+            padding-left: 0;
+        }
+
+        .references-list li {
+            margin-bottom: var(--space-lg);
+            padding-left: var(--space-xl);
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .ref-number {
+            position: absolute;
+            left: 0;
+            color: var(--circuit-primary);
+            font-family: var(--font-mono);
+            font-weight: bold;
+        }
+
+        .references-list strong {
+            color: var(--text-color);
+        }
+
+        .references-list em {
+            color: var(--accent-color);
+        }
+
+        .references-list a {
+            color: var(--circuit-primary);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+        }
+
+        .references-list a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -248,8 +306,11 @@
                 <section>
                     <h2>The Particle View: Vectors as Atoms</h2>
                     <p>
-                        Here's a radical reframe: what if instead of seeing a vector as an arrow, we see it
-                        as an <strong>atom</strong>?
+                        So we need a new metaphor. What if, instead of drawing arrows, we borrow from
+                        physics—a field that routinely handles invisible, high-dimensional phenomena?
+                    </p>
+                    <p>
+                        Here's the idea: see a vector not as an arrow, but as an <strong>atom</strong>.
                     </p>
                     <p>
                         Each dimension $v_i$ of the vector $\mathbf{v} = (v_1, v_2, \ldots, v_n)$ becomes a particle
@@ -325,18 +386,34 @@
                         Nearby vectors dominate; distant vectors contribute weakly. This preserves
                         <em>locality</em>—the most important property for understanding structure.
                     </div>
+
+                    <p>
+                        If this sounds familiar, it should. This is precisely the philosophy behind
+                        <strong>contrastive learning</strong> [1, 2]—the technique that powers modern
+                        self-supervised AI. Methods like SimCLR and MoCo train neural networks by
+                        treating similar examples as attracting particles and dissimilar examples as
+                        repelling ones. The loss function literally pushes representations together or apart.
+                    </p>
+                    <p>
+                        But here's the gap: most contrastive losses use only the dot product or cosine
+                        similarity. They measure whether particles are aligned—but not how far apart they are.
+                        The Yat captures both. It's the complete electromagnetic picture: alignment
+                        <em>and</em> distance, attraction <em>and</em> proximity.
+                    </p>
                 </section>
 
                 <!-- Part 4: The Network View -->
                 <section>
                     <h2>The Network: Atoms Connected by Force</h2>
                     <p>
-                        When you have many vectors, each becomes an atom. The Yat between every pair
-                        becomes a "bond"—a connection whose strength represents similarity.
+                        Now we can scale up. With the Yat as our force law, we can build something more
+                        ambitious: a complete <strong>molecular network</strong> of an entire dataset.
                     </p>
                     <p>
-                        This transforms an $n$-dimensional problem into a <strong>2D network</strong> that
-                        humans can actually understand. High-dimensional geometry becomes graph topology.
+                        Each vector becomes an atom. The Yat between every pair becomes a "bond"—a connection
+                        whose thickness represents the strength of their relationship. What emerges is a
+                        <strong>2D network</strong> that our eyes can actually parse, even when the original
+                        space had thousands of dimensions.
                     </p>
 
                     <div class="viz-container">
@@ -362,9 +439,13 @@
                 <section>
                     <h2>The Yat Similarity Matrix</h2>
                     <p>
-                        For larger datasets, we can't draw every bond. Instead, we use the
-                        <strong>Yat similarity matrix</strong>—a heatmap where each cell $(i, j)$ shows
-                        the Yat between vector $i$ and vector $j$.
+                        Networks work beautifully for dozens of vectors. But what about thousands?
+                        Millions? We need a more compact representation.
+                    </p>
+                    <p>
+                        Enter the <strong>Yat similarity matrix</strong>—a heatmap where each cell $(i, j)$
+                        encodes the Yat between vector $i$ and vector $j$. The entire relational structure
+                        of your dataset, compressed into a single image.
                     </p>
 
                     <div class="viz-container">
@@ -390,11 +471,16 @@
                 <section>
                     <h2>The Wave View: Vectors as Signals</h2>
                     <p>
-                        Now for the duality. There's another way to see a vector—not as a collection of
-                        independent particles, but as a <strong>wave</strong>.
+                        We've been treating dimensions as independent particles. But there's another way
+                        to look at this—one that will feel familiar if you've worked with embeddings or
+                        probability distributions.
                     </p>
                     <p>
-                        When we <strong>normalize</strong> a vector to unit length:
+                        What if, instead of independent particles, we see each vector as a coherent
+                        <strong>wave</strong>?
+                    </p>
+                    <p>
+                        The transformation is simple: <strong>normalize</strong> the vector to unit length.
                     </p>
                     <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
                         $$\hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|} \quad \text{where} \quad
@@ -441,22 +527,40 @@
                             <p>Good for: semantic similarity</p>
                         </div>
                     </div>
+
+                    <p>
+                        This duality isn't just a visualization trick—it's baked into how modern AI works.
+                        In contrastive learning [3], the first step is almost always to <strong>L2 normalize</strong>
+                        your embeddings. Why? Because you're switching from particle mode to wave mode.
+                        You're saying: "I don't care about magnitudes; I care about patterns."
+                    </p>
+                    <p>
+                        The same transformation happens in attention mechanisms and classifiers. The
+                        <strong>softmax function</strong> [4] doesn't just normalize—it creates a
+                        <em>probability distribution</em>. And what is a probability distribution?
+                        It's a wave. Specifically, it's a quantum probability wave where $\sum_i p_i = 1$.
+                        Every row of attention weights, every classification output—they're all waves,
+                        not particles.
+                    </p>
+                    <p>
+                        So when you wonder whether to normalize your embeddings, you're really asking:
+                        should I treat my data as particles or waves? The answer depends on your question.
+                    </p>
                 </section>
 
                 <!-- Part 7: Signal vs Noise -->
                 <section>
-                    <h2>Signal to Noise: The Yat as Coherence Detector</h2>
+                    <h2>Signal vs Noise: The Yat as Coherence Detector</h2>
                     <p>
-                        In signal processing, we care about the <strong>signal-to-noise ratio</strong>.
-                        A clear signal rises above the noise floor; a weak signal drowns in randomness.
+                        The wave view gives us a powerful new lens. In signal processing, the fundamental
+                        question is: <strong>how much of what I'm measuring is signal, and how much is noise?</strong>
                     </p>
                     <p>
-                        The Yat operates as a coherence detector. When comparing two unit vectors
+                        The Yat answers this question for vectors. When comparing two unit vectors
                         $\hat{\mathbf{x}}$ and $\hat{\mathbf{y}}$ (waves), a high Yat means they're
-                        transmitting on the same "frequency"—their signals are aligned. A low Yat
-                        means they're noise to each other—orthogonal ($\hat{\mathbf{x}} \cdot \hat{\mathbf{y}} \approx
-                        0$),
-                        carrying no mutual information.
+                        transmitting on the same "frequency"—their signals are coherent. A low Yat
+                        means they're orthogonal ($\hat{\mathbf{x}} \cdot \hat{\mathbf{y}} \approx 0$),
+                        essentially noise to each other.
                     </p>
 
                     <div class="viz-container">
@@ -485,9 +589,13 @@
                 <section>
                     <h2>The Duality Unified</h2>
                     <p>
-                        Here's the profound insight: <strong>both views are correct</strong>.
-                        Just like light is both a particle and a wave, a vector can be understood
-                        as either—depending on what you want to measure.
+                        Now we can see the full picture. We've been building toward this moment:
+                        the realization that <strong>both views are correct</strong>.
+                    </p>
+                    <p>
+                        Just like light is both a particle and a wave—depending on how you measure it—a
+                        vector can be understood as either. The particle view and the wave view aren't
+                        contradictory; they're <em>complementary</em>.
                     </p>
                     <ul>
                         <li><strong>Particle view:</strong> Use when dimensions represent independent features.
@@ -532,16 +640,20 @@
                 <section>
                     <h2>Beyond Arrows</h2>
                     <p>
-                        We started trapped by geometry—unable to visualize the high-dimensional spaces
-                        where modern AI lives. But by borrowing from physics, we've found two powerful
-                        new metaphors:
+                        Let's return to where we started. We were trapped by the geometric metaphor—unable
+                        to visualize the high-dimensional spaces where modern AI lives. Arrows failed us.
                     </p>
-                    <ul>
-                        <li>Vectors as <strong>atoms</strong>, with charged particles representing dimensions</li>
-                        <li>Vectors as <strong>waves</strong>, with coupled frequencies forming signals</li>
-                        <li>The <strong>Yat</strong> as the universal force/coherence measure in both paradigms</li>
-                        <li>Networks and matrices as ways to visualize high-dimensional structure in 2D</li>
-                    </ul>
+                    <p>
+                        But physics gave us a way out. By reimagining vectors as <strong>atoms</strong> and
+                        <strong>waves</strong>, we've gained something geometry couldn't provide: a way to
+                        <em>see</em> structure that exists beyond three dimensions.
+                    </p>
+                    <p>
+                        The Yat metric bridges both paradigms. In particle mode, it measures force. In wave
+                        mode, it measures coherence. Networks and matrices translate these relationships into
+                        images our eyes can parse. And contrastive learning, attention mechanisms, softmax
+                        layers—they all fit naturally into this framework.
+                    </p>
                     <p>
                         This is the foundation of <a href="../manifesto.html">physics-inspired AI</a>.
                         By speaking the language of particles and waves, forces and fields, we can finally
@@ -604,6 +716,49 @@
                     <a href="../blogs.html" class="nav-back">Back to Blog</a>
                 </nav>
             </footer>
+
+            <!-- Bibliography -->
+            <section class="bibliography" id="references">
+                <h2>References</h2>
+                <ol class="references-list">
+                    <li id="ref-1">
+                        <span class="ref-number">[1]</span>
+                        Chen, T., Kornblith, S., Norouzi, M., & Hinton, G. (2020).
+                        <strong>A Simple Framework for Contrastive Learning of Visual Representations.</strong>
+                        <em>Proceedings of the 37th International Conference on Machine Learning (ICML)</em>.
+                        <a href="https://arxiv.org/abs/2002.05709" target="_blank">arXiv:2002.05709</a>
+                    </li>
+                    <li id="ref-2">
+                        <span class="ref-number">[2]</span>
+                        He, K., Fan, H., Wu, Y., Xie, S., & Girshick, R. (2020).
+                        <strong>Momentum Contrast for Unsupervised Visual Representation Learning.</strong>
+                        <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition
+                            (CVPR)</em>.
+                        <a href="https://arxiv.org/abs/1911.05722" target="_blank">arXiv:1911.05722</a>
+                    </li>
+                    <li id="ref-3">
+                        <span class="ref-number">[3]</span>
+                        Wang, F., & Liu, H. (2021).
+                        <strong>Understanding the Behaviour of Contrastive Loss.</strong>
+                        <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition
+                            (CVPR)</em>.
+                        <a href="https://arxiv.org/abs/2012.09740" target="_blank">arXiv:2012.09740</a>
+                    </li>
+                    <li id="ref-4">
+                        <span class="ref-number">[4]</span>
+                        Bridle, J. S. (1990).
+                        <strong>Probabilistic Interpretation of Feedforward Classification Network Outputs.</strong>
+                        <em>Neurocomputing: Algorithms, Architectures and Applications</em>, NATO ASI Series.
+                    </li>
+                    <li id="ref-5">
+                        <span class="ref-number">[5]</span>
+                        Oord, A. v. d., Li, Y., & Vinyals, O. (2018).
+                        <strong>Representation Learning with Contrastive Predictive Coding.</strong>
+                        <em>arXiv preprint</em>.
+                        <a href="https://arxiv.org/abs/1807.03748" target="_blank">arXiv:1807.03748</a>
+                    </li>
+                </ol>
+            </section>
         </article>
     </main>
 
