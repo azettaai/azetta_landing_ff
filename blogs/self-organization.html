@@ -598,23 +598,36 @@
                 <section>
                     <h2>can algorithms self-organize?</h2>
                     <p>
-                        here's where our story takes its crucial turn. we've seen self-organization in the
-                        cosmos (gravitational fields organizing matter) and in biology (chemical fields
-                        organizing cells). the patterns are the same: local interactions, inverse-square
-                        falloffs, competition for territory.
+                        so here we are. we've watched galaxies spiral into form through curved spacetime.
+                        we've watched zebra stripes emerge from two diffusing chemicals. we've watched
+                        bacteria find food using nothing but a random walk modulated by gradients.
                     </p>
                     <p>
-                        if self-organization is a <em>mathematical</em> phenomenon—not specifically a
-                        biological one—then it should be possible in computation too. we just need the
-                        right ingredients: elements that interact locally, compete for resources, and
-                        respond to feedback.
+                        the same story, told three times: <em>local interactions produce global order</em>.
+                        no central planner. no blueprint. just elements responding to their neighbors,
+                        and complexity crystallizing from the interactions.
                     </p>
                     <p>
-                        in the AI community, however, there's an implicit assumption that self-organization
-                        requires biology. if it doesn't look like something neurons do, it can't be truly
-                        intelligent. backpropagation is called "unnatural." attention must be modeled after
-                        cortical columns. this is the trap we discussed in
-                        <a href="beyond-the-brain.html">beyond the brain</a>.
+                        now comes the question that matters most for AI: can we make this happen
+                        <em>in silicon</em>?
+                    </p>
+                    <p>
+                        the mainstream answer, implicit in most of machine learning, is "no—at least
+                        not directly." if you want self-organization, you need to simulate biology.
+                        neurons, synapses, spikes, dendrites. backpropagation is tolerated because
+                        it works, but it's treated as a necessary evil—"unnatural," "biologically
+                        implausible." the real goal, we're told, is to make our algorithms more
+                        brain-like. then self-organization will follow.
+                    </p>
+                    <p>
+                        but this gets the causality backwards.
+                    </p>
+                    <p>
+                        the brain doesn't self-organize <em>because</em> it's biological. it self-organizes
+                        because it implements the right <em>mathematical dynamics</em>—the same dynamics
+                        we saw in galaxies and chemical gradients. biology is one substrate that supports
+                        these dynamics. silicon can be another. we don't need to copy the wetware. we
+                        need to copy the <em>math</em>.
                     </p>
 
                     <div class="warning-box">
@@ -624,26 +637,33 @@
                     </div>
 
                     <p>
-                        the truth is simpler and more powerful: self-organization is a <em>mathematical</em>
-                        phenomenon. it emerges whenever you have:
+                        what are the essential ingredients? strip away the biological details and you find
+                        three universal requirements:
                     </p>
                     <ul>
-                        <li><strong>local interactions</strong>—elements affect their neighbors</li>
-                        <li><strong>competition</strong>—elements compete for resources or territory</li>
-                        <li><strong>feedback</strong>—the state of the system influences future dynamics</li>
+                        <li><strong>local interactions</strong>—each element affects only its neighbors, not distant
+                            strangers</li>
+                        <li><strong>competition</strong>—elements vie for limited resources, territory, or activation
+                        </li>
+                        <li><strong>feedback</strong>—the current state shapes future dynamics, creating memory</li>
                     </ul>
                     <p>
-                        the purest example is conway's game of life—a cellular automaton with rules so
-                        simple they fit in two equations. let $s_{i,j}^t \in \{0, 1\}$ be the state of
-                        cell $(i,j)$ at time $t$, and let $N_{i,j}^t$ be its neighbor count. then:
+                        that's the recipe. you don't need proteins or ion channels. you need <em>locality</em>,
+                        <em>competition</em>, and <em>feedback</em>. give an algorithm these three properties,
+                        and self-organization becomes not just possible but <em>inevitable</em>.
+                    </p>
+                    <p>
+                        the most famous proof is also the simplest: conway's game of life. a cellular
+                        automaton with rules so minimal they fit on a napkin. let $s_{i,j}^t \in \{0, 1\}$
+                        be the state of cell $(i,j)$ at time $t$, and let $N_{i,j}^t$ count its living neighbors:
                     </p>
                     <p style="text-align: center; font-size: 1.1em; margin: var(--space-lg) 0;">
                         $$s_{i,j}^{t+1} = \begin{cases} 1 & \text{if } N_{i,j}^t = 3 \\ s_{i,j}^t & \text{if } N_{i,j}^t
                         = 2 \\ 0 & \text{otherwise} \end{cases}$$
                     </p>
                     <p>
-                        that's it. birth at 3, survival at 2-3, death otherwise. from this, complexity.
-                    </p>
+                        birth when surrounded by exactly three neighbors. survival with two or three.
+                        death otherwise. that's the entire specification.
 
                     <div class="viz-container">
                         <div class="viz-header">
