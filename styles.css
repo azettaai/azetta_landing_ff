@@ -2178,6 +2178,303 @@ a.series-title:hover {
     text-align: center;
 }
 
+/* ============================================
+   BIBLIOGRAPHY & REFERENCES
+   ============================================ */
+
+.bibliography {
+    margin: var(--space-4xl) 0;
+    padding: var(--space-2xl);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(27, 153, 139, 0.05) 100%);
+    border: 2px solid rgba(27, 153, 139, 0.3);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle scan line effect for terminal aesthetic */
+.bibliography::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(27, 153, 139, 0.02) 2px,
+        rgba(27, 153, 139, 0.02) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bibliography > * {
+    position: relative;
+    z-index: 2;
+}
+
+.bibliography h2,
+.bibliography h3 {
+    font-family: var(--font-mono);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--circuit-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid rgba(27, 153, 139, 0.3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.bibliography h2::before,
+.bibliography h3::before {
+    content: '//';
+    color: var(--circuit-accent);
+    font-weight: 400;
+}
+
+/* References List */
+.references-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.references-list li {
+    position: relative;
+    padding: var(--space-lg);
+    padding-left: calc(var(--space-3xl) + var(--space-md));
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(27, 153, 139, 0.2);
+    border-radius: 3px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(244, 241, 222, 0.85);
+    transition: all var(--transition-fast);
+}
+
+.references-list li:hover {
+    background: rgba(27, 153, 139, 0.08);
+    border-color: rgba(27, 153, 139, 0.4);
+    transform: translateX(4px);
+}
+
+/* Reference Number Badge */
+.ref-number {
+    position: absolute;
+    left: var(--space-md);
+    top: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--dark);
+    background: var(--circuit-primary);
+    padding: 0.15em 0.5em;
+    border-radius: 2px;
+    min-width: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(27, 153, 139, 0.3);
+}
+
+/* Author Names - Primary emphasis */
+.references-list strong {
+    color: var(--light);
+    font-weight: 700;
+}
+
+/* Publication Title - Italic accent */
+.references-list em {
+    color: var(--circuit-accent);
+    font-style: italic;
+}
+
+/* Journal/Source - Secondary text */
+.references-list .ref-source,
+.references-list cite {
+    color: rgba(244, 241, 222, 0.7);
+    font-style: normal;
+}
+
+/* Year Badge */
+.ref-year {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--circuit-primary);
+    background: rgba(27, 153, 139, 0.15);
+    padding: 0.1em 0.4em;
+    border-radius: 2px;
+    margin-left: 0.25em;
+}
+
+/* DOI Links */
+.references-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--circuit-primary);
+    text-decoration: none;
+    padding: 0.2em 0.6em;
+    background: rgba(27, 153, 139, 0.1);
+    border: 1px solid rgba(27, 153, 139, 0.3);
+    border-radius: 3px;
+    margin-top: 0.5em;
+    transition: all var(--transition-fast);
+}
+
+.references-list a:hover {
+    background: rgba(27, 153, 139, 0.2);
+    border-color: var(--circuit-primary);
+    color: var(--light);
+    transform: translateX(2px);
+}
+
+.references-list a::before {
+    content: '↗';
+    font-size: 0.9em;
+}
+
+/* Inline citation links in article */
+.article-content sup a,
+.article-content .cite-ref {
+    font-family: var(--font-mono);
+    font-size: 0.75em;
+    color: var(--circuit-primary);
+    text-decoration: none;
+    padding: 0.1em 0.3em;
+    background: rgba(27, 153, 139, 0.15);
+    border-radius: 2px;
+    transition: background var(--transition-fast);
+}
+
+.article-content sup a:hover,
+.article-content .cite-ref:hover {
+    background: rgba(27, 153, 139, 0.3);
+    color: var(--light);
+}
+
+/* About/Author Bio Section */
+.author-bio {
+    margin: var(--space-4xl) 0;
+    padding: var(--space-2xl);
+    background: linear-gradient(135deg, rgba(237, 33, 124, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%);
+    border: 2px solid rgba(237, 33, 124, 0.3);
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+}
+
+.author-bio-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--circuit-accent);
+    object-fit: cover;
+    box-shadow: 0 4px 16px rgba(237, 33, 124, 0.2);
+}
+
+.author-bio-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--circuit-primary), var(--circuit-accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.author-bio-content h3 {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--light);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.author-bio-content .author-role {
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+    color: var(--circuit-accent);
+    margin-bottom: var(--space-md);
+}
+
+.author-bio-content p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(244, 241, 222, 0.85);
+    margin: 0;
+}
+
+.author-bio-links {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.author-bio-links a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--circuit-primary);
+    text-decoration: none;
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--circuit-primary);
+    border-radius: 2px;
+    transition: all var(--transition-fast);
+}
+
+.author-bio-links a:hover {
+    background: rgba(27, 153, 139, 0.15);
+    color: var(--light);
+}
+
+/* Responsive Bibliography */
+@media (max-width: 768px) {
+    .bibliography {
+        padding: var(--space-xl) var(--space-md);
+    }
+
+    .references-list li {
+        padding: var(--space-md);
+        padding-left: calc(var(--space-2xl) + var(--space-sm));
+    }
+
+    .ref-number {
+        font-size: 0.75rem;
+        min-width: 1.75rem;
+    }
+
+    .author-bio {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .author-bio-avatar,
+    .author-bio-placeholder {
+        margin: 0 auto;
+    }
+
+    .author-bio-links {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
 /* Responsive adjustments for articles */
 @media (max-width: 768px) {
     .blog-article {
