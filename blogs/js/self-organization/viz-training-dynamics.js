@@ -1,6 +1,6 @@
-import { COLORS, hexToRgba } from './common.js';
+import { COLORS, hexToRgba, drawHelpButton, drawResetButton, drawHelpTooltip, isPointInRect } from './common.js';
 
-export function initVizTrainingDynamics() {
+export async function initVizTrainingDynamics() {
     const canvas = document.getElementById('viz-training-dynamics');
     if (!canvas) return;
 
@@ -9,6 +9,20 @@ export function initVizTrainingDynamics() {
     let time = 0;
     let isTraining = true;
     let w, h;
+    let showHelp = false;
+    let helpBtnRect = null;
+    let resetBtnRect = null;
+    let mouseX = 0, mouseY = 0;
+
+    const HELP_LINES = [
+        '• Click to pause/resume training',
+        '• Double-click to reset',
+        '',
+        'Neural network training:',
+        '• Neurons move toward attractors',
+        '• Repulsion keeps them apart',
+        '• θ* marks optimal positions'
+    ];
 
     // Neurons with their weight trajectories
     let neurons = [];
@@ -261,37 +275,72 @@ export function initVizTrainingDynamics() {
             }
         }
 
-        // Info panel
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-        ctx.fillRect(10, 10, 260, 70);
-        ctx.strokeStyle = COLORS.trajectory;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(10, 10, 260, 70);
+        // Compact info - bottom right
+        const panelW = 145;
+        const panelH = 44;
+        const panelX = w - panelW - 10;
+        const panelY = h - panelH - 10;
 
-        ctx.font = 'bold 11px "Courier New", monospace';
-        ctx.fillStyle = COLORS.light;
-        ctx.textAlign = 'left';
-        ctx.fillText('TRAINING DYNAMICS', 20, 28);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(panelX, panelY, panelW, panelH);
+        ctx.strokeStyle = 'rgba(155, 93, 229, 0.5)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(panelX, panelY, panelW, panelH);
+
         ctx.font = '10px "Courier New", monospace';
-        ctx.fillStyle = COLORS.dim;
-        ctx.fillText('Neurons converging to optimal positions', 20, 43);
-        ctx.fillText('θ* = attractors (class prototypes)', 20, 56);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#aaa';
+        ctx.fillText('θ* = class attractors', panelX + 8, panelY + 16);
         ctx.fillStyle = isTraining ? '#2dd4bf' : '#ed217c';
-        ctx.fillText(isTraining ? '▶ Running | Click: pause | Dbl: reset' : '⏸ Paused | Click to resume', 20, 69);
+        ctx.fillText(isTraining ? '▶ Click to pause' : '⏸ Click to run', panelX + 8, panelY + 32);
+
+        // Title - top left
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(8, 8, 140, 20);
+        ctx.font = 'bold 10px "Courier New", monospace';
+        ctx.fillStyle = '#9b5de5';
+        ctx.fillText("TRAINING DYNAMICS", 14, 22);
+
+        // Help button
+        const isResetHovered = resetBtnRect && isPointInRect(mouseX, mouseY, resetBtnRect);
+        resetBtnRect = drawResetButton(ctx, w - 58, 22, isResetHovered, '#9b5de5');
+
+        const isHelpHovered = helpBtnRect && isPointInRect(mouseX, mouseY, helpBtnRect);
+        helpBtnRect = drawHelpButton(ctx, w - 22, 22, isHelpHovered, '#9b5de5');
+
+        if (showHelp) drawHelpTooltip(ctx, w, h, HELP_LINES, '#9b5de5');
 
         time += 0.016;
         animationFrame = requestAnimationFrame(draw);
     }
 
+    function handleMouseMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    }
+
     function handleClick(e) {
-        // Prevent double-click from triggering single click
-        if (e.detail === 1) {
-            setTimeout(() => {
-                if (!e.defaultPrevented) {
-                    isTraining = !isTraining;
-                }
-            }, 200);
+        const rect = canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+
+        // Check help button
+        if (helpBtnRect && isPointInRect(clickX, clickY, helpBtnRect)) {
+            showHelp = !showHelp;
+            return;
         }
+        if (showHelp) { showHelp = false; return; }
+        if (resetBtnRect && isPointInRect(clickX, clickY, resetBtnRect)) {
+            initNeurons();
+            isTraining = true;
+            ctx.fillStyle = '#0d0d15';
+            ctx.fillRect(0, 0, w, h);
+            return;
+        }
+
+        // Toggle training
+        isTraining = !isTraining;
     }
 
     function handleDblClick(e) {
@@ -303,6 +352,7 @@ export function initVizTrainingDynamics() {
         ctx.fillRect(0, 0, w, h);
     }
 
+    canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('click', handleClick);
     canvas.addEventListener('dblclick', handleDblClick);
 

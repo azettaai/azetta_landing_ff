@@ -1,19 +1,30 @@
-import { COLORS, hexToRgba } from './common.js';
+import { COLORS, hexToRgba, drawHelpButton, drawResetButton, drawHelpTooltip, isPointInRect } from './common.js';
 
 /**
  * General Relativity: Gravitational Lensing
- * 
- * Shows how mass bends light paths - a real prediction of GR.
- * Background stars get distorted as their light bends around massive objects.
- * Can create Einstein rings and arcs.
  */
-export function initVizSpacetimeCurvature() {
+export async function initVizSpacetimeCurvature() {
     const canvas = document.getElementById('viz-spacetime-curvature');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     let w, h;
     let time = 0;
+    let showHelp = false;
+    let helpBtnRect = null;
+    let resetBtnRect = null;
+    let mouseX = 0, mouseY = 0;
+
+    const HELP_LINES = [
+        '• Click to add a massive object',
+        '• Click on mass to remove it',
+        '• Right-click to cycle mass size',
+        '  (small/medium/large)',
+        '',
+        'Einstein\'s General Relativity:',
+        '• Mass bends spacetime',
+        '• Light follows curved paths'
+    ];
 
     // Masses that bend light
     let masses = [
@@ -260,52 +271,81 @@ export function initVizSpacetimeCurvature() {
             ctx.stroke();
         }
 
-        // Info panel
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.92)';
-        ctx.fillRect(12, 12, 280, 78);
-        ctx.strokeStyle = 'rgba(150, 200, 255, 0.5)';
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(12, 12, 280, 78);
+        // Compact info - bottom right
+        const panelW = 165;
+        const panelH = 44;
+        const panelX = w - panelW - 10;
+        const panelY = h - panelH - 10;
 
-        ctx.font = 'bold 12px "Courier New", monospace';
-        ctx.fillStyle = '#e8e8ff';
-        ctx.textAlign = 'left';
-        ctx.fillText('GRAVITATIONAL LENSING', 22, 30);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(panelX, panelY, panelW, panelH);
+        ctx.strokeStyle = 'rgba(150, 200, 255, 0.5)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(panelX, panelY, panelW, panelH);
+
         ctx.font = '10px "Courier New", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillStyle = 'rgba(150, 200, 255, 0.8)';
+        ctx.fillText(`Mass: ${currentMassSize.toUpperCase()}`, panelX + 8, panelY + 16);
         ctx.fillStyle = '#888';
-        ctx.fillText('Light bends around mass — Einstein 1915', 22, 46);
-        ctx.fillStyle = 'rgba(150, 200, 255, 0.7)';
-        ctx.fillText(`Next mass: ${currentMassSize.toUpperCase()} (M=${massSizes[currentMassSize]})`, 22, 60);
-        ctx.fillStyle = '#666';
-        ctx.fillText('Click: add/remove mass | Right-click: cycle size', 22, 74);
+        ctx.fillText('Click: add | R-click: size', panelX + 8, panelY + 32);
+
+        // Title - top left
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(8, 8, 165, 20);
+        ctx.font = 'bold 10px "Courier New", monospace';
+        ctx.fillStyle = 'rgba(150, 200, 255, 0.9)';
+        ctx.fillText("GRAVITATIONAL LENSING", 14, 22);
+
+        // Help button
+        const isResetHovered = resetBtnRect && isPointInRect(mouseX, mouseY, resetBtnRect);
+        resetBtnRect = drawResetButton(ctx, w - 58, 22, isResetHovered, 'rgba(150, 200, 255, 0.8)');
+
+        const isHelpHovered = helpBtnRect && isPointInRect(mouseX, mouseY, helpBtnRect);
+        helpBtnRect = drawHelpButton(ctx, w - 22, 22, isHelpHovered, 'rgba(150, 200, 255, 0.8)');
+
+        if (showHelp) drawHelpTooltip(ctx, w, h, HELP_LINES, 'rgba(150, 200, 255, 0.9)');
 
         time += 0.016;
         requestAnimationFrame(draw);
     }
 
+    function handleMouseMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    }
+
     function handleClick(e) {
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / w;
-        const y = (e.clientY - rect.top) / h;
+        const clickX = e.clientX - rect.left;
+        const clickY = e.clientY - rect.top;
+
+        // Check help button
+        if (helpBtnRect && isPointInRect(clickX, clickY, helpBtnRect)) {
+            showHelp = !showHelp;
+            return;
+        }
+        if (showHelp) { showHelp = false; return; }
+        if (resetBtnRect && isPointInRect(clickX, clickY, resetBtnRect)) {
+            masses = [{ x: 0.5, y: 0.5, mass: 150, color: '#1a1a2e' }];
+            return;
+        }
+
+        const x = clickX / w, y = clickY / h;
 
         // Check if clicking on existing mass to remove
         for (let i = 0; i < masses.length; i++) {
             const m = masses[i];
-            const dx = m.x - x;
-            const dy = m.y - y;
+            const dx = m.x - x, dy = m.y - y;
             if (Math.sqrt(dx * dx + dy * dy) < 0.05) {
                 masses.splice(i, 1);
                 return;
             }
         }
 
-        // Add new mass
-        masses.push({
-            x, y,
-            mass: massSizes[currentMassSize],
-            color: '#1a1a2e'
-        });
+        masses.push({ x, y, mass: massSizes[currentMassSize], color: '#1a1a2e' });
     }
 
     function handleRightClick(e) {
@@ -315,6 +355,7 @@ export function initVizSpacetimeCurvature() {
         else currentMassSize = 'small';
     }
 
+    canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('click', handleClick);
     canvas.addEventListener('contextmenu', handleRightClick);
 

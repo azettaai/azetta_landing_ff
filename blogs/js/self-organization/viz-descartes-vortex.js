@@ -1,6 +1,6 @@
-import { COLORS, hexToRgba } from './common.js';
+import { COLORS, hexToRgba, drawHelpButton, drawResetButton, drawHelpTooltip, isPointInRect } from './common.js';
 
-export function initVizDescartesVortex() {
+export async function initVizDescartesVortex() {
     const canvas = document.getElementById('viz-descartes-vortex');
     if (!canvas) return;
 
@@ -8,7 +8,22 @@ export function initVizDescartesVortex() {
     let animationFrame;
     let time = 0;
     let w, h;
-    let showDominance = false; // Toggle for showing gravitational dominance regions
+    let showDominance = true;
+    let showHelp = false;
+    let helpBtnRect = null;
+    let resetBtnRect = null;
+    let mouseX = 0, mouseY = 0;
+
+    const HELP_LINES = [
+        '• Click anywhere to add a star',
+        '• Right-click on star to remove',
+        '• Toggle REGIONS button to see',
+        '  gravitational territories',
+        '',
+        'Based on Descartes\' vortex theory:',
+        '• Matter swirls in cosmic whirlpools',
+        '• Each sun creates orbital flow'
+    ];
 
     // Vortex centers - each represents a "sun" with its planetary system
     let vortices = [
@@ -271,11 +286,11 @@ export function initVizDescartesVortex() {
             ctx.fillText(`S=${v.strength.toFixed(1)}`, cx, cy + baseRadius * pulse + 15);
         }
 
-        // Toggle button
-        const btnX = w - 130;
-        const btnY = 15;
-        const btnW = 115;
-        const btnH = 28;
+        // Toggle button - top right
+        const btnX = w - 95;
+        const btnY = 10;
+        const btnW = 85;
+        const btnH = 24;
 
         ctx.fillStyle = showDominance ? 'rgba(45, 212, 191, 0.3)' : 'rgba(0, 0, 0, 0.7)';
         ctx.fillRect(btnX, btnY, btnW, btnH);
@@ -283,32 +298,54 @@ export function initVizDescartesVortex() {
         ctx.lineWidth = 1;
         ctx.strokeRect(btnX, btnY, btnW, btnH);
 
-        ctx.font = 'bold 10px "Courier New", monospace';
+        ctx.font = '9px "Courier New", monospace';
         ctx.fillStyle = showDominance ? '#2dd4bf' : COLORS.light;
         ctx.textAlign = 'center';
-        ctx.fillText(showDominance ? '◉ DOMINANCE' : '○ DOMINANCE', btnX + btnW / 2, btnY + 18);
+        ctx.fillText(showDominance ? '◉ REGIONS' : '○ REGIONS', btnX + btnW / 2, btnY + 16);
 
-        // Info panel
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-        ctx.fillRect(10, 10, 220, 70);
-        ctx.strokeStyle = COLORS.primary;
+        // Compact info - bottom right
+        const panelW = 145;
+        const panelH = 44;
+        const panelX = w - panelW - 10;
+        const panelY = h - panelH - 10;
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(panelX, panelY, panelW, panelH);
+        ctx.strokeStyle = 'rgba(244, 162, 97, 0.5)';
         ctx.lineWidth = 1;
-        ctx.strokeRect(10, 10, 220, 70);
+        ctx.strokeRect(panelX, panelY, panelW, panelH);
 
-        ctx.font = 'bold 11px "Courier New", monospace';
-        ctx.fillStyle = COLORS.light;
-        ctx.textAlign = 'left';
-        ctx.fillText('DESCARTES VORTEX THEORY', 20, 28);
         ctx.font = '10px "Courier New", monospace';
-        ctx.fillStyle = COLORS.dim;
-        ctx.fillText(`Stars: ${vortices.length} | Particles: ${particles.length}`, 20, 43);
-        ctx.fillStyle = COLORS.primary;
-        ctx.fillText('Click: add star | R-click: remove', 20, 56);
-        ctx.fillStyle = showDominance ? '#2dd4bf' : COLORS.dim;
-        ctx.fillText('Toggle shows gravity territories', 20, 69);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#aaa';
+        ctx.fillText(`${vortices.length} suns | ${particles.length} dust`, panelX + 8, panelY + 16);
+        ctx.fillStyle = '#888';
+        ctx.fillText('Click: add | R-click: remove', panelX + 8, panelY + 32);
+
+        // Title - top left
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(8, 8, 135, 20);
+        ctx.font = 'bold 10px "Courier New", monospace';
+        ctx.fillStyle = '#f4a261';
+        ctx.fillText("DESCARTES VORTEX", 14, 22);
+
+        // Help button
+        const isResetHovered = resetBtnRect && isPointInRect(mouseX, mouseY, resetBtnRect);
+        resetBtnRect = drawResetButton(ctx, w - 58, 22, isResetHovered, '#f4a261');
+
+        const isHelpHovered = helpBtnRect && isPointInRect(mouseX, mouseY, helpBtnRect);
+        helpBtnRect = drawHelpButton(ctx, w - 22, 22, isHelpHovered, '#f4a261');
+
+        if (showHelp) drawHelpTooltip(ctx, w, h, HELP_LINES, '#f4a261');
 
         time += 0.016;
         animationFrame = requestAnimationFrame(draw);
+    }
+
+    function handleMouseMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
     }
 
     function handleClick(e) {
@@ -316,21 +353,29 @@ export function initVizDescartesVortex() {
         const clickX = e.clientX - rect.left;
         const clickY = e.clientY - rect.top;
 
-        // Check if clicking on toggle button
-        const btnX = w - 130;
-        const btnY = 15;
-        const btnW = 115;
-        const btnH = 28;
+        if (helpBtnRect && isPointInRect(clickX, clickY, helpBtnRect)) {
+            showHelp = !showHelp;
+            return;
+        }
+        if (showHelp) { showHelp = false; return; }
+        if (resetBtnRect && isPointInRect(clickX, clickY, resetBtnRect)) {
+            vortices = [
+                { x: 0.3, y: 0.5, strength: 1.2, rotation: 1, color: '#f4a261' },
+                { x: 0.7, y: 0.5, strength: 0.9, rotation: -1, color: '#4ea8de' }
+            ];
+            colorIndex = 2;
+            initParticles();
+            return;
+        }
 
+        // Check toggle button
+        const btnX = w - 95, btnY = 10, btnW = 85, btnH = 24;
         if (clickX >= btnX && clickX <= btnX + btnW && clickY >= btnY && clickY <= btnY + btnH) {
             showDominance = !showDominance;
             return;
         }
 
-        const x = clickX / w;
-        const y = clickY / h;
-
-        // Add new vortex
+        const x = clickX / w, y = clickY / h;
         vortices.push({
             x, y,
             strength: 0.8 + Math.random() * 0.8,
@@ -365,6 +410,7 @@ export function initVizDescartesVortex() {
         }
     }
 
+    canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('click', handleClick);
     canvas.addEventListener('contextmenu', handleRightClick);
 

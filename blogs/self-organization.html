@@ -403,9 +403,16 @@
                 <section>
                     <h2>from vortices to geometry</h2>
                     <p>
-                        descartes' vortices gave us the right intuition, but newton gave us the right math:
-                        gravity follows an inverse-square relationship. $F \propto 1/r^2$. this simple law
-                        explains planetary orbits with remarkable precision.
+                        descartes' vortices gave us the right intuition, but newton gave us the right math.
+                        his law of universal gravitation:
+                    </p>
+                    <p style="text-align: center; font-size: 1.3em; margin: var(--space-lg) 0;">
+                        $$F = G \frac{m_1 m_2}{r^2}$$
+                    </p>
+                    <p>
+                        the inverse-square relationship. this simple law explains planetary orbits with
+                        remarkable precision—and it contains the seed of self-organization. the $1/r^2$
+                        means nearby objects interact strongly, distant objects weakly. <em>locality</em>.
                     </p>
                     <p>
                         but einstein went deeper. in 1915, he showed that gravity isn't a force at all—it's
@@ -434,13 +441,20 @@
 
                     <p>
                         look at the visualization above. it shows <em>gravitational lensing</em>—one of
-                        einstein's most striking predictions. light from distant stars bends around massive
-                        objects, creating distorted images, arcs, and even complete rings. this isn't
-                        just theory—astronomers use lensing to map dark matter and study galaxies
-                        billions of light-years away.
+                        einstein's most striking predictions. the deflection angle $\theta$ of light
+                        passing near a mass follows:
+                    </p>
+                    <p style="text-align: center; font-size: 1.3em; margin: var(--space-lg) 0;">
+                        $$\theta = \frac{4GM}{rc^2}$$
                     </p>
                     <p>
-                        the connection to descartes' vortices is now clear. both describe the same phenomenon:
+                        again, the inverse relationship with $r$. closer to the mass, stronger bending.
+                        this formula—confirmed by eddington's 1919 eclipse expedition—was one of general
+                        relativity's first triumphs. today, astronomers use lensing to map dark matter
+                        and study galaxies billions of light-years away.
+                    </p>
+                    <p>
+                        the connection to descartes' vortices is now complete. both describe the same phenomenon:
                         <strong>sources curve the space around them, and that curvature organizes motion</strong>.
                         descartes imagined mechanical whirlpools. einstein revealed the true mechanism: geometry
                         itself bending in response to mass.
@@ -477,11 +491,18 @@
                         chemical reactions.
                     </p>
                     <p>
-                        turing's recipe is elegant: two chemicals, an activator and an inhibitor,
-                        diffuse through a tissue at different speeds. the activator promotes its own
-                        production and the inhibitor's; the inhibitor suppresses the activator. when
-                        these reactions play out spatially, patterns spontaneously emerge—spots,
-                        stripes, spirals, labyrinths.
+                        turing's recipe is elegant. he proposed a system of two coupled
+                        partial differential equations:
+                    </p>
+                    <p style="text-align: center; font-size: 1.1em; margin: var(--space-lg) 0;">
+                        $$\frac{\partial u}{\partial t} = D_u \nabla^2 u + f(u, v)$$
+                        $$\frac{\partial v}{\partial t} = D_v \nabla^2 v + g(u, v)$$
+                    </p>
+                    <p>
+                        here $u$ is the activator concentration, $v$ is the inhibitor. $D_u$ and $D_v$
+                        are diffusion rates. the key: $D_v > D_u$—the inhibitor diffuses faster.
+                        the functions $f$ and $g$ describe the local reactions. when these dynamics
+                        play out spatially, patterns spontaneously emerge—spots, stripes, spirals.
                     </p>
 
                     <div class="viz-container">
@@ -529,10 +550,48 @@
                         from these ingredients, complexity self-organizes at every scale.
                     </p>
                     <p>
-                        the parallel is striking. biology and cosmology use different substrates—chemicals
-                        vs. spacetime—but the underlying logic is the same: <strong>local interactions,
-                            mediated by diffusing fields, produce global organization</strong>.
+                        there's another beautiful example from biology: <strong>bacterial chemotaxis</strong>.
+                        bacteria like E. coli can't see—they're too small for eyes. yet they navigate
+                        toward food with remarkable precision. how? through a simple algorithm called
+                        <em>run-and-tumble</em>.
                     </p>
+                    <p>
+                        the bacterium alternates between two behaviors: running (swimming straight) and
+                        tumbling (randomly reorienting). the clever part is how it modulates these.
+                        the tumble rate $\lambda$ follows:
+                    </p>
+                    <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
+                        $$\lambda = \lambda_0 \cdot e^{-\alpha \cdot \frac{dc}{dt}}$$
+                    </p>
+                    <p>
+                        here $dc/dt$ is the rate of change of chemical concentration. when the bacterium
+                        swims <em>up</em> a gradient (toward food), $dc/dt > 0$, so the exponential term
+                        decreases $\lambda$—fewer tumbles, longer runs toward food. when swimming <em>away</em>
+                        from food, $dc/dt < 0$, tumble rate increases, reorienting the bacterium. </p>
+
+                            <div class="viz-container">
+                                <div class="viz-header">
+                                    <span class="viz-title">// Bacterial Chemotaxis: Run-and-Tumble</span>
+                                    <span class="viz-hint">Click to add food sources • Double-click to reset</span>
+                                </div>
+                                <canvas id="viz-chemotaxis" class="viz-canvas" style="height: 380px;"></canvas>
+                                <div class="viz-caption">
+                                    Watch bacteria navigate toward food using only local gradient sensing.
+                                    No map, no vision—just the simple run-and-tumble algorithm responding
+                                    to chemical concentration changes.
+                                </div>
+                            </div>
+
+                            <p>
+                                no centralized controller tells the bacteria where to go. each organism makes local
+                                decisions based on gradient sensing. yet collectively, they partition the space,
+                                clustering around food sources—self-organization emerging from simple local rules.
+                            </p>
+                            <p>
+                                the parallel is striking. biology and cosmology use different substrates—chemicals
+                                vs. spacetime—but the underlying logic is the same: <strong>local interactions,
+                                    mediated by diffusing fields, produce global organization</strong>.
+                            </p>
                 </section>
 
                 <!-- Part 5: The Turn to Computation -->
@@ -574,8 +633,40 @@
                         <li><strong>feedback</strong>—the state of the system influences future dynamics</li>
                     </ul>
                     <p>
-                        these conditions can be satisfied in silicon just as easily as in carbon. let's
-                        see it in action.
+                        the purest example is conway's game of life—a cellular automaton with rules so
+                        simple they fit in two equations. let $s_{i,j}^t \in \{0, 1\}$ be the state of
+                        cell $(i,j)$ at time $t$, and let $N_{i,j}^t$ be its neighbor count. then:
+                    </p>
+                    <p style="text-align: center; font-size: 1.1em; margin: var(--space-lg) 0;">
+                        $$s_{i,j}^{t+1} = \begin{cases} 1 & \text{if } N_{i,j}^t = 3 \\ s_{i,j}^t & \text{if } N_{i,j}^t
+                        = 2 \\ 0 & \text{otherwise} \end{cases}$$
+                    </p>
+                    <p>
+                        that's it. birth at 3, survival at 2-3, death otherwise. from this, complexity.
+                    </p>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Conway's Game of Life</span>
+                            <span class="viz-hint">Click to pause • Double-click to reset</span>
+                        </div>
+                        <canvas id="viz-game-of-life" class="viz-canvas" style="height: 350px;"></canvas>
+                        <div class="viz-caption">
+                            From two simple rules, complex structures emerge: oscillators, gliders, even
+                            universal Turing machines. No designer—just local interactions and feedback.
+                            This is computation self-organizing.
+                        </div>
+                    </div>
+
+                    <p>
+                        from these trivial rules, watch what emerges: oscillators that pulse forever,
+                        gliders that travel across the grid, even structures that compute. the game of
+                        life is turing-complete—it can simulate any computer. all from two rules about
+                        counting neighbors.
+                    </p>
+                    <p>
+                        if two rules can generate universal computation, imagine what carefully designed
+                        learning algorithms can achieve. let's see it in action.
                     </p>
                 </section>
 
@@ -589,10 +680,23 @@
                         zebra stripes.
                     </p>
                     <p>
-                        the setup is simple: you have a grid of neurons, each with a weight vector in
-                        high-dimensional space. when you present a data point, the neurons compete—the
-                        one whose weights are closest to the input "wins." the winner and its neighbors
-                        then update their weights to move toward the input.
+                        the setup is simple: you have a grid of neurons, each with a weight vector
+                        $\mathbf{w}_i \in \mathbb{R}^n$. when you present a data point $\mathbf{x}$,
+                        the neurons compete. the winner is:
+                    </p>
+                    <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
+                        $$c = \arg\min_i \|\mathbf{x} - \mathbf{w}_i\|$$
+                    </p>
+                    <p>
+                        the neuron closest to the input wins. then all neurons update:
+                    </p>
+                    <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
+                        $$\mathbf{w}_i \leftarrow \mathbf{w}_i + \eta \cdot h(i, c) \cdot (\mathbf{x} - \mathbf{w}_i)$$
+                    </p>
+                    <p>
+                        where $h(i, c)$ is the neighborhood function—large for neurons near the winner,
+                        small for distant neurons. typically a Gaussian $h(i,c) = \exp(-d^2/2\sigma^2)$.
+                        the learning rate $\eta$ and neighborhood width $\sigma$ shrink over time.
                     </p>
                     <p>
                         the key ingredient is the <em>neighborhood function</em>. it starts wide—when one

@@ -78,3 +78,100 @@ export function softmax(arr, temperature = 1) {
     const sum = exps.reduce((a, b) => a + b, 0);
     return exps.map(e => e / sum);
 }
+
+// Help tooltip system
+export function drawHelpButton(ctx, x, y, isHovered, color = '#888') {
+    const r = 12;
+    ctx.fillStyle = isHovered ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.5)';
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = isHovered ? '#fff' : color;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.font = 'bold 14px "Courier New", monospace';
+    ctx.fillStyle = isHovered ? '#fff' : color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('?', x, y + 1);
+    ctx.textBaseline = 'alphabetic';
+
+    return { x: x - r, y: y - r, w: r * 2, h: r * 2 };
+}
+
+export function drawResetButton(ctx, x, y, isHovered, color = '#888') {
+    const r = 12;
+    ctx.fillStyle = isHovered ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.5)';
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = isHovered ? '#fff' : color;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.font = 'bold 14px "Courier New", monospace';
+    ctx.fillStyle = isHovered ? '#fff' : color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('↻', x, y + 2);
+    ctx.textBaseline = 'alphabetic';
+
+    return { x: x - r, y: y - r, w: r * 2, h: r * 2 };
+}
+
+export function drawHelpTooltip(ctx, w, h, lines, accentColor = '#1b998b') {
+    const padding = 16;
+    const lineHeight = 18;
+    const tooltipW = Math.min(w - 40, 280);
+    const tooltipH = lines.length * lineHeight + padding * 2 + 10;
+    const tooltipX = (w - tooltipW) / 2;
+    const tooltipY = (h - tooltipH) / 2;
+
+    // Background
+    ctx.fillStyle = 'rgba(10, 10, 20, 0.95)';
+    ctx.fillRect(tooltipX, tooltipY, tooltipW, tooltipH);
+    ctx.strokeStyle = accentColor;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(tooltipX, tooltipY, tooltipW, tooltipH);
+
+    // Header
+    ctx.font = 'bold 11px "Courier New", monospace';
+    ctx.fillStyle = accentColor;
+    ctx.textAlign = 'center';
+    ctx.fillText('HOW TO USE', w / 2, tooltipY + padding + 4);
+
+    // Lines
+    ctx.font = '10px "Courier New", monospace';
+    ctx.textAlign = 'left';
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const y = tooltipY + padding + 24 + i * lineHeight;
+
+        if (line.startsWith('•')) {
+            ctx.fillStyle = accentColor;
+            ctx.fillText('•', tooltipX + padding, y);
+            ctx.fillStyle = '#ccc';
+            ctx.fillText(line.slice(2), tooltipX + padding + 12, y);
+        } else {
+            ctx.fillStyle = '#888';
+            ctx.fillText(line, tooltipX + padding, y);
+        }
+    }
+
+    // Click to close hint
+    ctx.fillStyle = '#666';
+    ctx.textAlign = 'center';
+    ctx.fillText('Click anywhere to close', w / 2, tooltipY + tooltipH - 10);
+}
+
+export function isPointInRect(px, py, rect) {
+    return px >= rect.x && px <= rect.x + rect.w && py >= rect.y && py <= rect.y + rect.h;
+}

@@ -1,26 +1,34 @@
-import { COLORS, hexToRgba, lerp, euclideanDist } from './common.js';
+import { COLORS, hexToRgba, drawHelpButton, drawResetButton, drawHelpTooltip, isPointInRect } from './common.js';
 
-export function initVizSomTraining() {
+/**
+ * Self-Organizing Map Training
+ */
+export async function initVizSomTraining() {
     const canvas = document.getElementById('viz-som-training');
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     let animationFrame;
     let isTraining = true;
-    let epoch = 0;
-    let step = 0;
+    let epoch = 0, step = 0;
+    let showHelp = false;
+    let helpBtnRect = null;
+    let resetBtnRect = null;
+    let mouseX = 0, mouseY = 0;
 
-    // SOM grid parameters
+    const HELP_LINES = [
+        '• Click to pause/resume',
+        '• Click ↻ to reset training',
+        '',
+        'Kohonen\'s SOM:',
+        '• Finds best matching unit',
+        '• Updates neighborhood',
+        '• Grid unfolds to data shape'
+    ];
+
     const gridSize = 10;
-    let neurons = [];
-
-    // Training data (2D points in a shape)
-    let dataPoints = [];
-    let currentDataIdx = 0;
-
-    // Training parameters
-    let learningRate = 0.5;
-    let neighborhoodRadius = 4;
+    let neurons = [], dataPoints = [], currentDataIdx = 0;
+    let learningRate = 0.5, neighborhoodRadius = 4;
 
     function resize() {
         const rect = canvas.getBoundingClientRect();
@@ -31,243 +39,185 @@ export function initVizSomTraining() {
 
     function initNeurons() {
         neurons = [];
-        const w = canvas.getBoundingClientRect().width;
-        const h = canvas.getBoundingClientRect().height;
-        const cx = w / 2;
-        const cy = h / 2;
-
-        // Initialize neurons in a small random cluster at center
+        const w = canvas.getBoundingClientRect().width, h = canvas.getBoundingClientRect().height;
+        const cx = w / 2, cy = h / 2;
         for (let i = 0; i < gridSize; i++) {
             neurons[i] = [];
             for (let j = 0; j < gridSize; j++) {
-                neurons[i][j] = {
-                    x: cx + (Math.random() - 0.5) * 40,
-                    y: cy + (Math.random() - 0.5) * 40,
-                    gridI: i,
-                    gridJ: j
-                };
+                neurons[i][j] = { x: cx + (Math.random() - 0.5) * 40, y: cy + (Math.random() - 0.5) * 40, gridI: i, gridJ: j };
             }
         }
     }
 
     function initData() {
         dataPoints = [];
-        const w = canvas.getBoundingClientRect().width;
-        const h = canvas.getBoundingClientRect().height;
-        const cx = w / 2;
-        const cy = h / 2;
-
-        // Generate data in a circular/ring pattern
+        const w = canvas.getBoundingClientRect().width, h = canvas.getBoundingClientRect().height;
+        const cx = w / 2, cy = h / 2;
         for (let i = 0; i < 200; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const radius = 80 + Math.random() * 80;
-            dataPoints.push({
-                x: cx + Math.cos(angle) * radius,
-                y: cy + Math.sin(angle) * radius
-            });
+            const angle = Math.random() * Math.PI * 2, radius = 80 + Math.random() * 80;
+            dataPoints.push({ x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius });
         }
-
-        // Add some inner points too
         for (let i = 0; i < 100; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const radius = Math.random() * 60;
-            dataPoints.push({
-                x: cx + Math.cos(angle) * radius,
-                y: cy + Math.sin(angle) * radius
-            });
+            const angle = Math.random() * Math.PI * 2, radius = Math.random() * 60;
+            dataPoints.push({ x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius });
         }
-
-        // Shuffle
         dataPoints.sort(() => Math.random() - 0.5);
     }
 
-    function findBMU(dataPoint) {
-        let bmu = null;
-        let minDist = Infinity;
+    function reset() {
+        epoch = 0; step = 0; currentDataIdx = 0;
+        learningRate = 0.5; neighborhoodRadius = 4;
+        initNeurons(); initData(); isTraining = true;
+    }
 
+    function findBMU(dataPoint) {
+        let bmu = null, minDist = Infinity;
         for (let i = 0; i < gridSize; i++) {
             for (let j = 0; j < gridSize; j++) {
                 const n = neurons[i][j];
                 const dist = Math.sqrt((n.x - dataPoint.x) ** 2 + (n.y - dataPoint.y) ** 2);
-                if (dist < minDist) {
-                    minDist = dist;
-                    bmu = n;
-                }
+                if (dist < minDist) { minDist = dist; bmu = n; }
             }
         }
-
         return bmu;
     }
 
     function trainStep() {
         if (!isTraining) return;
-
         const dataPoint = dataPoints[currentDataIdx];
         const bmu = findBMU(dataPoint);
-
-        // Update all neurons based on distance to BMU in grid space
         for (let i = 0; i < gridSize; i++) {
             for (let j = 0; j < gridSize; j++) {
                 const n = neurons[i][j];
                 const gridDist = Math.sqrt((n.gridI - bmu.gridI) ** 2 + (n.gridJ - bmu.gridJ) ** 2);
-
                 if (gridDist <= neighborhoodRadius) {
-                    // Gaussian neighborhood function
                     const influence = Math.exp(-(gridDist * gridDist) / (2 * neighborhoodRadius * neighborhoodRadius));
                     const lr = learningRate * influence;
-
                     n.x += lr * (dataPoint.x - n.x);
                     n.y += lr * (dataPoint.y - n.y);
                 }
             }
         }
-
         currentDataIdx = (currentDataIdx + 1) % dataPoints.length;
         step++;
-
-        // Decay parameters
         if (step % dataPoints.length === 0) {
             epoch++;
             learningRate *= 0.98;
             neighborhoodRadius *= 0.98;
-
             if (learningRate < 0.01) learningRate = 0.01;
             if (neighborhoodRadius < 0.5) neighborhoodRadius = 0.5;
         }
     }
 
     function draw() {
-        const w = canvas.getBoundingClientRect().width;
-        const h = canvas.getBoundingClientRect().height;
-
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        const w = canvas.getBoundingClientRect().width, h = canvas.getBoundingClientRect().height;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
         ctx.fillRect(0, 0, w, h);
 
-        // Train multiple steps per frame
-        if (isTraining) {
-            for (let i = 0; i < 5; i++) {
-                trainStep();
-            }
-        }
+        if (isTraining) for (let i = 0; i < 5; i++) trainStep();
 
-        // Draw data points (faint)
         for (const p of dataPoints) {
-            ctx.fillStyle = hexToRgba(COLORS.dim, 0.3);
+            ctx.fillStyle = hexToRgba(COLORS.dim, 0.25);
             ctx.beginPath();
             ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
             ctx.fill();
         }
 
-        // Draw SOM grid connections
-        ctx.strokeStyle = hexToRgba(COLORS.neuron, 0.6);
+        ctx.strokeStyle = hexToRgba(COLORS.neuron, 0.5);
         ctx.lineWidth = 1.5;
-
         for (let i = 0; i < gridSize; i++) {
             for (let j = 0; j < gridSize; j++) {
                 const n = neurons[i][j];
-
-                // Connect to right neighbor
-                if (j < gridSize - 1) {
-                    const right = neurons[i][j + 1];
-                    ctx.beginPath();
-                    ctx.moveTo(n.x, n.y);
-                    ctx.lineTo(right.x, right.y);
-                    ctx.stroke();
-                }
-
-                // Connect to bottom neighbor
-                if (i < gridSize - 1) {
-                    const bottom = neurons[i + 1][j];
-                    ctx.beginPath();
-                    ctx.moveTo(n.x, n.y);
-                    ctx.lineTo(bottom.x, bottom.y);
-                    ctx.stroke();
-                }
+                if (j < gridSize - 1) { ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(neurons[i][j + 1].x, neurons[i][j + 1].y); ctx.stroke(); }
+                if (i < gridSize - 1) { ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(neurons[i + 1][j].x, neurons[i + 1][j].y); ctx.stroke(); }
             }
         }
 
-        // Draw neurons
         for (let i = 0; i < gridSize; i++) {
             for (let j = 0; j < gridSize; j++) {
                 const n = neurons[i][j];
-
-                // Glow
-                const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 12);
+                const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 10);
                 glow.addColorStop(0, hexToRgba(COLORS.neuron, 0.4));
                 glow.addColorStop(1, 'transparent');
                 ctx.fillStyle = glow;
                 ctx.beginPath();
-                ctx.arc(n.x, n.y, 12, 0, Math.PI * 2);
+                ctx.arc(n.x, n.y, 10, 0, Math.PI * 2);
                 ctx.fill();
-
-                // Core
                 ctx.fillStyle = COLORS.neuron;
                 ctx.beginPath();
-                ctx.arc(n.x, n.y, 4, 0, Math.PI * 2);
+                ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        // Highlight current data point
         if (isTraining) {
             const p = dataPoints[currentDataIdx];
             ctx.strokeStyle = COLORS.accent;
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, 8, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
             ctx.stroke();
         }
 
         // Info panel
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
-        ctx.fillRect(10, 10, 220, 75);
-        ctx.strokeStyle = COLORS.neuron;
+        const panelW = 130, panelH = 44, panelX = w - panelW - 10, panelY = h - panelH - 10;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(panelX, panelY, panelW, panelH);
+        ctx.strokeStyle = 'rgba(45, 212, 191, 0.5)';
         ctx.lineWidth = 1;
-        ctx.strokeRect(10, 10, 220, 75);
+        ctx.strokeRect(panelX, panelY, panelW, panelH);
 
-        ctx.font = 'bold 11px "Courier New", monospace';
-        ctx.fillStyle = COLORS.light;
-        ctx.textAlign = 'left';
-        ctx.fillText('SELF-ORGANIZING MAP', 20, 28);
         ctx.font = '10px "Courier New", monospace';
-        ctx.fillStyle = COLORS.dim;
-        ctx.fillText(`Epoch: ${epoch} | LR: ${learningRate.toFixed(3)}`, 20, 43);
-        ctx.fillText(`Neighborhood: ${neighborhoodRadius.toFixed(2)}`, 20, 58);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#aaa';
+        ctx.fillText(`Epoch ${epoch} | σ=${neighborhoodRadius.toFixed(1)}`, panelX + 8, panelY + 16);
         ctx.fillStyle = isTraining ? '#2dd4bf' : '#ed217c';
-        ctx.fillText(isTraining ? 'Click to pause' : 'Click to resume', 20, 73);
+        ctx.fillText(isTraining ? '▶ Training' : '⏸ Paused', panelX + 8, panelY + 32);
+
+        // Title
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillRect(8, 8, 45, 20);
+        ctx.font = 'bold 10px "Courier New", monospace';
+        ctx.fillStyle = '#2dd4bf';
+        ctx.fillText("SOM", 14, 22);
+
+        // Buttons
+        const isResetHovered = resetBtnRect && isPointInRect(mouseX, mouseY, resetBtnRect);
+        resetBtnRect = drawResetButton(ctx, w - 58, 22, isResetHovered, '#2dd4bf');
+
+        const isHelpHovered = helpBtnRect && isPointInRect(mouseX, mouseY, helpBtnRect);
+        helpBtnRect = drawHelpButton(ctx, w - 22, 22, isHelpHovered, '#2dd4bf');
+
+        if (showHelp) drawHelpTooltip(ctx, w, h, HELP_LINES, '#2dd4bf');
 
         animationFrame = requestAnimationFrame(draw);
     }
 
-    function handleClick() {
+    function handleMouseMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+    }
+
+    function handleClick(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = e.clientX - rect.left, clickY = e.clientY - rect.top;
+        if (helpBtnRect && isPointInRect(clickX, clickY, helpBtnRect)) { showHelp = !showHelp; return; }
+        if (showHelp) { showHelp = false; return; }
+        if (resetBtnRect && isPointInRect(clickX, clickY, resetBtnRect)) { reset(); return; }
         isTraining = !isTraining;
     }
 
     function handleDblClick() {
-        // Reset
-        epoch = 0;
-        step = 0;
-        learningRate = 0.5;
-        neighborhoodRadius = 4;
-        initNeurons();
-        initData();
-        isTraining = true;
+        if (!showHelp) reset();
     }
 
+    canvas.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('click', handleClick);
     canvas.addEventListener('dblclick', handleDblClick);
-
     resize();
     initNeurons();
     initData();
     draw();
-    window.addEventListener('resize', () => {
-        resize();
-        initNeurons();
-        initData();
-        epoch = 0;
-        step = 0;
-        learningRate = 0.5;
-        neighborhoodRadius = 4;
-    });
+    window.addEventListener('resize', () => { resize(); reset(); });
 }
