@@ -2,6 +2,7 @@
  * YAT Manifold Visualization
  * A 3D curved surface showing how the YAT metric creates gravity-well-like
  * deformations in representation space. Supports multiple neurons.
+ * Grid colored by dominant neuron at each point.
  * 
  * ⵟ(x,w) = (x·w)² / ||x-w||² + ε
  */
@@ -29,21 +30,27 @@
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
 
-    // Compute combined YAT from all neurons
-    // ⵟ = Σ (x·w_i)² / ||x-w_i||²
-    function computeTotalYat(pointX, pointY) {
-        let totalYat = 0;
-        for (const n of neurons) {
-            const dotProduct = n.x * pointX + n.y * pointY;
-            const dx = pointX - n.x, dy = pointY - n.y;
-            const distanceSquared = dx * dx + dy * dy;
-            if (distanceSquared < 0.01) {
-                totalYat += 200;
-            } else {
-                totalYat += (dotProduct * dotProduct) / distanceSquared;
+    // Compute YAT for a single neuron
+    function computeSingleYat(pointX, pointY, neuron) {
+        const dotProduct = neuron.x * pointX + neuron.y * pointY;
+        const dx = pointX - neuron.x, dy = pointY - neuron.y;
+        const distanceSquared = dx * dx + dy * dy;
+        if (distanceSquared < 0.01) return 200;
+        return (dotProduct * dotProduct) / distanceSquared;
+    }
+
+    // Find dominant neuron at a point (returns index and total yat)
+    function getDominantNeuron(pointX, pointY) {
+        let maxYat = 0, dominantIdx = 0, totalYat = 0;
+        for (let i = 0; i < neurons.length; i++) {
+            const yat = computeSingleYat(pointX, pointY, neurons[i]);
+            totalYat += yat;
+            if (yat > maxYat) {
+                maxYat = yat;
+                dominantIdx = i;
             }
         }
-        return Math.log(1 + totalYat);
+        return { idx: dominantIdx, total: Math.log(1 + totalYat), max: maxYat };
     }
 
     // Isometric 3D projection
@@ -70,73 +77,83 @@
         const gridRes = 25;
         const spacing = 10;
 
-        // Compute Yat values and find max
+        // Compute grid data with dominant neuron info
         let maxYat = 0.01;
-        const yatGrid = [];
+        const gridData = [];
         for (let i = 0; i <= gridRes; i++) {
-            yatGrid[i] = [];
+            gridData[i] = [];
             for (let j = 0; j <= gridRes; j++) {
                 const worldX = (j - gridRes / 2) * spacing;
                 const worldY = (i - gridRes / 2) * spacing;
-                const yat = computeTotalYat(worldX, worldY);
-                yatGrid[i][j] = yat;
-                if (yat > maxYat) maxYat = yat;
+                const result = getDominantNeuron(worldX, worldY);
+                gridData[i][j] = { worldX, worldY, ...result };
+                if (result.total > maxYat) maxYat = result.total;
             }
         }
 
         const wellDepth = 70 / Math.max(maxYat, 0.1);
 
-        // Build height map
+        // Build height map with colors
         const heights = [];
         for (let i = 0; i <= gridRes; i++) {
             heights[i] = [];
             for (let j = 0; j <= gridRes; j++) {
-                const worldX = (j - gridRes / 2) * spacing;
-                const worldY = (i - gridRes / 2) * spacing;
-                const depth = Math.min(yatGrid[i][j] * wellDepth, 100);
-                heights[i][j] = { worldX, worldY, depth };
+                const gd = gridData[i][j];
+                const depth = Math.min(gd.total * wellDepth, 100);
+                heights[i][j] = {
+                    worldX: gd.worldX,
+                    worldY: gd.worldY,
+                    depth,
+                    color: neurons[gd.idx].color,
+                    intensity: Math.min(depth / 70, 1)
+                };
             }
         }
 
-        // Draw horizontal grid lines
+        // Draw horizontal grid lines with per-segment coloring
         for (let i = 0; i <= gridRes; i++) {
-            ctx.beginPath();
-            let maxD = 0;
-            for (let j = 0; j <= gridRes; j++) {
-                const ht = heights[i][j];
-                const p = project(ht.worldX, ht.worldY, ht.depth);
-                if (j === 0) ctx.moveTo(cx + p.x, cy + p.y);
-                else ctx.lineTo(cx + p.x, cy + p.y);
-                maxD = Math.max(maxD, ht.depth);
+            for (let j = 0; j < gridRes; j++) {
+                const h1 = heights[i][j];
+                const h2 = heights[i][j + 1];
+                const p1 = project(h1.worldX, h1.worldY, h1.depth);
+                const p2 = project(h2.worldX, h2.worldY, h2.depth);
+
+                // Use the color of the point with higher intensity
+                const color = h1.intensity >= h2.intensity ? h1.color : h2.color;
+                const intensity = Math.max(h1.intensity, h2.intensity);
+
+                ctx.beginPath();
+                ctx.moveTo(cx + p1.x, cy + p1.y);
+                ctx.lineTo(cx + p2.x, cy + p2.y);
+                ctx.strokeStyle = hexToRgba(color, 0.3 + intensity * 0.5);
+                ctx.lineWidth = 1;
+                ctx.stroke();
             }
-            const intensity = Math.min(maxD / 70, 1);
-            ctx.strokeStyle = `hsla(145, 80%, ${30 + intensity * 30}%, ${0.3 + intensity * 0.4})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
         }
 
-        // Draw vertical grid lines
+        // Draw vertical grid lines with per-segment coloring
         for (let j = 0; j <= gridRes; j++) {
-            ctx.beginPath();
-            let maxD = 0;
-            for (let i = 0; i <= gridRes; i++) {
-                const ht = heights[i][j];
-                const p = project(ht.worldX, ht.worldY, ht.depth);
-                if (i === 0) ctx.moveTo(cx + p.x, cy + p.y);
-                else ctx.lineTo(cx + p.x, cy + p.y);
-                maxD = Math.max(maxD, ht.depth);
+            for (let i = 0; i < gridRes; i++) {
+                const h1 = heights[i][j];
+                const h2 = heights[i + 1][j];
+                const p1 = project(h1.worldX, h1.worldY, h1.depth);
+                const p2 = project(h2.worldX, h2.worldY, h2.depth);
+
+                const color = h1.intensity >= h2.intensity ? h1.color : h2.color;
+                const intensity = Math.max(h1.intensity, h2.intensity);
+
+                ctx.beginPath();
+                ctx.moveTo(cx + p1.x, cy + p1.y);
+                ctx.lineTo(cx + p2.x, cy + p2.y);
+                ctx.strokeStyle = hexToRgba(color, 0.3 + intensity * 0.5);
+                ctx.lineWidth = 1;
+                ctx.stroke();
             }
-            const intensity = Math.min(maxD / 70, 1);
-            ctx.strokeStyle = `hsla(145, 80%, ${30 + intensity * 30}%, ${0.3 + intensity * 0.4})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
         }
 
         // Draw all neurons at bottom of their wells
         for (let idx = 0; idx < neurons.length; idx++) {
             const n = neurons[idx];
-
-            // Compute single neuron contribution for depth
             const dotP = n.x * n.x + n.y * n.y;
             const neuronDepth = Math.min(Math.log(1 + dotP * 10) * wellDepth, 100);
             const neuronScreen = project(n.x, n.y, neuronDepth);
