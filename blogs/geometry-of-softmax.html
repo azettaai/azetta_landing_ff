@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8V5SB2QZY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-C8V5SB2QZY');
+        document.addEventListener('DOMContentLoaded', function () {
+            gtag('event', 'blog_view', { 'event_category': 'content', 'event_label': document.title });
+            document.querySelectorAll('.viz-canvas').forEach(function (canvas) {
+                canvas.addEventListener('click', function () {
+                    gtag('event', 'viz_interaction', { 'event_category': 'engagement', 'event_label': this.id || 'visualization' });
+                });
+            });
+            document.querySelectorAll('.series-list a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    gtag('event', 'series_navigation', { 'event_category': 'content', 'event_label': this.textContent.trim() });
+                });
+            });
+            var scrollDepths = [25, 50, 75, 100], scrolledDepths = [];
+            window.addEventListener('scroll', function () {
+                var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+                scrollDepths.forEach(function (depth) {
+                    if (scrollPercent >= depth && scrolledDepths.indexOf(depth) === -1) {
+                        scrolledDepths.push(depth);
+                        gtag('event', 'blog_read_progress', { 'event_category': 'engagement', 'value': depth });
+                    }
+                });
+            });
+            [30, 60, 120, 180, 300].forEach(function (s) { setTimeout(function () { gtag('event', 'blog_reading_time', { 'event_category': 'engagement', 'value': s }); }, s * 1000); });
+        });
+    </script>
+
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>The Geometry of Softmax - Azetta.ai Blog</title>
+    <meta name="title" content="The Geometry of Softmax - Azetta.ai Blog" />
+    <meta name="description"
+        content="Softmax doesn't draw lines—it splits vector space between competing prototypes. The similarity metric you choose changes everything." />
+    <meta name="author" content="Taha Bouhsine" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://azetta.ai/blogs/geometry-of-softmax.html" />
+    <meta property="og:title" content="The Geometry of Softmax - Azetta.ai Blog" />
+    <meta property="og:description"
+        content="Softmax doesn't draw lines—it splits vector space between competing prototypes based on maximal similarity." />
+    <meta property="article:published_time" content="2026-02-11" />
+    <meta property="article:author" content="Taha Bouhsine" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://azetta.ai/blogs/geometry-of-softmax.html" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1b998b" />
+
+    <!-- Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        /* Interactive visualization containers */
+        .viz-container {
+            width: 100%;
+            margin: var(--space-xl) 0;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(27, 153, 139, 0.4);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .viz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            background: rgba(27, 153, 139, 0.1);
+            border-bottom: 1px solid rgba(27, 153, 139, 0.3);
+        }
+
+        .viz-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--circuit-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .viz-hint {
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            color: var(--light);
+            opacity: 0.6;
+        }
+
+        .viz-canvas {
+            display: block;
+            width: 100%;
+            height: 350px;
+            cursor: crosshair;
+        }
+
+        .viz-caption {
+            padding: var(--space-md) var(--space-lg);
+            font-size: 0.9rem;
+            color: var(--light);
+            opacity: 0.8;
+            border-top: 1px solid rgba(27, 153, 139, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Callout box for key insights */
+        .insight-box {
+            margin: var(--space-xl) 0;
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, rgba(237, 33, 124, 0.1), rgba(27, 153, 139, 0.1));
+            border-left: 4px solid var(--circuit-accent);
+            font-style: italic;
+        }
+
+        .insight-box strong {
+            color: var(--circuit-accent);
+            font-style: normal;
+        }
+
+        /* Warning/contrast box */
+        .warning-box {
+            margin: var(--space-xl) 0;
+            padding: var(--space-lg);
+            background: rgba(237, 33, 124, 0.1);
+            border-left: 4px solid #ed217c;
+        }
+
+        .warning-box strong {
+            color: #ed217c;
+        }
+
+        /* Dual view panel */
+        .dual-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .panel-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(27, 153, 139, 0.3);
+            border-radius: 4px;
+            padding: var(--space-lg);
+        }
+
+        .panel-box h4 {
+            color: var(--circuit-primary);
+            margin-bottom: var(--space-md);
+            font-family: var(--font-mono);
+        }
+
+        @media (max-width: 768px) {
+            .dual-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Bibliography section */
+        .bibliography {
+            margin: var(--space-xxl) 0;
+            padding: var(--space-xl);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(27, 153, 139, 0.3);
+            border-radius: 4px;
+        }
+
+        .bibliography h2 {
+            font-size: 1.4rem;
+            margin-bottom: var(--space-lg);
+            color: var(--circuit-primary);
+            font-family: var(--font-mono);
+        }
+
+        .references-list {
+            list-style: none;
+            counter-reset: none;
+            padding-left: 0;
+        }
+
+        .references-list li {
+            margin-bottom: var(--space-lg);
+            padding-left: var(--space-xl);
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .ref-number {
+            position: absolute;
+            left: 0;
+            color: var(--circuit-primary);
+            font-family: var(--font-mono);
+            font-weight: bold;
+        }
+
+        .references-list strong {
+            color: var(--text-color);
+        }
+
+        .references-list em {
+            color: var(--accent-color);
+        }
+
+        .references-list a {
+            color: var(--circuit-primary);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+        }
+
+        .references-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="site-header" data-active="blog" data-prefix=".."></div>
+
+    <main>
+        <!-- Article Header -->
+        <article class="blog-article">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="blog-tag">Information Geometry</span>
+                    <time class="blog-date" datetime="2026-02-11">February 11, 2026</time>
+                </div>
+                <h1 class="article-title">The Geometry of Softmax</h1>
+                <p class="article-subtitle">
+                    how competitive potentials split vector space—and why the similarity you choose changes everything
+                </p>
+                <div class="article-author">
+                    <span class="author-name">By Taha Bouhsine</span>
+                    <span class="read-time">16 min read</span>
+                </div>
+            </header>
+
+            <div class="article-content">
+
+                <!-- Section 1: The Line-Drawing Myth -->
+                <section>
+                    <h2>the line-drawing myth</h2>
+                    <p>
+                        open any machine learning textbook and you'll find the same picture. two classes.
+                        a line between them. "the softmax classifier draws a linear decision boundary."
+                        clean, simple, wrong.
+                    </p>
+                    <p>
+                        well—not wrong exactly. but so incomplete that it misleads. the textbook picture
+                        shows you a 2D slice of something far richer. it makes you think softmax is about
+                        <em>drawing lines</em>. that the fundamental operation is: find a hyperplane,
+                        put class A on one side, class B on the other.
+                    </p>
+                    <p>
+                        this framing is seductive because it connects to our geometric intuition. lines
+                        separate things. boundaries divide space. we've been drawing lines since grade school.
+                        and when we see the softmax output for two classes collapsing to a sigmoid—a smooth
+                        step function—the "line" interpretation feels natural.
+                    </p>
+                    <p>
+                        but here's what the textbook never tells you: <strong>the line is an artifact, not the
+                        mechanism</strong>. softmax doesn't draw lines. it does something far more fundamental—
+                        something that becomes invisible when you only look at the boundary.
+                    </p>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// The Textbook View</span>
+                            <span class="viz-hint">Click to add prototypes</span>
+                        </div>
+                        <canvas id="viz-textbook-lines" class="viz-canvas"></canvas>
+                        <div class="viz-caption">
+                            The standard picture: softmax draws lines between classes. Clean, intuitive—
+                            and profoundly incomplete. What happens between the lines?
+                        </div>
+                    </div>
+
+                    <p>
+                        look at the visualization above. it shows the standard dot-product softmax with a
+                        few prototypes. you see the lines—the decision boundaries where classes meet. but
+                        notice what the textbook ignores: the <em>colored regions</em>. the entire space is
+                        painted. every single point belongs to some class, with some confidence.
+                        the boundary is just the thin edge where confidence transitions. the real story is
+                        the territory—not the border.
+                    </p>
+
+                    <div class="warning-box">
+                        <strong>the misdirection:</strong> by focusing on decision boundaries, we've trained
+                        a generation of practitioners to think about classification as line-drawing. but
+                        softmax is not a boundary-finding algorithm. it's a <em>space-splitting</em> algorithm.
+                        every point in the entire vector space gets assigned to a prototype. the boundary
+                        is just where assignments change.
+                    </div>
+                </section>
+
+                <!-- Section 2: What Softmax Actually Does -->
+                <section>
+                    <h2>what softmax actually does</h2>
+                    <p>
+                        let's look at the formula everyone knows but few people <em>see</em>:
+                    </p>
+                    <p style="text-align: center; font-size: 1.3em; margin: var(--space-xl) 0;">
+                        $$p(k \mid \mathbf{x}) = \frac{e^{s(\mathbf{x}, \mathbf{w}_k)}}{\sum_j e^{s(\mathbf{x}, \mathbf{w}_j)}}$$
+                    </p>
+                    <p>
+                        here $s(\mathbf{x}, \mathbf{w}_k)$ is a <em>similarity function</em> between the input
+                        $\mathbf{x}$ and prototype $\mathbf{w}_k$. the exponential amplifies differences.
+                        the denominator normalizes into probabilities.
+                    </p>
+                    <p>
+                        now read that formula as a sentence: <strong>for every point $\mathbf{x}$ in space,
+                        compute how similar it is to each prototype $\mathbf{w}_k$, then normalize those
+                        similarities into a probability distribution</strong>.
+                    </p>
+                    <p>
+                        this is not line-drawing. this is <em>competitive potential evaluation</em>. each
+                        prototype generates a potential field across the entire space. at every point, the
+                        potentials compete. the prototype with the highest potential at that point "wins"
+                        the territory.
+                    </p>
+                    <p>
+                        the decision boundary? it's just the <strong>equipotential surface</strong>—the set
+                        of points where two prototypes have exactly equal potential. it's the tideline between
+                        two seas, not a wall someone built.
+                    </p>
+
+                    <div class="insight-box">
+                        <strong>the reframe:</strong> softmax doesn't draw boundaries. it evaluates
+                        <em>competitive similarity</em> everywhere. each prototype radiates a potential field.
+                        the boundaries are just where those fields balance—like the Lagrange points between
+                        two stars, or the watershed line between two river basins.
+                    </div>
+                </section>
+
+                <!-- Section 3: Space Splitting -->
+                <section>
+                    <h2>space splitting, not line drawing</h2>
+                    <p>
+                        once you see softmax as competitive potential, the geometry transforms completely.
+                        you're no longer asking "where is the line?" you're asking "what shape is each
+                        prototype's territory?"
+                    </p>
+                    <p>
+                        and here's the crucial insight: <strong>the shape of the territory depends entirely
+                        on what "similarity" means</strong>. change the similarity function $s(\mathbf{x},
+                        \mathbf{w}_k)$, and the territories reshape completely—even with the exact same
+                        prototypes in the exact same positions.
+                    </p>
+                    <p>
+                        this is what we explored in <a href="meaning-of-non-linearity.html">The Meaning
+                        of Non-Linearity</a>: different metrics see different geometry. but now we can be
+                        precise about <em>how</em> the metric shapes classification. the softmax is the
+                        arena. the similarity function is the physics of the arena. change the physics,
+                        and the same competitors carve out radically different territories.
+                    </p>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Space Splitting: Metric Comparison</span>
+                            <span class="viz-hint">Click buttons to switch metrics • Click canvas to add prototypes</span>
+                        </div>
+                        <canvas id="viz-space-splitting" class="viz-canvas" style="height: 400px;"></canvas>
+                        <div class="viz-controls"
+                            style="display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; background: rgba(0,0,0,0.3);">
+                            <button id="viz-split-dot"
+                                style="padding: 8px 16px; background: rgba(155,93,229,0.5); border: 1px solid #9b5de5; color: #9b5de5; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold;">Dot Product</button>
+                            <button id="viz-split-cosine"
+                                style="padding: 8px 16px; background: rgba(244,162,97,0.3); border: 1px solid #f4a261; color: #f4a261; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Cosine</button>
+                            <button id="viz-split-euclidean"
+                                style="padding: 8px 16px; background: rgba(100,200,100,0.3); border: 1px solid #64c864; color: #64c864; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Neg. Euclidean</button>
+                            <button id="viz-split-yat"
+                                style="padding: 8px 16px; background: rgba(27,153,139,0.3); border: 1px solid #1b998b; color: #1b998b; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Yat</button>
+                            <button id="viz-split-reset"
+                                style="padding: 8px 16px; background: rgba(230,126,163,0.3); border: 1px solid #e67ea3; color: #e67ea3; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Reset</button>
+                        </div>
+                        <div class="viz-caption">
+                            Same prototypes, different similarity functions, radically different territories.
+                            The metric <em>is</em> the geometry of classification.
+                        </div>
+                    </div>
+
+                    <p>
+                        toggle between the metrics in the visualization above. watch how the same three or
+                        four prototypes produce completely different space partitions. with the dot product,
+                        one prototype can dominate everything. with cosine, the territories slice by angle.
+                        with negative euclidean distance, you get classic Voronoi cells. with the Yat,
+                        you get curved, gravitational territories.
+                    </p>
+                    <p>
+                        the prototypes didn't move. the space didn't change. only the <em>definition of
+                        similarity</em> changed. and everything followed.
+                    </p>
+                </section>
+
+                <!-- Section 4: The Anatomy of the Dot Product -->
+                <section>
+                    <h2>the anatomy of the dot product</h2>
+                    <p>
+                        most softmax classifiers use the dot product as their similarity function:
+                        $s(\mathbf{x}, \mathbf{w}) = \mathbf{x} \cdot \mathbf{w}$. let's dissect exactly
+                        what this means geometrically.
+                    </p>
+                    <p>
+                        the dot product decomposes cleanly:
+                    </p>
+                    <p style="text-align: center; font-size: 1.3em; margin: var(--space-xl) 0;">
+                        $$\mathbf{x} \cdot \mathbf{w} = \|\mathbf{x}\| \cdot \|\mathbf{w}\| \cdot \cos\theta$$
+                    </p>
+                    <p>
+                        three factors, multiplied together. the magnitude of $\mathbf{x}$, the magnitude
+                        of $\mathbf{w}$, and the cosine of the angle between them. all three contribute.
+                        but they don't contribute equally.
+                    </p>
+                    <p>
+                        <strong>magnitude is multiplicative</strong>. if you double $\|\mathbf{w}\|$, you
+                        double the dot product. the cosine term only ranges from $-1$ to $+1$—it's bounded.
+                        but magnitudes are unbounded. this means that in the dot product, <strong>magnitude
+                        dominates direction</strong>.
+                    </p>
+                    <p>
+                        consider two prototypes: $\mathbf{w}_A$ with $\|\mathbf{w}_A\| = 10$ and
+                        $\mathbf{w}_B$ with $\|\mathbf{w}_B\| = 1$. even if an input $\mathbf{x}$ points
+                        directly at $\mathbf{w}_B$ ($\cos\theta = 1$) and is nearly orthogonal to
+                        $\mathbf{w}_A$ ($\cos\theta \approx 0.1$), the dot product with $\mathbf{w}_A$
+                        can still win because $10 \times 0.1 = 1 \geq 1 \times 1$.
+                    </p>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Anatomy of Dot Product</span>
+                            <span class="viz-hint">Drag the slider to change prototype magnitude</span>
+                        </div>
+                        <canvas id="viz-dot-anatomy" class="viz-canvas" style="height: 380px;"></canvas>
+                        <div class="viz-caption">
+                            Watch how increasing one prototype's magnitude causes it to absorb territory from
+                            its neighbor—even territory that is closer and better-aligned to the other prototype.
+                        </div>
+                    </div>
+
+                    <p>
+                        this is the dot product's fundamental character: it conflates "how aligned are we?"
+                        with "how large are we?" in the softmax competition, a large prototype doesn't just
+                        win in its direction—it bleeds into other directions through sheer magnitude. it's
+                        a bully metric.
+                    </p>
+
+                    <div class="warning-box">
+                        <strong>the magnitude trap:</strong> in dot product softmax, a prototype with
+                        twice the magnitude gets twice the "vote" at every point in space—regardless of
+                        direction. this is why neural networks need careful weight initialization and
+                        normalization. without it, the loudest voice drowns out all the others, regardless
+                        of whether it's right.
+                    </div>
+                </section>
+
+                <!-- Section 5: Magnitude Dominance -->
+                <section>
+                    <h2>the black hole effect</h2>
+                    <p>
+                        let's push this to its extreme. what happens when one prototype has vastly more
+                        magnitude than the others?
+                    </p>
+                    <p>
+                        in dot product softmax, the answer is stark: <strong>it absorbs everything</strong>.
+                        the high-magnitude prototype becomes a black hole—its territory expands to fill
+                        the entire space, pushing all other prototypes into negligible slivers.
+                    </p>
+                    <p>
+                        this isn't a pathological edge case. it's what happens naturally during training when
+                        weight norms grow unevenly. one class accumulates larger weights, which gives it
+                        larger territory, which means it sees more data, which reinforces its larger weights.
+                        a positive feedback loop toward collapse.
+                    </p>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// The Black Hole Effect</span>
+                            <span class="viz-hint">Click the arrows to grow/shrink a prototype's magnitude</span>
+                        </div>
+                        <canvas id="viz-magnitude-dominance" class="viz-canvas" style="height: 400px;"></canvas>
+                        <div class="viz-caption">
+                            In dot product softmax, increasing one prototype's magnitude causes it to
+                            swallow the space. This is the "black hole effect"—magnitude overpowers geometry.
+                        </div>
+                    </div>
+
+                    <p>
+                        this is why modern neural network practice is filled with normalization tricks:
+                        batch normalization [1], layer normalization [2], weight normalization [3], cosine
+                        classifiers [4]. they're all fighting the same enemy—the dot product's magnitude
+                        bias. they're trying to force the competition back to direction, where it
+                        geometrically belongs.
+                    </p>
+                    <p>
+                        but normalization is a patch, not a cure. it forces all prototypes to have unit
+                        magnitude, effectively replacing the dot product with cosine similarity:
+                    </p>
+                    <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
+                        $$\cos\theta = \frac{\mathbf{x} \cdot \mathbf{w}}{\|\mathbf{x}\| \|\mathbf{w}\|}$$
+                    </p>
+                    <p>
+                        cosine similarity solves the magnitude problem. but it introduces a new one: it
+                        <strong>completely ignores distance</strong>. two vectors on opposite ends of the
+                        space, pointing in the same direction, are "maximally similar" by cosine—even if
+                        they're lightyears apart. as we discussed in <a href="meaning-of-non-linearity.html">
+                        The Meaning of Non-Linearity</a>, this is half the picture at best.
+                    </p>
+                </section>
+
+                <!-- Section 6: Competitive Potentials -->
+                <section>
+                    <h2>competitive potentials</h2>
+                    <p>
+                        let's formalize the intuition. each prototype $\mathbf{w}_k$ generates a
+                        <strong>potential field</strong> $\phi_k(\mathbf{x})$ across the entire vector space:
+                    </p>
+                    <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
+                        $$\phi_k(\mathbf{x}) = s(\mathbf{x}, \mathbf{w}_k)$$
+                    </p>
+                    <p>
+                        the softmax converts these potentials into probabilities. the "winning class"
+                        at any point $\mathbf{x}$ is simply:
+                    </p>
+                    <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
+                        $$\hat{y}(\mathbf{x}) = \arg\max_k \; \phi_k(\mathbf{x})$$
+                    </p>
+                    <p>
+                        the decision boundary between classes $i$ and $j$ is the equipotential surface:
+                    </p>
+                    <p style="text-align: center; font-size: 1.2em; margin: var(--space-lg) 0;">
+                        $$\phi_i(\mathbf{x}) = \phi_j(\mathbf{x})$$
+                    </p>
+                    <p>
+                        now the shape of these potential fields—and therefore the shape of classification—
+                        depends entirely on $s$. let's compare what each similarity function produces.
+                    </p>
+
+                    <div class="dual-panel">
+                        <div class="panel-box">
+                            <h4>dot product: $\mathbf{x} \cdot \mathbf{w}$</h4>
+                            <p>Potential increases linearly along $\mathbf{w}$'s direction</p>
+                            <p>Isopotential lines are <strong>hyperplanes</strong> perpendicular to $\mathbf{w}$</p>
+                            <p>Boundaries are <strong>flat</strong></p>
+                            <p>Magnitude dominates—large prototypes absorb space</p>
+                        </div>
+                        <div class="panel-box">
+                            <h4>cosine: $\cos(\mathbf{x}, \mathbf{w})$</h4>
+                            <p>Potential depends only on angle, not position</p>
+                            <p>Isopotential lines are <strong>cones</strong> centered at origin</p>
+                            <p>Boundaries are <strong>angular rays</strong> from origin</p>
+                            <p>Distance-blind—far and near are treated identically</p>
+                        </div>
+                    </div>
+
+                    <div class="dual-panel">
+                        <div class="panel-box">
+                            <h4>neg. euclidean: $-\|\mathbf{x} - \mathbf{w}\|$</h4>
+                            <p>Potential decreases with distance from $\mathbf{w}$</p>
+                            <p>Isopotential lines are <strong>circles</strong> around $\mathbf{w}$</p>
+                            <p>Boundaries are <strong>Voronoi edges</strong> (perpendicular bisectors)</p>
+                            <p>Direction-blind—only proximity matters</p>
+                        </div>
+                        <div class="panel-box">
+                            <h4>yat: $\frac{(\mathbf{x} \cdot \mathbf{w})^2}{\|\mathbf{x} - \mathbf{w}\|^2}$</h4>
+                            <p>Potential depends on <strong>both</strong> alignment and proximity</p>
+                            <p>Isopotential lines are <strong>curves</strong> that respect geometry</p>
+                            <p>Boundaries are <strong>gravitational equipotentials</strong></p>
+                            <p>Local—nearby prototypes outweigh distant large ones</p>
+                        </div>
+                    </div>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Competitive Potential Fields</span>
+                            <span class="viz-hint">Click buttons to switch metrics • Hover for potential values</span>
+                        </div>
+                        <canvas id="viz-potential-fields" class="viz-canvas" style="height: 400px;"></canvas>
+                        <div class="viz-controls"
+                            style="display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; background: rgba(0,0,0,0.3);">
+                            <button id="viz-pot-dot"
+                                style="padding: 8px 16px; background: rgba(155,93,229,0.5); border: 1px solid #9b5de5; color: #9b5de5; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold;">Dot Product</button>
+                            <button id="viz-pot-cosine"
+                                style="padding: 8px 16px; background: rgba(244,162,97,0.3); border: 1px solid #f4a261; color: #f4a261; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Cosine</button>
+                            <button id="viz-pot-euclidean"
+                                style="padding: 8px 16px; background: rgba(100,200,100,0.3); border: 1px solid #64c864; color: #64c864; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Neg. Euclidean</button>
+                            <button id="viz-pot-yat"
+                                style="padding: 8px 16px; background: rgba(27,153,139,0.3); border: 1px solid #1b998b; color: #1b998b; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Yat</button>
+                        </div>
+                        <div class="viz-caption">
+                            The potential field of a single prototype, shown as a heatmap. Brighter = higher potential.
+                            Notice how each metric creates a completely different "field shape" from the same prototype.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 7: The Yat as Gravitational Potential -->
+                <section>
+                    <h2>the yat: gravitational classification</h2>
+                    <p>
+                        as we introduced in <a href="meaning-of-non-linearity.html">The Meaning of
+                        Non-Linearity</a> and explored in <a href="duality-of-information.html">The Duality
+                        of Information</a>, the Yat metric combines alignment and distance:
+                    </p>
+                    <p style="text-align: center; font-size: 1.4em; margin: var(--space-xl) 0;">
+                        $$\text{Yat}(\mathbf{x}, \mathbf{w}) = \frac{(\mathbf{x} \cdot \mathbf{w})^2}{\|\mathbf{x} - \mathbf{w}\|^2}$$
+                    </p>
+                    <p>
+                        when we use this as the similarity function inside softmax, something remarkable
+                        happens. the potential field of each prototype follows an <strong>inverse-square
+                        law</strong>—the same law that governs gravity.
+                    </p>
+                    <p>
+                        near the prototype, the potential rises sharply (the $1/d^2$ term dominates).
+                        far from the prototype, the potential falls off rapidly. this means each prototype
+                        has a <strong>sphere of influence</strong>—a local territory where it dominates,
+                        regardless of what larger prototypes exist far away.
+                    </p>
+                    <p>
+                        remember the analogy from <a href="self-organization.html">The Universe of
+                        Self-Organization</a>: the moon orbits the earth, not the sun, even though the
+                        sun is vastly more massive. why? because the earth is <em>closer</em>. gravity's
+                        inverse-square law ensures that proximity trumps magnitude at local scales.
+                    </p>
+                    <p>
+                        the Yat-softmax does the same thing for classification. a small prototype nearby
+                        can outcompete a large prototype far away. every data point gets classified by its
+                        <em>local</em> geometry, not by some global magnitude hierarchy.
+                    </p>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Gravitational vs. Linear Potential</span>
+                            <span class="viz-hint">Drag prototypes to reposition • Click to add</span>
+                        </div>
+                        <canvas id="viz-gravity-vs-linear" class="viz-canvas" style="height: 420px;"></canvas>
+                        <div class="viz-controls"
+                            style="display: flex; gap: 8px; padding: 10px; flex-wrap: wrap; background: rgba(0,0,0,0.3);">
+                            <button id="viz-gvl-dot"
+                                style="padding: 8px 16px; background: rgba(155,93,229,0.5); border: 1px solid #9b5de5; color: #9b5de5; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold;">Dot Product</button>
+                            <button id="viz-gvl-yat"
+                                style="padding: 8px 16px; background: rgba(27,153,139,0.3); border: 1px solid #1b998b; color: #1b998b; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Yat</button>
+                            <button id="viz-gvl-add"
+                                style="padding: 8px 16px; background: rgba(230,126,163,0.3); border: 1px solid #e67ea3; color: #e67ea3; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">+ Add Prototype</button>
+                            <button id="viz-gvl-reset"
+                                style="padding: 8px 16px; background: rgba(100,100,100,0.3); border: 1px solid #888; color: #aaa; cursor: pointer; font-family: 'Courier New', monospace; font-size: 11px;">Reset</button>
+                        </div>
+                        <div class="viz-caption">
+                            <strong>Left half:</strong> Dot product softmax—flat, linear potential fields.
+                            <strong>Right half:</strong> Yat softmax—curved, gravitational potential fields.
+                            Same prototypes, radically different territories.
+                        </div>
+                    </div>
+
+                    <div class="insight-box">
+                        <strong>the gravity principle:</strong> in Yat-softmax, each prototype is a "mass"
+                        that curves the classification manifold around it. the resulting space partition
+                        follows the same inverse-square dynamics as planetary orbits. nearby prototypes
+                        create local structure. distant prototypes fade. this is classification as
+                        <em>gravitational self-organization</em>—the same principle we traced from
+                        Descartes' vortices to Einstein's curved spacetime.
+                    </div>
+                </section>
+
+                <!-- Section 8: The Polarity Effect -->
+                <section>
+                    <h2>the polarity of space</h2>
+                    <p>
+                        there's one more geometric effect that the Yat reveals—something the dot product
+                        hides. remember that the Yat uses the <em>squared</em> dot product in its numerator:
+                        $(\mathbf{x} \cdot \mathbf{w})^2$. this means it treats parallel and anti-parallel
+                        vectors identically.
+                    </p>
+                    <p>
+                        a vector pointing at $(1, 1)$ and a vector pointing at $(-1, -1)$ have the same Yat
+                        with respect to a prototype at $(1, 1)$. both are "aligned"—one positively, one
+                        negatively. in the Yat's view, the opposite is just as informative as the identical.
+                    </p>
+                    <p>
+                        this creates a striking visual effect: each prototype's territory extends to the
+                        <em>opposite</em> side of the origin. the space develops a <strong>bipolar</strong>
+                        character. as we discussed in <a href="meaning-of-non-linearity.html">The Meaning
+                        of Non-Linearity</a>, anti-parallel vectors are linearly dependent—knowing one
+                        perfectly predicts the other.
+                    </p>
+                    <p>
+                        contrast this with the dot product, where $\mathbf{x} \cdot \mathbf{w} < 0$ for
+                        anti-parallel vectors. the dot product treats opposites as <em>negatively similar</em>—
+                        it pushes them away. the Yat treats them as <em>positively related</em>—it pulls
+                        them in. this isn't a quirk; it's a deeper reading of the geometry. in a universe
+                        where random vectors are orthogonal (as we showed in
+                        <a href="meaning-of-non-linearity.html">The Meaning of Non-Linearity</a>),
+                        finding your exact opposite is just as remarkable as finding your twin.
+                    </p>
+                </section>
+
+                <!-- Section 9: The Behavior of the Dot Product vs Yat -->
+                <section>
+                    <h2>how the dot product and the yat behave</h2>
+                    <p>
+                        let's now do a systematic comparison. fix two prototypes and sweep a test point
+                        across the space. what does each metric "see"?
+                    </p>
+
+                    <div class="dual-panel">
+                        <div class="panel-box">
+                            <h4>dot product behavior</h4>
+                            <p><strong>as $\|\mathbf{x}\|$ grows:</strong> similarity grows linearly.
+                            a point far from the origin has enormous dot product with whatever prototype it vaguely
+                            points toward. distance from origin amplifies everything.</p>
+                            <p><strong>as $\theta$ changes:</strong> similarity varies smoothly as $\cos\theta$.
+                            the transition from "aligned" to "orthogonal" is gradual and symmetric.</p>
+                            <p><strong>result:</strong> magnitude and angle compete. in practice, magnitude
+                            usually wins because it's unbounded while $\cos\theta \in [-1, 1]$.</p>
+                        </div>
+                        <div class="panel-box">
+                            <h4>yat behavior</h4>
+                            <p><strong>as $\|\mathbf{x}\|$ grows (away from $\mathbf{w}$):</strong>
+                            the numerator grows as $\|\mathbf{x}\|^2 \|\mathbf{w}\|^2 \cos^2\theta$,
+                            but the denominator grows as $\|\mathbf{x} - \mathbf{w}\|^2 \approx
+                            \|\mathbf{x}\|^2$. they cancel. far-away points don't dominate.</p>
+                            <p><strong>as $\mathbf{x} \to \mathbf{w}$:</strong> the denominator approaches
+                            zero. the Yat explodes to infinity. this is the <em>singularity</em>—the
+                            prototype's gravitational core.</p>
+                            <p><strong>result:</strong> locality. the Yat is dominated by proximity to the
+                            nearest prototype. direction matters, but distance matters more at close range.</p>
+                        </div>
+                    </div>
+
+                    <div class="viz-container">
+                        <div class="viz-header">
+                            <span class="viz-title">// Dot Product vs Yat: Sweep Comparison</span>
+                            <span class="viz-hint">Drag the test point around the space</span>
+                        </div>
+                        <canvas id="viz-sweep-comparison" class="viz-canvas" style="height: 400px;"></canvas>
+                        <div class="viz-caption">
+                            Drag the test point (white circle) around the space. The bar chart shows how each
+                            metric scores the similarity to each prototype. Watch how the dot product's scores
+                            are dominated by magnitude, while the Yat's scores are dominated by proximity.
+                        </div>
+                    </div>
+
+                    <p>
+                        the fundamental difference is this: the dot product is a <strong>projective</strong>
+                        measure—it projects $\mathbf{x}$ onto the direction of $\mathbf{w}$ and reads the
+                        shadow's length. this shadow grows with distance from the origin, regardless of
+                        distance from the prototype.
+                    </p>
+                    <p>
+                        the Yat is a <strong>field</strong> measure—it computes the strength of the
+                        prototype's "gravitational field" at the point $\mathbf{x}$. this field strength
+                        is dominated by proximity, with direction serving as a modulator. close and aligned
+                        is strong. close and orthogonal is weak. far away is always weak—no matter how
+                        aligned.
+                    </p>
+
+                    <div class="insight-box">
+                        <strong>the core difference:</strong> the dot product asks "how much of $\mathbf{w}$
+                        can I see in $\mathbf{x}$?" (a projection question). the Yat asks "how strongly does
+                        $\mathbf{w}$ influence $\mathbf{x}$?" (a field question). projections are global—
+                        they extend to infinity. fields are local—they decay with distance. this is why
+                        Yat-softmax produces gravitational territories while dot-product-softmax produces
+                        linear half-spaces.
+                    </div>
+                </section>
+
+                <!-- Section 10: Why This Matters -->
+                <section>
+                    <h2>why this matters</h2>
+                    <p>
+                        this isn't abstract geometry. it's the foundation of how every neural network
+                        classifier works. the final layer of nearly every classification network is a
+                        softmax over dot products. and now you know what that means: the network is
+                        splitting its representation space into linear half-spaces, where magnitude
+                        dominates direction.
+                    </p>
+                    <p>
+                        every normalization trick, every temperature parameter, every label-smoothing
+                        strategy is a workaround for the dot product's geometric pathologies. we've
+                        built an enormous engineering apparatus to patch a fundamentally wrong choice
+                        of similarity.
+                    </p>
+                    <p>
+                        the alternative is simple: use a similarity function whose geometry matches
+                        the problem. if you want local structure, use a local metric. if you want
+                        both direction and distance to matter, use a metric that captures both.
+                        if you want prototypes to have bounded spheres of influence—like stars with
+                        gravitational reach rather than searchlights with infinite range—use a metric
+                        with inverse-square decay.
+                    </p>
+                    <p>
+                        the Yat is one such metric. there may be others. the point isn't that the Yat
+                        is uniquely correct—it's that <strong>the choice of similarity function inside
+                        softmax determines the entire geometry of classification</strong>. this choice
+                        is usually made by default (dot product) and never questioned. it should be
+                        the first question we ask.
+                    </p>
+
+                    <div class="insight-box">
+                        <strong>the takeaway:</strong> softmax is not about lines. it's about competitive
+                        potentials splitting vector space between prototypes. the shape of those territories—
+                        linear or curved, local or global, magnitude-dominated or geometry-respecting—is
+                        entirely determined by the similarity function. change the similarity, change the
+                        geometry. change the geometry, change what the network can learn. the metric is not
+                        a detail. <strong>the metric is the architecture</strong>.
+                    </div>
+                </section>
+
+                <!-- Series Navigation -->
+                <nav class="article-series" aria-label="Article series navigation">
+                    <h3>Part of the series: Understanding Information</h3>
+                    <ul class="series-list">
+                        <li>
+                            <span class="series-number">01</span>
+                            <a href="black-box-dilemma.html" class="series-title">The Black Box Dilemma</a>
+                        </li>
+                        <li>
+                            <span class="series-number">02</span>
+                            <a href="meaning-of-information.html" class="series-title">The Meaning of Information</a>
+                        </li>
+                        <li>
+                            <span class="series-number">03</span>
+                            <a href="beyond-the-brain.html" class="series-title">Beyond the Brain</a>
+                        </li>
+                        <li>
+                            <span class="series-number">04</span>
+                            <a href="meaning-of-non-linearity.html" class="series-title">The Meaning of
+                                Non-Linearity</a>
+                        </li>
+                        <li>
+                            <span class="series-number">05</span>
+                            <a href="duality-of-information.html" class="series-title">The Duality of Information</a>
+                        </li>
+                        <li>
+                            <span class="series-number">06</span>
+                            <a href="self-organization.html" class="series-title">The Universe of Self-Organization</a>
+                        </li>
+                        <li class="series-current">
+                            <span class="series-number">07</span>
+                            <span class="series-title">The Geometry of Softmax</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Article Footer -->
+            <footer class="article-footer">
+                <div class="article-tags">
+                    <span class="tag-label">Tags:</span>
+                    <a href="../blogs.html" class="article-tag">Information Geometry</a>
+                    <a href="../blogs.html" class="article-tag">Softmax</a>
+                    <a href="../blogs.html" class="article-tag">Competitive Potentials</a>
+                    <a href="../blogs.html" class="article-tag">Yat Metric</a>
+                </div>
+
+                <div class="article-cta">
+                    <h3>Ready to rethink classification geometry?</h3>
+                    <p>Learn how Azetta uses physics-inspired metrics to build transparent classifiers.</p>
+                    <a class="btn btn-primary" href="mailto:contact@azetta.ai">Get in Touch</a>
+                </div>
+
+                <nav class="article-nav" aria-label="Adjacent articles">
+                    <a href="self-organization.html" class="nav-prev">&larr; Previous Article</a>
+                    <a href="../blogs.html" class="nav-back">Back to Blog</a>
+                </nav>
+            </footer>
+
+            <!-- Bibliography -->
+            <section class="bibliography" id="references">
+                <h2>References</h2>
+                <ol class="references-list">
+                    <li id="ref-1">
+                        <span class="ref-number">[1]</span>
+                        Ioffe, S. &amp; Szegedy, C. (2015).
+                        <strong>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift.</strong>
+                        <em>Proceedings of the 32nd International Conference on Machine Learning (ICML)</em>.
+                        <a href="https://arxiv.org/abs/1502.03167" target="_blank">arXiv:1502.03167</a>
+                    </li>
+                    <li id="ref-2">
+                        <span class="ref-number">[2]</span>
+                        Ba, J. L., Kiros, J. R., &amp; Hinton, G. E. (2016).
+                        <strong>Layer Normalization.</strong>
+                        <em>arXiv preprint</em>.
+                        <a href="https://arxiv.org/abs/1607.06450" target="_blank">arXiv:1607.06450</a>
+                    </li>
+                    <li id="ref-3">
+                        <span class="ref-number">[3]</span>
+                        Salimans, T. &amp; Kingma, D. P. (2016).
+                        <strong>Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks.</strong>
+                        <em>Advances in Neural Information Processing Systems (NeurIPS)</em>.
+                        <a href="https://arxiv.org/abs/1602.07868" target="_blank">arXiv:1602.07868</a>
+                    </li>
+                    <li id="ref-4">
+                        <span class="ref-number">[4]</span>
+                        Wang, H., Wang, Y., Zhou, Z., Ji, X., Gong, D., Zhou, J., Li, Z., &amp; Liu, W. (2018).
+                        <strong>CosFace: Large Margin Cosine Loss for Deep Face Recognition.</strong>
+                        <em>Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>.
+                        <a href="https://arxiv.org/abs/1801.09414" target="_blank">arXiv:1801.09414</a>
+                    </li>
+                    <li id="ref-5">
+                        <span class="ref-number">[5]</span>
+                        Bridle, J. S. (1990).
+                        <strong>Probabilistic Interpretation of Feedforward Classification Network Outputs.</strong>
+                        <em>Neurocomputing: Algorithms, Architectures and Applications</em>, NATO ASI Series.
+                    </li>
+                </ol>
+            </section>
+        </article>
+    </main>
+
+    <!-- External Scripts -->
+    <script src="../js/components.js"></script>
+    <script src="../main.js" defer></script>
+
+    <!-- Interactive Visualizations -->
+    <script type="module" src="js/geometry-softmax/main.js"></script>
+</body>
+
+</html>
