@@ -70,7 +70,7 @@
       '        ' + navItems + '\n' +
       '      </ul>\n' +
       '      <div class="nav-cta">\n' +
-      '        <a class="btn btn-primary" href="mailto:contact@azetta.ai?subject=Join%20the%20Azetta%20waitlist">Join Waitlist</a>\n' +
+      '        <a class="btn btn-primary" href="https://getwaitlist.com/waitlist/32497" target="_blank" rel="noopener">Join Waitlist</a>\n' +
       '      </div>\n' +
       '    </nav>\n' +
       '  </div>\n' +
