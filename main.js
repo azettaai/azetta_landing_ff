@@ -19,7 +19,8 @@ const CircuitAnimation = (function () {
     function Line(x, y) {
         this.location = { x: x, y: y };
         this.width = Math.random() * 1 + 0.25;
-        this.color = 'hsla(' + (~~(Math.random() * 360)) + ', 100%, 70%, 0.90)';
+        var palette = ['rgba(120,196,164,0.6)', 'rgba(90,181,200,0.5)', 'rgba(120,196,164,0.3)'];
+        this.color = palette[~~(Math.random() * palette.length)];
     }
 
     /**

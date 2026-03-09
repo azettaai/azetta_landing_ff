@@ -39,7 +39,7 @@
     padding: 0.5rem 0.75rem;
     background: rgba(0, 0, 0, 0.25);
     border-radius: 4px;
-    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.2));
+    border: 1px solid var(--listing-accent, rgba(90, 181, 200, 0.2));
 }
 
 .listing-controls-left,
@@ -53,7 +53,7 @@
 /* View Toggle */
 .view-toggle {
     display: flex;
-    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.4));
+    border: 1px solid var(--listing-accent, rgba(90, 181, 200, 0.4));
     border-radius: 3px;
     overflow: hidden;
 }
@@ -70,7 +70,7 @@
 }
 
 .view-toggle button.active {
-    background: var(--listing-accent-bg, rgba(27, 153, 139, 0.25));
+    background: var(--listing-accent-bg, rgba(90, 181, 200, 0.25));
     color: var(--listing-accent-color, #1b998b);
 }
 
@@ -83,7 +83,7 @@
 .sort-select {
     padding: 0.35rem 0.6rem;
     background: rgba(0, 0, 0, 0.4);
-    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.3));
+    border: 1px solid var(--listing-accent, rgba(90, 181, 200, 0.3));
     border-radius: 3px;
     color: #aaa;
     font-family: 'Courier New', monospace;
@@ -118,8 +118,8 @@
 
 /* Series Badge (Blog) */
 .series-badge {
-    background: rgba(27, 153, 139, 0.12);
-    border: 1px solid rgba(27, 153, 139, 0.35);
+    background: rgba(90, 181, 200, 0.12);
+    border: 1px solid rgba(90, 181, 200, 0.35);
     color: #1b998b;
 }
 
@@ -131,8 +131,8 @@
 }
 
 .type-badge.talk {
-    background: rgba(27, 153, 139, 0.12);
-    border-color: rgba(27, 153, 139, 0.35);
+    background: rgba(90, 181, 200, 0.12);
+    border-color: rgba(90, 181, 200, 0.35);
     color: #1b998b;
 }
 
@@ -229,7 +229,7 @@
 .listing-pagination button {
     padding: 0.4rem 0.75rem;
     background: rgba(0, 0, 0, 0.35);
-    border: 1px solid var(--listing-accent, rgba(27, 153, 139, 0.3));
+    border: 1px solid var(--listing-accent, rgba(90, 181, 200, 0.3));
     border-radius: 3px;
     color: #777;
     font-family: 'Courier New', monospace;
@@ -239,7 +239,7 @@
 }
 
 .listing-pagination button:hover:not(:disabled) {
-    background: var(--listing-accent-bg, rgba(27, 153, 139, 0.15));
+    background: var(--listing-accent-bg, rgba(90, 181, 200, 0.15));
     color: var(--listing-accent-color, #1b998b);
 }
 
@@ -257,9 +257,9 @@
 
 /* Blog-specific accent */
 .blog-listing {
-    --listing-accent: rgba(27, 153, 139, 0.25);
-    --listing-accent-bg: rgba(27, 153, 139, 0.2);
-    --listing-accent-color: #1b998b;
+    --listing-accent: rgba(90, 181, 200, 0.25);
+    --listing-accent-bg: rgba(90, 181, 200, 0.2);
+    --listing-accent-color: #5ab5c8;
 }
 
 /* News-specific accent */
