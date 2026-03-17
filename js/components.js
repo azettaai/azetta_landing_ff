@@ -29,21 +29,21 @@
   function renderHeader() {
     if (!headerEl) return;
 
+    var home = prefix + 'index.html';
     var nav = [
-      { label: 'Overview', href: prefix + 'index.html#hero', id: 'overview' },
-      { label: 'Periodica', href: prefix + 'index.html#periodica', id: 'periodica' },
-      { label: 'Contact', href: prefix + 'index.html#connect', id: 'contact' },
-      { label: 'Manifesto', href: prefix + 'manifesto.html', id: 'manifesto' },
-      { label: 'Team', href: prefix + 'team.html', id: 'team' },
-      { label: 'Blog', href: prefix + 'blogs.html', id: 'blog' },
-      { label: 'Newsroom', href: prefix + 'news.html', id: 'newsroom' }
+      { label: 'Our Mission',  href: home + '#about',    id: 'about'    },
+      { label: 'Our Research', href: home + '#research',  id: 'research' },
+      { label: 'Our Products', href: home + '#products',  id: 'products' },
+      { label: 'Our Team',     href: home + '#team',      id: 'team'     },
+      { label: 'Our Blog',     href: prefix + 'blogs.html', id: 'blog'  }
     ];
 
-    // For index.html, use hash-only links for on-page sections
+    // On the home page, use bare anchors so the scroll is instant
     if (activePage === 'home') {
-      nav[0].href = '#hero';
-      nav[1].href = '#periodica';
-      nav[2].href = '#connect';
+      nav[0].href = '#about';
+      nav[1].href = '#research';
+      nav[2].href = '#products';
+      nav[3].href = '#team';
     }
 
     var navItems = nav.map(function (item) {
@@ -53,11 +53,29 @@
 
     var brandHref = activePage === 'home' ? '#hero' : prefix + 'index.html#hero';
 
+    var logoSvg =
+      '<svg class="nav-logo" viewBox="0 0 100 100" fill="none" aria-hidden="true">' +
+        '<defs><clipPath id="nav-logo-clip"><polygon points="50,4 96,50 50,96 4,50"/></clipPath></defs>' +
+        '<g clip-path="url(#nav-logo-clip)">' +
+          '<line x1="50" y1="41" x2="50" y2="23" stroke="white" stroke-width="3"/>' +
+          '<line x1="59" y1="50" x2="77" y2="50" stroke="white" stroke-width="3"/>' +
+          '<line x1="50" y1="59" x2="50" y2="77" stroke="white" stroke-width="3"/>' +
+          '<line x1="41" y1="50" x2="23" y2="50" stroke="white" stroke-width="3"/>' +
+          '<circle cx="50" cy="50" r="10" stroke="white" stroke-width="3" fill="none"/>' +
+          '<circle cx="50" cy="50" r="4" fill="white"/>' +
+          '<circle cx="50" cy="17" r="7" fill="#e84545"/>' +
+          '<circle cx="83" cy="50" r="7" fill="#e84545"/>' +
+          '<circle cx="50" cy="83" r="7" fill="#e84545"/>' +
+          '<circle cx="17" cy="50" r="7" fill="#e84545"/>' +
+        '</g>' +
+        '<polygon points="50,4 96,50 50,96 4,50" stroke="white" stroke-width="5" fill="none" stroke-linejoin="miter"/>' +
+      '</svg>';
+
     headerEl.outerHTML =
       '<header class="site-header" aria-label="Primary navigation">\n' +
       '  <div class="nav-container">\n' +
       '    <a class="brand-mark" href="' + brandHref + '" aria-label="Azetta.ai home">\n' +
-      '      <span>Azetta.ai</span><span class="brand-accent"></span>\n' +
+      '      ' + logoSvg + '<span class="brand-name">azetta.ai</span>\n' +
       '    </a>\n' +
       '    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">\n' +
       '      <span class="sr-only">Toggle navigation</span>\n' +
@@ -70,7 +88,7 @@
       '        ' + navItems + '\n' +
       '      </ul>\n' +
       '      <div class="nav-cta">\n' +
-      '        <a class="btn btn-primary" href="https://getwaitlist.com/waitlist/32497" target="_blank" rel="noopener">Join Waitlist</a>\n' +
+      '        <a class="btn btn-primary" href="mailto:contact@azetta.ai">Reach Out</a>\n' +
       '      </div>\n' +
       '    </nav>\n' +
       '  </div>\n' +
@@ -93,10 +111,10 @@
       '        <div class="footer-nav-group">\n' +
       '          <h4>Company</h4>\n' +
       '          <ul>\n' +
-      '            <li><a href="' + prefix + 'manifesto.html">Manifesto</a></li>\n' +
-      '            <li><a href="' + prefix + 'team.html">Team</a></li>\n' +
+      '            <li><a href="' + prefix + 'index.html#about">Our Mission</a></li>\n' +
+      '            <li><a href="' + prefix + 'index.html#research">Our Research</a></li>\n' +
+      '            <li><a href="' + prefix + 'index.html#products">Our Products</a></li>\n' +
       '            <li><a href="' + prefix + 'blogs.html">Blog</a></li>\n' +
-      '            <li><a href="' + prefix + 'news.html">Newsroom</a></li>\n' +
       '            <li><a href="mailto:contact@azetta.ai">Contact</a></li>\n' +
       '          </ul>\n' +
       '        </div>\n' +

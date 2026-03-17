@@ -10,7 +10,6 @@
     gtag('js', new Date());
     gtag('config', 'G-C8V5SB2QZY');
 
-    // Enhanced Event Tracking
     document.addEventListener('DOMContentLoaded', function () {
       // Track button clicks
       document.querySelectorAll('.btn, button').forEach(function (btn) {
@@ -72,17 +71,6 @@
           });
         }, seconds * 1000);
       });
-
-      // Track product card interactions
-      document.querySelectorAll('.product-card').forEach(function (card) {
-        card.addEventListener('click', function () {
-          var productName = this.querySelector('h3') ? this.querySelector('h3').textContent.trim() : 'Unknown';
-          gtag('event', 'product_interest', {
-            'event_category': 'products',
-            'event_label': productName
-          });
-        });
-      });
     });
   </script>
 
@@ -91,24 +79,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary Meta Tags -->
-  <title>
-    Azetta.ai - Whitebox AI Systems | Explainable & Physics-Grounded
-    AI
-  </title>
-  <meta name="title" content="Azetta.ai - Whitebox AI Systems | Explainable & Physics-Grounded AI" />
-  <meta name="description"
-    content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone." />
-  <meta name="keywords"
-    content="AI, Artificial Intelligence, Explainable AI, White-box AI, Transparent AI, Physics-inspired AI, Machine Learning, Low-compute AI, Multimodal AI, Safe AI, Azetta" />
+  <title>Azetta.ai — Physics Grounded AI Research Lab</title>
+  <meta name="title" content="Azetta.ai — Physics Grounded AI Research Lab" />
+  <meta name="description" content="The only AI that explains every decision it makes. Building AI that is interpretable, steerable, efficient, and state of the art." />
+  <meta name="keywords" content="AI, Artificial Intelligence, Explainable AI, Physics Grounded AI, Interpretable AI, Machine Learning, ICML 2026, Azetta" />
   <meta name="author" content="Azetta.ai" />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://azetta.ai/" />
-  <meta property="og:title" content="Azetta.ai - Transparent AI Architecture" />
-  <meta property="og:description"
-    content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone." />
+  <meta property="og:title" content="Azetta.ai — Physics Grounded AI Research Lab" />
+  <meta property="og:description" content="The only AI that explains every decision it makes." />
   <meta property="og:image" content="https://azetta.ai/og-image.jpg" />
   <meta property="og:site_name" content="Azetta.ai" />
   <meta property="og:locale" content="en_US" />
@@ -116,9 +98,8 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://azetta.ai/" />
-  <meta name="twitter:title" content="Azetta.ai - Transparent AI Architecture" />
-  <meta name="twitter:description"
-    content="Revolutionary white-box AI architecture built from first principles. Explainable, low-compute, safe, and accessible AI for everyone." />
+  <meta name="twitter:title" content="Azetta.ai — Physics Grounded AI Research Lab" />
+  <meta name="twitter:description" content="The only AI that explains every decision it makes." />
   <meta name="twitter:image" content="https://azetta.ai/twitter-image.jpg" />
   <meta name="twitter:creator" content="@azettaai" />
 
@@ -127,393 +108,1109 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" href="/logo.png" />
-  <link rel="apple-touch-icon" href="/logo.png" />
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <link rel="apple-touch-icon" href="/assets/logo.png" />
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#1b998b" />
 
-  <!-- Preconnect for Performance -->
+  <!-- Preconnect -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
   <!-- Stylesheets -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- MathJax for LaTeX rendering -->
-  <script>
-    MathJax = {
-      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-      svg: { fontCache: 'global' }
-    };
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Azetta.ai",
+      "url": "https://azetta.ai",
+      "logo": "https://azetta.ai/assets/logo.png",
+      "description": "Physics Grounded AI Research Lab",
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://twitter.com/azettaai",
+        "https://linkedin.com/company/azettaai",
+        "https://github.com/azettaai"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "contact@azetta.ai"
+      }
+    }
   </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-
-  <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Azetta.ai",
-        "url": "https://azetta.ai",
-        "logo": "https://azetta.ai/logo.png",
-        "description": "Revolutionary white-box AI architecture built from first principles",
-        "foundingDate": "2024",
-        "sameAs": [
-          "https://twitter.com/azettaai",
-          "https://linkedin.com/company/azettaai",
-          "https://github.com/azettaai"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "Customer Support",
-          "email": "info@azetta.ai"
-        }
-      }
-    </script>
-
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Azetta AI Platform",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Cross-platform",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Azetta.ai",
-          "url": "https://azetta.ai"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "description": "Explainable AI architecture with white-box transparency, low-compute efficiency, and physics-inspired design",
-        "featureList": [
-          "Explainable AI with 100% traceable decisions",
-          "Low-compute efficiency with 10x reduction",
-          "Safe deterministic behavior",
-          "Multilingual support for 100+ languages",
-          "Multimodal unified embedding space"
-        ]
-      }
-    </script>
-
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Azetta.ai",
-        "url": "https://azetta.ai",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://azetta.ai/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      }
-    </script>
 </head>
 
 <body>
   <div id="site-header" data-active="home"></div>
 
   <main>
-    <!-- Hero Section -->
-    <section class="hero" id="hero" aria-label="Hero section with animated background">
+
+    <!-- ═══════════════════════════════════════
+         SECTION 1 — HERO
+         ═══════════════════════════════════════ -->
+    <section class="hero" id="hero" aria-label="Hero section">
       <canvas id="circuit-canvas" aria-hidden="true"></canvas>
 
-      <div class="hero-content">
-        <div class="logo-box" aria-label="Azetta.ai logo">
-          <div class="svg-container">
-            <svg width="512" height="512" viewBox="0 0 512 512" role="img"
-              aria-label="Azetta tech logo with circuit design">
-              <title>Azetta.ai Logo</title>
-              <path fill="#FCFCFC" transform="scale(0.5 0.5)"
-                d="M511.513 171.769C514.089 172.418 540.136 199.44 544.062 203.416L583.687 242.986L753.262 412.478L796.535 455.334C801.942 460.768 811.812 470.142 816.115 475.808C813.287 480.222 802.346 490.027 797.826 494.575L747.936 544.362L581.976 710.245C558.923 733.284 535.372 756.424 512.62 779.701C510.199 779.03 502.181 770.791 499.724 768.379L293.195 562.264L233.352 502.453C227.447 496.46 212.251 481.602 208.052 475.746C210.615 472.312 215.934 467.225 219.125 464.028C226.592 456.569 234.109 449.16 241.678 441.804L306.749 376.916L511.513 171.769ZM380.733 330.515C388.967 340.869 406.707 356.876 416.589 366.728L447.505 397.715C453.894 404.12 460.947 411.437 467.65 417.334L468 386.018C462.056 384.674 457.63 383.284 453.947 377.759C450.933 373.238 449.727 366.148 451.103 360.895C452.357 356.167 455.516 352.171 459.826 349.859C464.469 347.34 469.977 347 474.984 348.584C479.718 350.037 483.678 353.316 485.987 357.697C490.61 366.607 486.298 371.482 484.481 379.454C483.834 382.293 484.291 390.325 484.324 393.66L484.587 418.71C491.913 415.424 495.518 414.639 503.417 413.346C503.328 383.784 503.039 353.141 503.642 323.651C495.875 322.016 488.653 316.23 484.371 309.655C479.863 302.645 478.284 294.148 479.972 285.986C483.476 269.333 498.753 260.199 515.121 261.129C549.955 266.635 553.999 312.354 519.74 323.54C519.393 332.647 519.435 342.447 519.566 351.597C519.861 372.124 519.219 392.975 519.721 413.464C526.628 414.023 532.52 416.298 538.932 418.808C537.832 407.723 539.266 392.898 538.385 381.441C537.821 374.103 533.765 371.848 533.989 365.448C534.171 361.4 535.618 357.51 538.127 354.328C544.524 346.275 557.183 344.513 565.151 351.281C569.027 354.588 571.432 359.298 571.839 364.377C572.258 369.778 570.416 375.111 566.754 379.103C563.208 383.038 559.898 384.423 554.989 385.731C554.768 395.738 554.449 407.123 554.86 417.068C562.204 411.838 575.159 398.367 582.08 391.456L623.064 350.731C628.724 345.123 637.827 335.569 643.424 330.593C632.642 318.883 514.551 199.792 511.269 198.834L411.052 299.738C400.915 309.94 390.973 320.473 380.733 330.515ZM519.633 627.314C528.326 630.106 536.004 634.888 540.162 643.285C552.872 668.95 527.883 697.046 500.77 687.948C473.863 678.919 470.807 641.93 496.51 629.842C498.679 628.819 500.929 628.13 503.216 627.394C503.396 609.588 503.453 591.781 503.389 573.974C503.389 562.829 503.733 548.781 503.016 537.874C495.582 536.367 491.614 535.2 484.448 532.449C484.397 545.102 484.223 557.836 484.434 570.481C484.528 576.102 488.456 579.871 487.97 586.446C486.704 603.555 465.717 611.152 454.424 597.597C451.146 593.635 449.657 588.492 450.311 583.392C451.599 573.112 459.425 568.919 468.158 565.999C468.761 556.224 468.362 543.193 468.315 533.141L415.432 586.778L393.483 608.717C389.625 612.588 384.118 617.866 380.716 621.973L467.98 709.312C482.483 723.774 497.761 738.595 511.9 753.323C526.709 737.7 542.642 722.434 557.912 707.239L628.82 636.451C632.634 632.693 639.643 625.34 643.471 622.148C632.592 610.089 616.55 595.448 604.625 583.706C587.765 566.831 571.058 549.803 554.508 532.623C554.604 542.985 554.455 554.987 554.977 565.19C566.994 569.763 577.366 578.618 570.996 592.817C568.816 597.691 564.749 601.469 559.729 603.286C548.295 607.298 537.844 600.474 534.978 589.294C532.939 581.342 538.182 577.574 538.58 570.079C538.87 557.555 538.416 544.779 538.51 532.242C531.881 535.271 527.314 536.802 520.1 537.848C519.124 542.621 519.515 560.957 519.519 566.982L519.633 627.314ZM587.054 452.343C581.576 451.863 576.111 451.983 570.612 451.999C571.986 457.177 573.559 462.904 574.554 468.135L633.702 468.06C644.688 468.067 657.224 467.775 668.047 468.216C671.406 458.714 675.334 452.099 684.89 447.556C692.667 443.91 701.579 443.523 709.643 446.482C717.824 449.543 724.965 456.382 728.475 464.374C731.542 471.425 731.66 479.41 728.804 486.548C722.052 503.191 702.815 512.581 685.788 505.091C675.94 500.759 671.755 494.062 667.811 484.461L588.805 484.483C584.088 484.434 578.906 484.487 574.231 484.248C573.078 489.616 571.722 494.937 570.165 500.202C575.523 500.703 581.263 500.518 586.669 500.477C607.074 481.936 616.241 499.42 629.8 513.218L664.329 547.67L715.74 548.012C719.614 545.447 729.287 535.603 733.157 531.806C745.266 519.974 757.255 508.021 769.122 495.948C773.301 491.716 785.859 479.771 789.069 475.853C765.012 451.791 742.161 428.229 717.626 404.603C706.456 404.512 695.285 404.481 684.115 404.509C678.028 404.507 670.069 404.285 664.108 404.615L629.162 439.562C615.943 453.008 606.778 470.144 587.054 452.343ZM234.892 475.69C237.702 479.462 242.437 483.803 245.867 487.185L263.244 504.307L291.17 531.975C296.252 537.046 302.124 543.243 307.344 548.029C324.448 548.128 341.552 548.117 358.656 547.995C371.039 536.81 382.46 524.335 394.366 512.66C400.027 507.108 405.509 499.307 412.071 495.059C420.93 489.323 430.503 493.908 436.935 500.643L452.818 500.613L449.722 484.431L379.75 484.366C371.79 484.376 363.57 484.279 355.632 484.433C351.798 494.182 346.419 501.05 336.474 505.281C329.02 508.464 320.6 508.523 313.102 505.444C286.453 494.284 285.314 457.841 313.017 447.211C329.18 441.01 348.185 448.253 354.589 464.811C355.011 465.919 355.421 467.031 355.818 468.149C385.944 467.699 418.747 467.588 448.915 468.03C450.285 462.496 451.825 457.152 453.211 451.691C447.603 452.179 441.759 451.548 435.756 452.06C428.659 458.441 421.013 463.835 411.234 457.195C404.588 452.683 399.53 445.209 393.644 439.743C382.187 428.317 370.88 416.303 359.203 405.139C351.402 404.165 338.571 404.489 330.266 404.49C323.875 404.491 312.874 404.108 306.802 404.505C293.152 416.475 276.988 434.195 263.603 446.966C257.266 453.013 239.66 469.882 234.892 475.69ZM353.303 594.85C358.202 599.526 363.572 605.229 368.282 610.17C386.027 593.674 405.116 573.103 422.445 555.907L447.306 531.233C451.496 527.051 457.772 521.224 461.15 516.571C454.132 516.505 445.752 516.259 438.848 516.652C436.233 522.222 433.128 526.866 427.016 529.218C422.319 531.024 417.083 530.804 412.553 528.612C410.047 527.386 408.418 525.747 406.654 523.647C402.256 526.827 397.922 531.89 393.965 535.701C384.853 544.477 374.906 555.972 365.394 564.101C354.841 564.781 332.136 563.354 323.908 564.79C326.821 568.531 331.523 572.939 334.971 576.38C341.133 582.485 347.244 588.642 353.303 594.85ZM699.628 564.5C691.948 564.357 664.992 564.907 659.769 563.883C655.06 562.959 629.942 536.427 625.713 532.037C622.931 529.112 620.121 526.213 617.284 523.341C603.914 535.189 592.392 531.905 584.506 516.54C577.431 516.463 569.505 516.216 562.51 516.553C565.207 520.88 580.752 535.017 585.731 540.053L621.96 576.524C632.448 587.203 644.225 599.578 655.233 609.575C663.687 601.618 673.502 592.168 681.505 583.763C686.617 578.426 695.204 570 699.628 564.5ZM556.275 594.049C560.922 592.635 563.537 587.717 562.111 583.074C560.685 578.432 555.759 575.83 551.121 577.269C546.5 578.702 543.911 583.604 545.331 588.229C546.752 592.854 551.647 595.457 556.275 594.049ZM426.075 504.41C422.446 503.072 421.37 502.626 417.389 503.125C414.655 504.802 412.55 506.622 411.657 509.883C411.125 511.839 411.422 513.928 412.476 515.658C415.212 520.223 419.274 520.072 423.823 519.944C431 515.87 431.49 510.401 426.075 504.41ZM604.814 449.423C607.991 448.623 610.477 446.151 611.294 442.978C612.111 439.805 611.128 436.439 608.733 434.204C606.337 431.97 602.911 431.223 599.803 432.258C595.238 433.778 592.693 438.636 594.041 443.254C595.39 447.872 600.148 450.597 604.814 449.423ZM471.274 594.169C476.006 592.789 478.712 587.823 477.307 583.099C475.902 578.374 470.922 575.694 466.206 577.124C461.523 578.543 458.867 583.478 460.262 588.168C461.656 592.857 466.578 595.539 471.274 594.169ZM471.264 375.069C474.421 374.205 476.858 371.693 477.626 368.511C478.394 365.329 477.372 361.982 474.957 359.773C472.542 357.563 469.117 356.842 466.016 357.889C463.163 358.853 460.983 361.181 460.208 364.09C459.433 366.999 460.167 370.103 462.163 372.358C464.432 374.922 467.961 375.973 471.264 375.069ZM552.586 357.278C549.381 357.647 546.635 359.741 545.43 362.733C544.225 365.726 544.755 369.139 546.81 371.626C548.865 374.113 552.116 375.276 555.282 374.657C559.921 373.751 563.015 369.342 562.291 364.671C561.566 360.001 557.282 356.737 552.586 357.278ZM460.822 434.943C431.739 404.348 398.701 372.465 368.695 342.573C360.207 349.983 350.536 360.406 342.335 368.427C337.469 373.187 327.069 383.327 323.358 388.273C334.071 388.271 354.176 387.704 364.088 388.561C368.732 391.332 372.14 395.611 376.1 399.135C386.112 408.046 396.119 420.073 405.914 428.754C411.906 423.877 413.534 422.277 421.284 421.756C431.251 422.924 434.323 426.882 439.258 434.961C446.648 435.129 453.428 435.234 460.822 434.943ZM418.651 432.24C415.516 432.908 412.992 435.227 412.062 438.295C411.132 441.362 411.944 444.692 414.18 446.989C416.416 449.285 419.724 450.184 422.815 449.335C427.406 448.075 430.162 443.391 429.036 438.765C427.909 434.14 423.308 431.248 418.651 432.24ZM599.136 503.195C594.618 505.066 592.453 510.231 594.289 514.764C596.124 519.298 601.272 521.503 605.82 519.703C610.419 517.884 612.654 512.665 610.798 508.081C608.942 503.496 603.706 501.303 599.136 503.195ZM601.121 422.032C608.35 422.268 611.963 423.843 617.462 428.739L643.704 402.449C647.16 399 654.692 391.234 658.348 388.658C672.255 387.911 686.549 388.753 700.389 387.989C688.373 372.991 668.753 356.882 655.73 341.971C651.434 345.359 645.219 351.951 641.122 356.011L610.853 386.353C599.886 397.063 588.976 407.829 578.121 418.651C573.01 423.716 566.304 429.769 561.893 435.123C569.397 435.222 576.758 434.935 584.254 434.644C588.73 426.737 591.667 423.463 601.121 422.032ZM505.827 432.71C482.031 435.872 465.249 457.649 468.255 481.465C471.261 505.281 492.928 522.206 516.763 519.356C540.821 516.479 557.937 494.567 554.903 470.529C551.869 446.491 529.845 429.518 505.827 432.71Z" />
-              <path class="logo-glow-center" fill="#FCFCFC" transform="scale(0.5 0.5)"
-                d="M508.211 448.197C523.484 446.355 537.377 457.197 539.302 472.46C541.227 487.723 530.461 501.674 515.209 503.682C499.839 505.706 485.756 494.839 483.816 479.458C481.876 464.077 492.82 450.054 508.211 448.197Z" />
-              <path fill="#D87455" transform="scale(0.5 0.5)"
-                d="M510.312 641.198C519.589 640.578 527.625 647.567 528.297 656.84C528.969 666.113 522.025 674.188 512.756 674.912C503.413 675.642 495.26 668.631 494.582 659.284C493.905 649.937 500.961 641.823 510.312 641.198Z" />
-              <path fill="#D87455" transform="scale(0.5 0.5)"
-                d="M510.054 276.055C519.201 275.248 527.288 281.967 528.173 291.107C529.057 300.247 522.407 308.391 513.274 309.353C504.032 310.326 495.768 303.578 494.873 294.328C493.979 285.077 500.796 276.871 510.054 276.055Z" />
-              <path fill="#D87455" transform="scale(0.5 0.5)"
-                d="M324.255 459.601C333.473 459.315 341.175 466.561 341.451 475.78C341.728 484.999 334.474 492.693 325.255 492.961C316.049 493.228 308.367 485.986 308.091 476.78C307.815 467.574 315.049 459.885 324.255 459.601Z" />
-              <path fill="#D87455" transform="scale(0.5 0.5)"
-                d="M694.942 460.041C703.924 457.821 712.997 463.336 715.16 472.332C717.324 481.327 711.752 490.365 702.744 492.472C693.814 494.561 684.873 489.049 682.729 480.133C680.584 471.217 686.04 462.242 694.942 460.041Z" />
+      <div class="hero-content hero-centered">
+
+        <!-- Logo ↔ Atom morph -->
+        <div class="hero-morph-wrap" aria-hidden="true">
+          <div class="hero-morph-logo">
+            <img class="hero-morph-img" src="assets/logo.png" alt="Azetta logo">
+          </div>
+          <div class="hero-morph-atom">
+            <svg class="hero-morph-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="50" rx="45" ry="18" stroke="#5ab5c8" stroke-width="1" opacity="0.55"/>
+              <ellipse cx="50" cy="50" rx="45" ry="18" stroke="#78c4a4" stroke-width="1" opacity="0.55" transform="rotate(60 50 50)"/>
+              <ellipse cx="50" cy="50" rx="45" ry="18" stroke="#5ab5c8" stroke-width="1" opacity="0.55" transform="rotate(120 50 50)"/>
+              <circle cx="50" cy="50" r="8" fill="#78c4a4" class="nucleus-pulse"/>
+              <circle cx="50" cy="50" r="3.5" fill="#d4f0e4" opacity="0.9"/>
+              <g transform="rotate(0 50 50)"><g class="electron-orbit-1"><circle cx="95" cy="50" r="3.5" fill="#5ab5c8"/></g></g>
+              <g transform="rotate(60 50 50)"><g class="electron-orbit-2"><circle cx="95" cy="50" r="3.5" fill="#78c4a4"/></g></g>
+              <g transform="rotate(120 50 50)"><g class="electron-orbit-3"><circle cx="95" cy="50" r="3.5" fill="#5ab5c8"/></g></g>
             </svg>
           </div>
         </div>
 
-        <h1 class="hero-tagline">The only AI that explains every decision it makes.</h1>
-        <p class="hero-subtitle">Physics Grounded AI</p>
+        <!-- Brand -->
+        <h1 class="hero-brand-title">azetta ai</h1>
+        <p class="hero-pitch">Physics Grounded AI Research Lab.</p>
+        <p class="hero-subtitle">Building AI that is interpretable, steerable, efficient, and state of the art.</p>
 
-        <div class="hero-buttons" role="group" aria-label="Primary actions">
-          <a class="btn btn-primary" href="#connect">Get in Touch</a>
-          <a class="btn btn-outline" href="manifesto.html">Read Manifesto</a>
-          <a class="btn" href="mailto:contact@azetta.ai?subject=Schedule%20a%20briefing">Book Briefing</a>
+      </div>
+
+      <a class="scroll-hint" href="#about" aria-label="Scroll to learn more">
+        <span class="scroll-hint-label">scroll</span>
+        <span class="scroll-hint-chevron"></span>
+      </a>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 2 — OUR MISSION
+         ═══════════════════════════════════════ -->
+    <section class="problem-section" id="about" aria-labelledby="problem-title">
+      <div class="section-shell" style="padding-bottom:0;">
+        <p class="flow-subtitle reveal">// OUR MISSION</p>
+        <h2 id="problem-title" class="flow-title reveal">AI Should Be Safe, Transparent, and Sustainable.</h2>
+      </div>
+      <div class="problem-layout">
+        <div class="problem-text">
+          <blockquote class="dario-quote">
+            <p>"People outside the field are often surprised to learn that we do not understand how our own AI creations work. This lack of understanding is unprecedented in the history of technology."</p>
+            <cite>— Dario Amodei, CEO Anthropic · 2025</cite>
+          </blockquote>
+          <p class="about-lead" style="font-size:0.9rem;">Today's AI is a black box running on brute force. Models grow larger every year, yet no one can explain why they hallucinate, discriminate, or fail; bias lives inside weights beyond our reach and attempts from the Frontier Labs at reverse engineering AI are extremely inefficient. Anthropic itself admits that, to fully understand models using their approaches, they would have to use <strong> much more compute than the total compute needed to train the underlying models.</strong> We belive this happens because the current frontier models are fundamentally opaque, and that a viable, scalable solution needs to go back to the foundations. Our mission is to rebuild AI so that every decision is explainable, every behaviour is correctable, and models are able to improve and scale in much more efficient and smart ways.</p>
+        </div>
+        <div class="problem-viz">
+          <div class="blackbox-demo" id="bb-demo-container">
+            <div class="bb-prompt-wrap">
+              <div class="bb-prompt-row"><span class="bb-io-label">Prompt</span><span class="bb-prompt-text">"the capital of Mexico is"</span></div>
+              <div class="bb-prompt-row"><span class="bb-io-label">Output</span><span class="bb-output-text" id="bb-output"></span><span class="bb-cursor" id="bb-cursor">▋</span></div>
+            </div>
+            <div class="bb-svg-wrap">
+              <svg id="bb-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" width="100%">
+                <g id="bb-edges"></g>
+                <rect x="52" y="1" width="302" height="155" rx="3" fill="rgba(4,3,3,0.88)" stroke="rgba(120,130,160,0.22)" stroke-width="1" stroke-dasharray="4,3"/>
+                <text x="203" y="11" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="rgba(150,160,190,0.22)">· · · more layers above · · ·</text>
+                <text x="203" y="153" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="rgba(150,160,190,0.22)">· · · more layers below · · ·</text>
+                <text x="203" y="82" text-anchor="middle" font-family="'Chakra Petch',monospace" font-size="9" fill="rgba(170,180,210,0.22)" letter-spacing="3" font-weight="700">BLACK BOX</text>
+                <text x="203" y="94" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="5.5" fill="rgba(150,160,190,0.18)">96 layers · 8,192 neurons each</text>
+                <g id="bb-nodes"></g>
+                <text x="28" y="158" text-anchor="middle" font-family="'Chakra Petch',monospace" font-size="5.5" fill="rgba(120,196,164,0.45)">INPUT</text>
+                <text x="203" y="158" text-anchor="middle" font-family="'Chakra Petch',monospace" font-size="5.5" fill="rgba(150,160,190,0.32)">HIDDEN LAYERS (96 total)</text>
+                <text x="378" y="158" text-anchor="middle" font-family="'Chakra Petch',monospace" font-size="5.5" fill="rgba(120,196,164,0.45)">OUTPUT</text>
+              </svg>
+            </div>
+            <div class="bb-polysemantic">
+              <strong class="bb-poly-kicker">The core problem:</strong> Each neuron fires for dozens of unrelated concepts at once — geography, grammar, culture, sentiment all entangled. This <em>superposition</em> makes models opaque by construction. You cannot audit what you cannot see, and you cannot fix what you cannot audit.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risk grid + Why This Matters -->
+      <div class="mission-bottom reveal">
+        <div class="section-shell">
+          <div class="mission-bottom-row">
+          <div class="mission-risks">
+          <p class="mission-sub-header">&#9654; Every Major AI Risk Traces Back to Interpretability</p>
+          <div class="risk-grid">
+
+            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Alignment — click to reveal detail">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <svg class="flip-icon" style="color:#e84545;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>
+                  <p class="flip-name">Alignment</p>
+                  <span class="flip-hint">click to reveal</span>
+                </div>
+                <div class="flip-back">
+                  <p>Harmful AI incidents hit <strong>233 in 2024 — +56% YoY</strong> (Stanford HAI). We cannot verify what a model is optimising for — goals appear aligned but remain uninspectable.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Hallucinations — click to reveal detail">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <svg class="flip-icon" style="color:#e8a02a;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <p class="flip-name">Hallucinations</p>
+                  <span class="flip-hint">click to reveal</span>
+                </div>
+                <div class="flip-back">
+                  <p>LLMs hallucinate on <strong>75%+ of legal queries.</strong> We can detect errors in outputs — without interpretability, we cannot stop them at the source.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Bias and Fairness — click to reveal detail">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <svg class="flip-icon" style="color:#a050ff;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="5 8 12 5 19 8"/><path d="M5 8l-2 5a5 5 0 0 0 10 0l-2-5"/><path d="M11 18.5a5 5 0 0 0 10 0l-2-5"/></svg>
+                  <p class="flip-name">Bias &amp; Fairness</p>
+                  <span class="flip-hint">click to reveal</span>
+                </div>
+                <div class="flip-back">
+                  <p>LLMs preferred white-sounding names <strong>85% of the time</strong> in hiring simulations. EEOC's first AI bias settlement: <strong>$325K.</strong> Bias lives inside weights — beyond our reach.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Privacy Leakage — click to reveal detail">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <svg class="flip-icon" style="color:#38c9c4;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <p class="flip-name">Privacy Leakage</p>
+                  <span class="flip-hint">click to reveal</span>
+                </div>
+                <div class="flip-back">
+                  <p>Researchers extracted PII from ChatGPT for <strong>~$200.</strong> <strong>5%+ of outputs</strong> are verbatim training copies. No mechanism exists to audit what a model retained.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="IP Exposure — click to reveal detail">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <svg class="flip-icon" style="color:#e8c42a;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/><line x1="12" y1="13" x2="12" y2="17"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                  <p class="flip-name">IP Exposure</p>
+                  <span class="flip-hint">click to reveal</span>
+                </div>
+                <div class="flip-back">
+                  <p>Courts hold companies liable for AI outputs (Air Canada, 2024). Without interpretability, IP exposure is <strong>unquantifiable</strong> — we cannot trace which training data shaped a model's behaviour.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Harmful Use — click to reveal detail">
+              <div class="flip-inner">
+                <div class="flip-front">
+                  <svg class="flip-icon" style="color:#e84587;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+                  <p class="flip-name">Harmful Use</p>
+                  <span class="flip-hint">click to reveal</span>
+                </div>
+                <div class="flip-back">
+                  <p>EU AI Act mandates human oversight for high-risk AI — non-compliance: up to <strong>6% of global revenue.</strong> Safety filters are surface patches on opaque systems.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          </div><!-- /mission-risks -->
+          <div class="why-box">
+            <p class="why-box-header">&#9654; Why This Matters</p>
+            <div class="why-matters-grid">
+
+              <div class="why-panel">
+                <span class="why-num">01</span>
+                <p class="why-title">The Ceiling on Progress</p>
+                <p class="why-desc">Model self-improvement requires interpretability. <strong>Without it, we cannot guide models reliably or safely.</strong></p>
+              </div>
+
+              <div class="why-panel">
+                <span class="why-num">02</span>
+                <p class="why-title">Regulated Industries Are Locked Out</p>
+                <p class="why-desc">Healthcare, finance, legal, and defence <strong>cannot deploy black-box AI</strong> where decisions must be audited or legally defended.</p>
+              </div>
+
+              <div class="why-panel">
+                <span class="why-num">03</span>
+                <p class="why-title">Full Automation Requires Control</p>
+                <p class="why-desc"><strong>You cannot delegate what you cannot inspect</strong> — and today, we cannot inspect these systems.</p>
+              </div>
+
+            </div>
+          </div><!-- /why-box -->
+          </div><!-- /mission-bottom-row -->
         </div>
       </div>
     </section>
 
-    <!-- Periodica Section -->
-    <section class="periodica-section" id="periodica" aria-labelledby="periodica-title">
+
+    <!-- ═══════════════════════════════════════
+         SECTION 3 — OUR APPROACH
+         ═══════════════════════════════════════ -->
+    <section class="approach-section" id="approach" aria-labelledby="approach-title">
+      <div class="section-shell" style="padding-bottom:0;">
+        <p class="flow-subtitle reveal">// OUR APPROACH</p>
+        <h2 id="approach-title" class="flow-title reveal">Reimagining AI Through a Physics Lens.</h2>
+      </div>
+      <div class="approach-layout">
+        <div class="approach-viz">
+          <div class="pg-demo-wrap" id="pg-demo-container">
+            <div class="pg-demo-header">
+              <span class="pg-demo-kicker">⬡ GLASS BOX</span>
+              <span class="pg-phase-label" id="pg-phase-label">Tracing Neuron Activation</span>
+              <span class="pg-icml">ICML 2026</span>
+            </div>
+            <div class="bb-prompt-wrap">
+              <div class="bb-prompt-row"><span class="bb-io-label">Prompt</span><span class="bb-prompt-text">"the capital of Mexico is"</span></div>
+              <div class="bb-prompt-row"><span class="bb-io-label">Output</span><span class="bb-output-text" id="pg-output"></span><span class="bb-cursor" id="pg-cursor">▋</span></div>
+            </div>
+            <svg id="pg-svg" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" width="100%">
+              <g id="pg-edges"></g>
+              <rect x="52" y="1" width="302" height="155" rx="3" fill="rgba(90,181,200,0.04)" stroke="rgba(90,181,200,0.28)" stroke-width="1" stroke-dasharray="4,3"/>
+              <text x="203" y="11" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="6.5" fill="rgba(90,181,200,0.22)">· · · interpretable by design · · ·</text>
+              <path id="pg-manifold-path" fill="none" stroke="rgba(90,181,200,0)" stroke-width="2" stroke-dasharray="5,4"/>
+              <g id="pg-nodes"></g>
+              <g id="pg-concept-labels"></g>
+              <text x="28" y="158" text-anchor="middle" font-family="'Chakra Petch',monospace" font-size="5.5" fill="rgba(120,196,164,0.45)">INPUT</text>
+              <text x="200" y="158" text-anchor="middle" font-family="'Chakra Petch',monospace" font-size="5.5" fill="rgba(90,181,200,0.35)">INTERPRETABLE LAYERS (3)</text>
+              <text x="378" y="158" text-anchor="middle" font-family="'Chakra Petch',monospace" font-size="5.5" fill="rgba(120,196,164,0.45)">OUTPUT</text>
+            </svg>
+            <div class="pg-trail" id="pg-trail"></div>
+          </div>
+        </div>
+        <div class="approach-text">
+          <p class="about-lead">We believe information has its own physics. Reimagining AI through this lens reveals a fundamental mathematical structure — and building based on it gives us models that are interpretable, steerable, efficient and performant -- by design.</p>
+          <dl class="pillar-list">
+            <div class="pillar-item"><dt>Interpretable</dt><dd>One neuron, one concept. Full audit trail from input to output.</dd></div>
+            <div class="pillar-item"><dt>Steerable</dt><dd>Target specific neurons. Correct behaviour directly — no retraining.</dd></div>
+            <div class="pillar-item"><dt>Efficient</dt><dd>10× fewer parameters, 90% faster training.</dd></div>
+            <div class="pillar-item"><dt>Performant</dt><dd>Performance matches or exceeds State of the Art.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 5 — OUR RESEARCH
+         ═══════════════════════════════════════ -->
+    <section class="flywheel-section" id="research" aria-labelledby="research-title">
+      <div class="section-shell">
+        <p class="flow-subtitle reveal">// OUR RESEARCH</p>
+        <h2 id="research-title" class="flow-title reveal">Intelligence Has a Fundamental Structure. We Find It.</h2>
+
+        <!-- YAT split layout: copy left, canvas right -->
+        <div class="yat-container">
+
+          <div class="yat-content reveal">
+
+            <div>
+              <p class="yat-title">YAT KERNEL</p>
+              <p class="yat-subtitle">Yet Another Transform — a physics-grounded similarity metric that creates gravity wells in representation space</p>
+            </div>
+
+            <div class="yat-formula-box">
+              <div>
+                <span class="formula-label">// Core metric — powers NoMoreDelulu &amp; SLAY Attention</span>
+                <p class="yat-formula">ⵟ(x, w) = (x·w)² / ‖x − w‖²</p>
+              </div>
+            </div>
+
+            <p class="yat-description">Unlike dot products and cosines, the YAT kernel measures how much a weight vector acts as an attractor for an input. Each neuron bends representation space around itself — creating distinct, non-overlapping gravity wells. The result: monosemantic neurons by design, interpretability without any post-hoc approximation.</p>
+
+
+          </div>
+
+          <div class="yat-viz-wrapper reveal">
+            <div class="yat-viz-header">
+              <span class="viz-label">ⵟ — YAT Kernel Manifold</span>
+              <span class="viz-hint">click to add neurons · up to 5</span>
+            </div>
+            <canvas id="yat-viz-canvas" class="yat-canvas" aria-label="Interactive YAT Kernel manifold — each neuron bends representation space like a gravity well"></canvas>
+          </div>
+
+        </div>
+
+        <!-- Paper cards -->
+        <div class="paper-grid">
+          <a class="paper-card reveal" href="https://openreview.net/pdf?id=1AFenZBIcW" target="_blank" rel="noopener">
+            <span class="paper-venue">ICML 2026 · OpenReview</span>
+            <h3 class="paper-title">NoMoreDelulu</h3>
+            <p class="paper-desc">SOTA performance at 10× fewer parameters. Foundational research for Physics Grounded AI.</p>
+            <span class="paper-link">Read paper →</span>
+          </a>
+          <a class="paper-card reveal" href="https://arxiv.org/pdf/2602.04915" target="_blank" rel="noopener">
+            <span class="paper-venue">ICML 2026 · arXiv</span>
+            <h3 class="paper-title">SLAY Attention</h3>
+            <p class="paper-desc">Linear-time attention mechanism that outperforms standard softmax attention.</p>
+            <span class="paper-link">Read paper →</span>
+          </a>
+        </div>
+
+        <!-- Badge + view all -->
+        <div style="display:flex;align-items:center;gap:1.5rem;margin-top:2rem;" class="reveal">
+          <span class="highlight-badge">2 PAPERS SUBMITTED</span>
+          <a href="research.html" style="color:var(--primary);font-family:var(--font-primary);font-size:0.8rem;letter-spacing:0.05em;text-decoration:none;">
+            View all research →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 6 — OUR PRODUCTS
+         ═══════════════════════════════════════ -->
+    <section class="periodica-section" id="products" aria-labelledby="products-title">
+      <div class="section-shell" style="padding-bottom:0;">
+        <p class="flow-subtitle reveal">// OUR PRODUCTS</p>
+        <h2 id="products-title" class="flow-title reveal">We Build Glass Box Models + the Tools to Understand them.</h2>
+        <p class="about-lead reveal" style="max-width:800px;margin-bottom:3rem;">
+          As we establish and grow the field of Physics Grounded AI, we also build products that help researchers, engineers and enterprises have access to our research findings seamlessly, safely and ready to scale.
+        </p>
+      </div>
+
+      <!-- Periodica spotlight -->
       <div class="periodica-grid">
-        <div class="periodica-content">
-          <h2 id="periodica-title" class="periodica-title">PERIODICA</h2>
-          <p class="periodica-subtitle">// intervene &middot; audit &middot; explain</p>
+        <div class="periodica-content reveal">
+          <h2 class="periodica-title">PERIODICA</h2>
+          <p class="periodica-subtitle">// The first MLOps platform built for interpretability</p>
 
           <p class="periodica-desc">
-            Train with full visibility. Intervene mid-run. Audit every weight. No black boxes, ever.
+            Upload any AI model — Periodica maps every neuron to a concept and lets you steer behaviour directly. No retraining. No black boxes.
           </p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.25rem 0;">
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">Hallucinations</span>
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">Bias</span>
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">Sycophancy</span>
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">Privacy Leakage</span>
+          </div>
 
           <div class="periodica-actions">
-            <a class="btn btn-outline" href="#connect">Get in Touch</a>
+            <a class="btn btn-primary" href="mailto:contact@azetta.ai">Get Early Access</a>
           </div>
         </div>
 
-        <div class="periodica-viz-wrapper">
-          <div class="periodica-viz-header">
-            <span class="viz-label">// training loop</span>
-            <span class="viz-hint">hover to intervene</span>
+        <div id="periodica-demo" class="pd-demo reveal">
+
+          <!-- Premium status banner -->
+          <div class="pd-premium-banner" id="pd-premium-banner" style="display:none;">
+            <span class="pd-premium-star">✦</span> PERIODICA PREMIUM &nbsp;—&nbsp; ACTIVE
           </div>
-          <canvas id="periodica-canvas" class="periodica-canvas"></canvas>
+
+          <!-- Screen 0: Splash -->
+          <div class="pd-screen pd-active" id="pd-splash">
+            <div class="pd-splash-inner">
+              <div class="pd-splash-title">Periodica</div>
+              <div class="pd-splash-sub">Full AI Model Interpretability Platform</div>
+              <button class="pd-cta" id="pd-explore-btn">Explore Demo ›</button>
+            </div>
+          </div>
+
+          <!-- Screen 1: Upload -->
+          <div class="pd-screen" id="pd-upload">
+            <div class="pd-upload-inner">
+              <svg class="pd-upload-svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              <p class="pd-upload-title">Drop your model or pick a demo</p>
+              <p class="pd-upload-sub">PyTorch &nbsp;·&nbsp; TensorFlow &nbsp;·&nbsp; ONNX &nbsp;·&nbsp; HuggingFace</p>
+              <div class="pd-chips">
+                <span class="pd-chip" data-model="GPT-J-6B">GPT-J-6B</span>
+                <span class="pd-chip pd-chip-sel" data-model="Llama-3-8B">Llama-3-8B</span>
+                <span class="pd-chip" data-model="Mistral-7B">Mistral-7B</span>
+              </div>
+              <button class="pd-cta" id="pd-start-btn">Analyze with Periodica ›</button>
+            </div>
+          </div>
+
+          <!-- Screen 2: Scan -->
+          <div class="pd-screen" id="pd-scan">
+            <div class="pd-scan-inner">
+              <div class="pd-scan-heading">Periodica is mapping <span id="pd-scan-model-name" class="pd-green">Llama-3-8B</span></div>
+              <div class="pd-scan-track"><div id="pd-scan-fill" class="pd-scan-fill"></div></div>
+              <div id="pd-scan-phase" class="pd-scan-phase">Tokenizing architecture…</div>
+              <div class="pd-scan-count"><span id="pd-n-count">0</span> neurons analyzed</div>
+            </div>
+          </div>
+
+          <!-- Screen 3: Map + Detail -->
+          <div class="pd-screen" id="pd-main">
+            <!-- Left: Neuron Map -->
+            <div class="pd-map-col">
+              <div class="pd-map-hdr">
+                <span class="pd-map-chip" id="pd-map-model">Llama-3-8B</span>
+                <span class="pd-map-meta"><span style="color:#e84545;" id="pd-flag-count">4 flags</span> &nbsp;·&nbsp; <span style="color:var(--secondary);">8,192</span> neurons mapped</span>
+              </div>
+              <div class="pd-search-row">
+                <input type="text" class="pd-search-input" id="pd-search-input" placeholder='Search for a concept… e.g. "IP-protected data"' />
+                <button class="pd-search-btn" id="pd-search-btn">Search</button>
+              </div>
+              <div id="pd-map" class="pd-map"></div>
+              <div class="pd-legend">
+                <span class="pd-leg"><span class="pd-ldot" style="background:#e84545;box-shadow:0 0 4px #e84545;"></span>Sycophancy</span>
+                <span class="pd-leg"><span class="pd-ldot" style="background:#e8a02a;box-shadow:0 0 4px #e8a02a;"></span>Hallucination</span>
+                <span class="pd-leg"><span class="pd-ldot" style="background:#a050ff;box-shadow:0 0 4px #a050ff;"></span>PII</span>
+                <span class="pd-leg"><span class="pd-ldot" style="background:#e84587;box-shadow:0 0 4px #e84587;"></span>Bias</span>
+                <span class="pd-leg" id="pd-leg-ip" style="display:none;"><span class="pd-ldot" style="background:#e8c42a;box-shadow:0 0 4px #e8c42a;"></span>IP Match</span>
+                <span class="pd-leg"><span class="pd-ldot pd-ldot-ok"></span>Healthy</span>
+              </div>
+            </div>
+
+            <!-- Right: Detail Panel -->
+            <div class="pd-detail-col" id="pd-detail-col">
+              <div id="pd-flags-view" class="pd-flags-view">
+                <p class="pd-detail-hint">← Click a flagged neuron or use Search to probe any concept</p>
+                <div id="pd-flag-list"></div>
+              </div>
+              <div id="pd-neuron-view" class="pd-neuron-view"></div>
+              <div id="pd-search-view" class="pd-search-view"></div>
+            </div>
+          </div>
+
+          <!-- Paywall Modal -->
+          <div class="pd-paywall" id="pd-paywall">
+            <div class="pd-pw-card" id="pd-pw-card"></div>
+          </div>
+
+        </div><!-- /pd-demo -->
+      </div><!-- /periodica-grid -->
+
+      <!-- Aether Models -->
+      <div class="aether-grid reveal">
+
+        <!-- LEFT: comparison table -->
+        <div class="aether-compare">
+          <div class="ac-header">
+            <div class="ac-metric-spacer"></div>
+            <div class="ac-col-label ac-sota-label">SOTA Models</div>
+            <div class="ac-col-label ac-aether-label">Aether Models</div>
+          </div>
+
+          <div class="ac-row">
+            <div class="ac-metric-name">Size</div>
+            <div class="ac-sota-cell">
+              <span class="ac-val">~70B</span>
+              <span class="ac-sub">avg. parameters</span>
+              <div class="ac-bar-wrap"><div class="ac-bar ac-bar-sota" style="--w:100%;"></div></div>
+            </div>
+            <div class="ac-aether-cell">
+              <span class="ac-val ac-good">~7B</span>
+              <span class="ac-sub ac-good">10× smaller</span>
+              <div class="ac-bar-wrap"><div class="ac-bar ac-bar-aether" style="--w:10%;"></div></div>
+            </div>
+          </div>
+
+          <div class="ac-row">
+            <div class="ac-metric-name">Performance</div>
+            <div class="ac-sota-cell">
+              <span class="ac-val">SOTA</span>
+              <div class="ac-bar-wrap"><div class="ac-bar ac-bar-sota" style="--w:87%;"></div></div>
+            </div>
+            <div class="ac-aether-cell">
+              <span class="ac-val ac-good">SOTA+</span>
+              <div class="ac-bar-wrap"><div class="ac-bar ac-bar-aether" style="--w:95%;"></div></div>
+            </div>
+          </div>
+
+          <div class="ac-row">
+            <div class="ac-metric-name">Interpretability</div>
+            <div class="ac-sota-cell ac-cell-bool">
+              <span class="ac-cross">✗</span>
+              <span class="ac-sub">black box</span>
+            </div>
+            <div class="ac-aether-cell ac-cell-bool">
+              <span class="ac-check">✓</span>
+              <span class="ac-sub ac-good">fully interpretable</span>
+            </div>
+          </div>
+
+          <div class="ac-row">
+            <div class="ac-metric-name">Steerability</div>
+            <div class="ac-sota-cell ac-cell-bool">
+              <span class="ac-cross">✗</span>
+              <span class="ac-sub">trial and error + retraining</span>
+            </div>
+            <div class="ac-aether-cell ac-cell-bool">
+              <span class="ac-check">✓</span>
+              <span class="ac-sub ac-good">targeted steering, no retraining</span>
+            </div>
+          </div>
         </div>
+
+        <!-- RIGHT: content, right-aligned -->
+        <div class="aether-content">
+          <h2 class="aether-title">Aether Models</h2>
+          <p class="periodica-subtitle">// Fully interpretable SOTA models, available via API</p>
+          <p class="periodica-desc">Aether models are Physics Grounded AI in production. Every neuron maps to one concept. Every decision carries a full audit trail. Better performance, a fraction of the cost and 10× fewer parameters than current SOTA models.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.25rem 0;justify-content:flex-end;">
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">Fully Interpretable</span>
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">10× Smaller</span>
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">Lower Price</span>
+            <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">SOTA Performance</span>
+          </div>
+          <div class="periodica-actions" style="justify-content:flex-end;">
+            <a class="btn btn-primary" href="mailto:contact@azetta.ai">Sign up for Waitlist</a>
+          </div>
+        </div>
+
       </div>
+
     </section>
 
-    <!-- YAT Product Section -->
-    <section class="yat-section" id="yat-core" aria-labelledby="yat-title">
-      <div class="yat-container">
-        <div class="yat-content">
-          <h2 id="yat-title" class="yat-title">YAT_KERNEL</h2>
-          <p class="yat-subtitle">// One neuron. One concept. Zero guesswork.</p>
 
-          <div class="yat-formula-box">
-            <div class="yat-formula">$$ⵟ(x,w) = \frac{(x \cdot w)^2}{\|x - w\|^2 + \varepsilon}$$</div>
-          </div>
-
-          <p class="yat-description">
-            Information has its own physics. YAT makes neurons monosemantic by design — each encodes exactly one concept, fully auditable from input to output.
-          </p>
-
-          <div class="yat-actions">
-            <a href="blogs/duality-of-information.html" class="btn btn-outline">Read &lt;duality_of_information&gt;</a>
-            <a href="blogs/self-organization.html" class="btn btn-ghost">Read &lt;self_organization&gt;</a>
-          </div>
-        </div>
-
-        <div class="yat-viz-wrapper">
-          <div class="yat-viz-header">
-            <span class="viz-label">// YAT Manifold</span>
-            <span class="viz-hint">Click to add neurons</span>
-          </div>
-          <canvas id="yat-viz-canvas" class="yat-canvas"></canvas>
-        </div>
-      </div>
-    </section>
-
-    <!-- Open Source Section -->
-    <section class="open-source" id="open-source" aria-labelledby="open-source-title">
+    <!-- ═══════════════════════════════════════
+         SECTION 4 — WHO WE ARE: TEAM
+         ═══════════════════════════════════════ -->
+    <section class="about-section" id="team" aria-labelledby="team-title" style="padding-top:3rem;">
       <div class="section-shell">
-        <h2 id="open-source-title" class="flow-title">OPEN_CORE</h2>
-        <p class="flow-subtitle">// Open source. Physics grounded. Peer-reviewed.</p>
 
-        <div class="package-showcase">
-          <div class="package-card">
-            <!-- Animated corner accents -->
-            <div class="card-corner card-corner-tl"></div>
-            <div class="card-corner card-corner-br"></div>
+        <p class="flow-subtitle reveal">// WHO WE ARE</p>
+        <h2 id="team-title" class="flow-title reveal">The Founding Team.</h2>
+        <p class="about-lead reveal" style="max-width:800px;">Mathematical rigour, entrepreneurial experience, and product acumen.</p>
 
-            <div class="package-header">
-              <div class="package-icon-wrapper">
-                <svg class="package-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path
-                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                  </path>
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                </svg>
-                <span class="package-pulse"></span>
-              </div>
-              <div class="package-title-group">
-                <h3>nmn</h3>
-                <div class="package-badges">
-                  <span class="package-badge">PyPI</span>
-                  <span class="package-badge badge-version" id="pypi-version">v0.x</span>
-                </div>
-              </div>
+        <div class="founders-grid">
+
+          <!-- Taha Bouhsine — CEO -->
+          <div class="founder-card reveal" tabindex="0"
+            data-name="Taha Bouhsine" data-role="Co-Founder &amp; CEO" data-img="assets/taha.jpg"
+            data-bio="Mathematician and architect of the Physics Grounded AI framework. Authored the core interpretability methodology now under ICML 2026 review."
+            data-linkedin="#" data-twitter="#" data-github="#">
+            <div class="founder-avatar">
+              <img src="assets/taha.jpg" alt="Taha Bouhsine">
             </div>
-
-            <p class="package-desc">
-              Our core neural modeling library—built for transparency, efficiency, and first-principles AI.
-              Production-ready with a growing community of researchers and engineers.
-            </p>
-
-            <div class="package-stats">
-              <div class="stat">
-                <div class="stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                  </svg>
-                </div>
-                <span class="stat-value" id="pypi-downloads">--</span>
-                <span class="stat-label">Downloads</span>
-              </div>
-              <div class="stat">
-                <div class="stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon
-                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                    </polygon>
-                  </svg>
-                </div>
-                <span class="stat-value" id="github-stars">--</span>
-                <span class="stat-label">Stars</span>
-              </div>
-              <div class="stat">
-                <div class="stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="18" r="3"></circle>
-                    <circle cx="6" cy="6" r="3"></circle>
-                    <circle cx="18" cy="6" r="3"></circle>
-                    <path d="M18 9a9 9 0 0 1-9 9"></path>
-                    <path d="M6 9a9 9 0 0 0 9 9"></path>
-                  </svg>
-                </div>
-                <span class="stat-value" id="github-forks">--</span>
-                <span class="stat-label">Forks</span>
-              </div>
+            <h3 class="founder-name">Taha Bouhsine</h3>
+            <p class="founder-role">Co-Founder &amp; CEO</p>
+            <div class="founder-tags">
+              <span class="founder-tag">GOOGLE DEV</span>
+              <span class="founder-tag">MATHEMATICIAN</span>
             </div>
-
-            <div class="package-install"
-              onclick="navigator.clipboard.writeText('pip install nmn').then(() => this.classList.add('copied'))">
-              <span class="install-prompt">$</span>
-              <code>pip install nmn</code>
-              <button class="copy-btn" aria-label="Copy to clipboard">
-                <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-              </button>
-            </div>
-
-            <div class="package-actions">
-              <a class="btn btn-primary" href="https://github.com/mlnomadpy/nmn" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-                View on GitHub
+            <p class="founder-bio">Architect of the Physics Grounded AI framework. Published AI researcher and Google Developer Expert. Authored core Physics-grounded AI methodology, now under ICML 2026 review.</p>
+            <div class="founder-socials">
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
-              <a class="btn btn-outline" href="https://pypi.org/project/nmn/" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                  <path
-                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                  </path>
-                </svg>
-                PyPI Package
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Douglas Seo — CTO -->
+          <div class="founder-card reveal" tabindex="0"
+            data-name="Douglas Seo" data-role="Co-Founder &amp; CTO" data-img="assets/doug.jpg"
+            data-bio="Third-time founder. Built and scaled two previous ventures through the Founders Inc. portfolio network. Deep enterprise GTM experience."
+            data-linkedin="#" data-twitter="#" data-github="#">
+            <div class="founder-avatar">
+              <img src="assets/doug.jpg" alt="Douglas Seo">
+            </div>
+            <h3 class="founder-name">Douglas Seo</h3>
+            <p class="founder-role">Co-Founder &amp; CTO</p>
+            <div class="founder-tags">
+              <span class="founder-tag">FOUNDERS INC</span>
+              <span class="founder-tag">2× FOUNDER</span>
+              <span class="founder-tag">BERKELEY CS</span>
+            </div>
+            <p class="founder-bio">Second-time founder. Built and scaled two previous ventures, the latest of which was part of the Founders Inc. portfolio network. Deep product engineering experience.</p>
+            <div class="founder-socials">
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Jose Miguel Luna — CPO -->
+          <div class="founder-card reveal" tabindex="0"
+            data-name="Jose Miguel Luna" data-role="Co-Founder &amp; CPO" data-img="assets/jose.jpg"
+            data-bio="Ex-Apple Product Leader. Shipped AI/ML features to hundreds of millions of users. Columbia MBA + MS in AI/ML."
+            data-linkedin="#" data-twitter="#" data-github="#">
+            <div class="founder-avatar">
+              <img src="assets/jose.jpg" alt="Jose Miguel Luna">
+            </div>
+            <h3 class="founder-name">Jose Miguel Luna</h3>
+            <p class="founder-role">Co-Founder &amp; CPO</p>
+            <div class="founder-tags">
+              <span class="founder-tag">EX-APPLE</span>
+              <span class="founder-tag">MBA + MS AI/ML</span>
+            </div>
+            <p class="founder-bio">Ex-Apple Engineering Product Manager. Led Product, Data and Tech teams at YC-backed startup. Has shipped AI/ML features to millions of users. Schwarzman Scholar and Columbia MBA + MS in AI/ML.</p>
+            <div class="founder-socials">
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div><!-- /founders-grid -->
+
+        <!-- Founder Modal -->
+        <div class="modal-overlay" id="founder-modal">
+          <div class="modal-card">
+            <button class="modal-close" aria-label="Close">&times;</button>
+            <div class="modal-avatar"><img id="modal-img" src="" alt=""></div>
+            <h2 class="modal-name" id="modal-name"></h2>
+            <p class="modal-role" id="modal-role"></p>
+            <p class="modal-bio" id="modal-bio"></p>
+            <div class="modal-socials">
+              <a id="modal-linkedin" href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a id="modal-twitter" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
               </a>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- Call to Action Section -->
+
+    <!-- ═══════════════════════════════════════
+         SECTION 7 — CTA / CONNECT
+         ═══════════════════════════════════════ -->
     <section class="cta-section" id="connect" aria-labelledby="cta-title">
       <div class="cta-box">
         <h2 id="cta-title" class="cta-title">
-          BUILD ON GLASS.<br />NOT GUESSWORK.
+          Interested? Reach out!
         </h2>
         <p class="cta-subtitle">
-          Every decision traceable. Zero post-hoc tools. ICML 2026.
+          We are looking for researchers, engineers, investors and partners who want to build safe AI with us. If that sounds like you, shoot us an email!
         </p>
         <nav class="cta-buttons" aria-label="Call to action buttons">
-          <a class="btn btn-primary" aria-label="Contact Us" href="mailto:contact@azetta.ai">Contact Us</a>
-          <a class="btn" aria-label="Read our whitepaper" href="https://azetta.ai/assets/nomodelulu.pdf" target="_blank"
-            rel="noopener">Read
-            Whitepaper</a>
+          <a class="btn btn-primary" href="mailto:contact@azetta.ai" aria-label="Get in Touch">Get in touch</a>
         </nav>
       </div>
     </section>
+
   </main>
 
   <div id="site-footer"></div>
 
-  <!-- External Scripts -->
+  <!-- Scripts -->
   <script src="js/components.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
   <script src="main.js" defer></script>
-  <script src="js/yat-manifold.js" defer></script>
-  <script src="js/periodica-viz.js" defer></script>
+  <script src="js/periodica-demo.js" defer></script>
 
-  <!-- Package Stats Script -->
+  <!-- Neural network demo animations -->
   <script>
     (function () {
-      // Format large numbers (e.g., 10500 -> "10.5K")
-      function formatNumber(num) {
-        if (num >= 1000000) {
-          return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-        }
-        if (num >= 1000) {
-          return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-        }
-        return num.toString();
+      'use strict';
+
+      // ── Black-Box Demo ─────────────────────────────────────────────────
+      var BB_NET = [
+        { x: 28,  ys: [28, 56, 84, 112],                       type: 'io'     },
+        { x: 88,  ys: [12, 33, 54, 75, 96, 117, 138],          type: 'hidden' },
+        { x: 148, ys: [12, 33, 54, 75, 96, 117, 138],          type: 'hidden' },
+        { x: 208, ys: [12, 33, 54, 75, 96, 117, 138],          type: 'hidden' },
+        { x: 268, ys: [12, 33, 54, 75, 96, 117, 138],          type: 'hidden' },
+        { x: 328, ys: [12, 33, 54, 75, 96, 117, 138],          type: 'hidden' },
+        { x: 378, ys: [42, 80, 118],                           type: 'io'     },
+      ];
+      var bbTimers = [], bbSvgBuilt = false;
+
+      function bbKillTimers() { bbTimers.forEach(function(t){clearTimeout(t);}); bbTimers = []; }
+      function bbDelay(fn, ms) { bbTimers.push(setTimeout(fn, ms)); }
+
+      function bbBuildSVG() {
+        var edgesG = document.getElementById('bb-edges');
+        var nodesG = document.getElementById('bb-nodes');
+        if (!edgesG || !nodesG) return;
+        var NS = 'http://www.w3.org/2000/svg';
+        BB_NET.forEach(function(layer, li) {
+          if (li >= BB_NET.length - 1) return;
+          var next = BB_NET[li + 1];
+          layer.ys.forEach(function(y1, i) {
+            next.ys.forEach(function(y2, j) {
+              var ln = document.createElementNS(NS, 'line');
+              ln.setAttribute('x1', layer.x); ln.setAttribute('y1', y1);
+              ln.setAttribute('x2', next.x);  ln.setAttribute('y2', y2);
+              ln.setAttribute('stroke', 'rgba(100,120,160,0.06)');
+              ln.setAttribute('stroke-width', '0.55');
+              ln.dataset.from = li + '-' + i;
+              ln.dataset.to   = (li + 1) + '-' + j;
+              ln.classList.add('bb-edge');
+              edgesG.appendChild(ln);
+            });
+          });
+        });
+        BB_NET.forEach(function(layer, li) {
+          layer.ys.forEach(function(y, ni) {
+            var isH = layer.type === 'hidden';
+            var c = document.createElementNS(NS, 'circle');
+            c.setAttribute('cx', layer.x); c.setAttribute('cy', y);
+            c.setAttribute('r', isH ? '4' : '5');
+            c.setAttribute('fill',         isH ? 'rgba(80,100,140,0.2)'   : 'rgba(120,196,164,0.2)');
+            c.setAttribute('stroke',       isH ? 'rgba(100,130,180,0.32)' : 'rgba(120,196,164,0.5)');
+            c.setAttribute('stroke-width', '1');
+            c.dataset.layer = li;
+            c.dataset.node  = ni;
+            c.classList.add('bb-node');
+            nodesG.appendChild(c);
+          });
+        });
+        bbSvgBuilt = true;
       }
 
-      // Fetch GitHub stats
-      fetch('https://api.github.com/repos/mlnomadpy/nmn')
-        .then(response => response.json())
-        .then(data => {
-          const starsEl = document.getElementById('github-stars');
-          const forksEl = document.getElementById('github-forks');
-          if (starsEl && data.stargazers_count !== undefined) {
-            starsEl.textContent = formatNumber(data.stargazers_count);
+      function bbReset() {
+        document.querySelectorAll('#bb-svg .bb-edge').forEach(function(e) {
+          e.setAttribute('stroke', 'rgba(100,120,160,0.06)');
+          e.setAttribute('stroke-width', '0.55');
+        });
+        document.querySelectorAll('#bb-svg .bb-node').forEach(function(n) {
+          var li = parseInt(n.dataset.layer);
+          var isH = BB_NET[li].type === 'hidden';
+          n.setAttribute('fill',         isH ? 'rgba(80,100,140,0.2)'   : 'rgba(120,196,164,0.2)');
+          n.setAttribute('stroke',       isH ? 'rgba(100,130,180,0.32)' : 'rgba(120,196,164,0.5)');
+          n.setAttribute('stroke-width', '1');
+          n.setAttribute('r', isH ? '4' : '5');
+        });
+        var out = document.getElementById('bb-output');
+        if (out) out.textContent = '';
+        var cur = document.getElementById('bb-cursor');
+        if (cur) cur.style.display = '';
+      }
+
+      function bbFireLayer(li) {
+        var ys = BB_NET[li].ys;
+        var count = 3 + Math.floor(Math.random() * 2);
+        var indices = ys.map(function(_, i){return i;}).sort(function(){return Math.random()-0.5;}).slice(0, count);
+        indices.forEach(function(ni) {
+          var node = document.querySelector('#bb-svg .bb-node[data-layer="' + li + '"][data-node="' + ni + '"]');
+          if (node) {
+            node.setAttribute('fill', 'rgba(232,160,42,0.82)');
+            node.setAttribute('stroke', 'rgba(232,180,60,0.9)');
+            node.setAttribute('r', '6');
           }
-          if (forksEl && data.forks_count !== undefined) {
-            forksEl.textContent = formatNumber(data.forks_count);
+          document.querySelectorAll('#bb-svg .bb-edge[data-to="' + li + '-' + ni + '"]').forEach(function(e) {
+            e.setAttribute('stroke', 'rgba(232,160,42,0.38)');
+            e.setAttribute('stroke-width', '1.1');
+          });
+          document.querySelectorAll('#bb-svg .bb-edge[data-from="' + li + '-' + ni + '"]').forEach(function(e) {
+            e.setAttribute('stroke', 'rgba(232,160,42,0.18)');
+            e.setAttribute('stroke-width', '0.8');
+          });
+        });
+      }
+
+      function bbShowOutput(text) {
+        var cur = document.getElementById('bb-cursor');
+        if (cur) cur.style.display = 'none';
+        BB_NET[BB_NET.length - 1].ys.forEach(function(_, ni) {
+          var node = document.querySelector('#bb-svg .bb-node[data-layer="' + (BB_NET.length-1) + '"][data-node="' + ni + '"]');
+          if (node) {
+            node.setAttribute('fill', 'rgba(120,196,164,0.75)');
+            node.setAttribute('stroke', 'rgba(120,196,164,1)');
+            node.setAttribute('r', '7');
           }
-        })
-        .catch(err => {
-          console.warn('Could not fetch GitHub stats:', err);
+        });
+        var el = document.getElementById('bb-output');
+        if (!el) return;
+        var i = 0;
+        function typeNext() { if (i < text.length) { el.textContent += text[i++]; bbDelay(typeNext, 60); } }
+        typeNext();
+      }
+
+      function bbRunCycle() {
+        bbReset();
+        var STEP = 280;
+        bbDelay(function() {
+          BB_NET[0].ys.forEach(function(_, ni) {
+            var n = document.querySelector('#bb-svg .bb-node[data-layer="0"][data-node="' + ni + '"]');
+            if (n) {
+              n.setAttribute('fill', 'rgba(120,196,164,0.55)');
+              n.setAttribute('stroke', 'rgba(120,196,164,0.9)');
+              n.setAttribute('r', '7');
+            }
+          });
+        }, 120);
+        var hiddenIdxs = BB_NET.map(function(l,i){return i;}).filter(function(i){return BB_NET[i].type==='hidden';});
+        hiddenIdxs.forEach(function(li, idx) {
+          bbDelay(function(){bbFireLayer(li);}, 120 + (idx + 1) * STEP);
+        });
+        var outputDelay = 120 + (hiddenIdxs.length + 1) * STEP;
+        bbDelay(function(){bbShowOutput('Mexico City');}, outputDelay + 120);
+        bbDelay(bbRunCycle, outputDelay + 2600);
+      }
+
+      function initBlackboxDemo() { bbKillTimers(); if (!bbSvgBuilt) bbBuildSVG(); bbRunCycle(); }
+      function stopBlackboxDemo() { bbKillTimers(); }
+
+      // ── Glass-Box Demo ─────────────────────────────────────────────────
+      var PG_IO_IN  = { x: 28,  ys: [28, 56, 84, 112] };
+      var PG_IO_OUT = { x: 378, ys: [42, 80, 118] };
+      var PG_LAYERS = [
+        { x: 130, nodes: [
+          { y: 30,  concept: 'Geography',    active: true  },
+          { y: 80,  concept: 'Syntax',       active: false },
+          { y: 130, concept: 'Emotion',      active: false },
+        ]},
+        { x: 200, nodes: [
+          { y: 30,  concept: 'Capital City', active: true  },
+          { y: 80,  concept: 'Grammar',      active: false },
+          { y: 130, concept: 'Sentiment',    active: false },
+        ]},
+        { x: 270, nodes: [
+          { y: 30,  concept: 'Named Entity', active: true  },
+          { y: 80,  concept: 'Verb Tense',   active: false },
+          { y: 130, concept: 'Factual',      active: false },
+        ]},
+      ];
+      var PG_MANIFOLD_PATH = 'M 130,30 C 163,24 167,24 200,30 C 233,36 239,28 270,30';
+      var pgTimers = [], pgSvgBuilt = false;
+
+      function pgKillTimers() { pgTimers.forEach(function(t){clearTimeout(t);}); pgTimers = []; }
+      function pgDelay(fn, ms) { pgTimers.push(setTimeout(fn, ms)); }
+
+      function pgBuildSVG() {
+        var edgesG  = document.getElementById('pg-edges');
+        var nodesG  = document.getElementById('pg-nodes');
+        var labelsG = document.getElementById('pg-concept-labels');
+        if (!edgesG || !nodesG || !labelsG) return;
+        var NS = 'http://www.w3.org/2000/svg';
+
+        function mkEdge(x1, y1, x2, y2, fromKey, toKey) {
+          var ln = document.createElementNS(NS, 'line');
+          ln.setAttribute('x1', x1); ln.setAttribute('y1', y1);
+          ln.setAttribute('x2', x2); ln.setAttribute('y2', y2);
+          ln.setAttribute('stroke', 'rgba(120,196,164,0.07)');
+          ln.setAttribute('stroke-width', '0.8');
+          ln.dataset.from = fromKey; ln.dataset.to = toKey;
+          ln.classList.add('pg-edge');
+          edgesG.appendChild(ln);
+        }
+
+        PG_IO_IN.ys.forEach(function(y, ii) {
+          PG_LAYERS[0].nodes.forEach(function(nd, ni) {
+            mkEdge(PG_IO_IN.x, y, PG_LAYERS[0].x, nd.y, 'io-in-'+ii, '0-'+ni);
+          });
+        });
+        PG_LAYERS.forEach(function(layer, li) {
+          if (li >= PG_LAYERS.length - 1) return;
+          var next = PG_LAYERS[li + 1];
+          layer.nodes.forEach(function(nd1, i) {
+            next.nodes.forEach(function(nd2, j) {
+              mkEdge(layer.x, nd1.y, next.x, nd2.y, li+'-'+i, (li+1)+'-'+j);
+            });
+          });
+        });
+        var lastLayer = PG_LAYERS[PG_LAYERS.length - 1];
+        PG_IO_OUT.ys.forEach(function(y, oi) {
+          lastLayer.nodes.forEach(function(nd, ni) {
+            mkEdge(lastLayer.x, nd.y, PG_IO_OUT.x, y, '2-'+ni, 'io-out-'+oi);
+          });
         });
 
-      // Fetch PyPI download stats from pepy.tech
-      fetch('https://api.pepy.tech/api/v2/projects/nmn')
-        .then(response => response.json())
-        .then(data => {
-          const downloadsEl = document.getElementById('pypi-downloads');
-          if (downloadsEl && data.total_downloads !== undefined) {
-            downloadsEl.textContent = formatNumber(data.total_downloads);
-          }
-        })
-        .catch(err => {
-          console.warn('Could not fetch PyPI stats:', err);
-          // Fallback: try alternative endpoint
-          const downloadsEl = document.getElementById('pypi-downloads');
-          if (downloadsEl) {
-            downloadsEl.textContent = '10K+';
-          }
-        });
+        function mkCircle(cx, cy, r, fill, stroke, cls, data) {
+          var c = document.createElementNS(NS, 'circle');
+          c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r);
+          c.setAttribute('fill', fill); c.setAttribute('stroke', stroke);
+          c.setAttribute('stroke-width', '1');
+          Object.keys(data).forEach(function(k){ c.dataset[k] = data[k]; });
+          c.classList.add(cls);
+          nodesG.appendChild(c);
+        }
 
-      // Update copyright year dynamically
-      const yearEl = document.getElementById('current-year');
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
+        PG_IO_IN.ys.forEach(function(y, ni) {
+          mkCircle(PG_IO_IN.x, y, '5', 'rgba(120,196,164,0.2)', 'rgba(120,196,164,0.5)', 'pg-io', { io: 'in', node: ni });
+        });
+        PG_LAYERS.forEach(function(layer, li) {
+          layer.nodes.forEach(function(nd, ni) {
+            mkCircle(layer.x, nd.y, '7', 'rgba(120,196,164,0.1)', 'rgba(120,196,164,0.3)', 'pg-node', { layer: li, node: ni });
+            var lbl = document.createElementNS(NS, 'text');
+            lbl.setAttribute('x', layer.x); lbl.setAttribute('y', nd.y - 12);
+            lbl.setAttribute('text-anchor', 'middle');
+            lbl.setAttribute('font-family', "'IBM Plex Mono', monospace");
+            lbl.setAttribute('font-size', '6'); lbl.setAttribute('fill', 'rgba(120,196,164,0.22)');
+            lbl.textContent = nd.concept;
+            lbl.dataset.layer = li; lbl.dataset.node = ni;
+            lbl.classList.add('pg-label');
+            labelsG.appendChild(lbl);
+          });
+        });
+        PG_IO_OUT.ys.forEach(function(y, ni) {
+          mkCircle(PG_IO_OUT.x, y, '5', 'rgba(120,196,164,0.2)', 'rgba(120,196,164,0.5)', 'pg-io', { io: 'out', node: ni });
+        });
+        pgSvgBuilt = true;
+      }
+
+      function pgReset() {
+        document.querySelectorAll('#pg-svg .pg-node').forEach(function(n) {
+          n.setAttribute('fill','rgba(120,196,164,0.1)'); n.setAttribute('stroke','rgba(120,196,164,0.3)');
+          n.setAttribute('stroke-width','1'); n.setAttribute('r','7');
+        });
+        document.querySelectorAll('#pg-svg .pg-io').forEach(function(n) {
+          n.setAttribute('fill','rgba(120,196,164,0.2)'); n.setAttribute('stroke','rgba(120,196,164,0.5)');
+          n.setAttribute('stroke-width','1'); n.setAttribute('r','5');
+        });
+        document.querySelectorAll('#pg-svg .pg-edge').forEach(function(e) {
+          e.setAttribute('stroke','rgba(120,196,164,0.07)'); e.setAttribute('stroke-width','0.8');
+        });
+        document.querySelectorAll('#pg-svg .pg-label').forEach(function(l) {
+          l.setAttribute('fill','rgba(120,196,164,0.22)');
+        });
+        var mpath = document.getElementById('pg-manifold-path');
+        if (mpath) mpath.setAttribute('stroke', 'rgba(90,181,200,0)');
+        var trail = document.getElementById('pg-trail');
+        if (trail) trail.innerHTML = '';
+        var phLbl = document.getElementById('pg-phase-label');
+        if (phLbl) phLbl.textContent = 'Tracing Neuron Activation';
+        var pgOut = document.getElementById('pg-output');
+        if (pgOut) pgOut.textContent = '';
+        var pgCur = document.getElementById('pg-cursor');
+        if (pgCur) pgCur.style.display = '';
+      }
+
+      function pgFireNode(li, ni) {
+        var node = document.querySelector('#pg-svg .pg-node[data-layer="' + li + '"][data-node="' + ni + '"]');
+        if (node) {
+          node.setAttribute('fill','rgba(120,196,164,0.72)'); node.setAttribute('stroke','rgba(120,196,164,1)');
+          node.setAttribute('stroke-width','2'); node.setAttribute('r','9');
+        }
+        var lbl = document.querySelector('#pg-svg .pg-label[data-layer="' + li + '"][data-node="' + ni + '"]');
+        if (lbl) lbl.setAttribute('fill','rgba(120,196,164,1)');
+        document.querySelectorAll('#pg-svg .pg-edge[data-to="' + li + '-' + ni + '"]').forEach(function(e) {
+          e.setAttribute('stroke','rgba(120,196,164,0.52)'); e.setAttribute('stroke-width','1.4');
+        });
+      }
+
+      function pgRunCycle() {
+        pgReset();
+        pgDelay(function() {
+          document.querySelectorAll('#pg-svg .pg-io[data-io="in"]').forEach(function(n) {
+            n.setAttribute('fill','rgba(120,196,164,0.7)'); n.setAttribute('stroke','rgba(120,196,164,1)');
+            n.setAttribute('r','7');
+          });
+        }, 200);
+        pgDelay(function(){pgFireNode(0, 0);}, 400);
+        pgDelay(function(){pgFireNode(1, 0);}, 1000);
+        pgDelay(function(){pgFireNode(2, 0);}, 1600);
+        pgDelay(function() {
+          document.querySelectorAll('#pg-svg .pg-io[data-io="out"]').forEach(function(n) {
+            n.setAttribute('fill','rgba(120,196,164,0.75)'); n.setAttribute('stroke','rgba(120,196,164,1)'); n.setAttribute('r','7');
+          });
+          document.querySelectorAll('#pg-svg .pg-edge[data-from="2-0"]').forEach(function(e) {
+            e.setAttribute('stroke','rgba(120,196,164,0.52)'); e.setAttribute('stroke-width','1.4');
+          });
+        }, 2000);
+        pgDelay(function() {
+          var cur = document.getElementById('pg-cursor');
+          if (cur) cur.style.display = 'none';
+          var outEl = document.getElementById('pg-output');
+          if (!outEl) return;
+          var text = 'Mexico City', i = 0;
+          function typeNext() { if (i < text.length) { outEl.textContent += text[i++]; pgDelay(typeNext, 60); } }
+          typeNext();
+        }, 2100);
+        pgDelay(function() {
+          var trail = document.getElementById('pg-trail');
+          if (trail) trail.innerHTML = '<span style="color:var(--text-muted);">Trace: </span>Geography &rarr; Capital City &rarr; Named Entity &rarr; <strong style="color:var(--primary);">Mexico City ✓</strong>';
+        }, 2800);
+        pgDelay(function() {
+          var phLbl = document.getElementById('pg-phase-label');
+          if (phLbl) phLbl.textContent = 'Preserved Geometric Manifold';
+          var mpath = document.getElementById('pg-manifold-path');
+          if (mpath) { mpath.setAttribute('d', PG_MANIFOLD_PATH); mpath.setAttribute('stroke', 'rgba(90,181,200,0.62)'); }
+        }, 3500);
+        pgDelay(pgRunCycle, 6200);
+      }
+
+      function initPGDemo() { pgKillTimers(); if (!pgSvgBuilt) pgBuildSVG(); pgRunCycle(); }
+      function stopPGDemo() { pgKillTimers(); }
+
+      // ── IntersectionObserver triggers ──────────────────────────────────
+      if (window.IntersectionObserver) {
+        var bbContainer = document.getElementById('bb-demo-container');
+        if (bbContainer) {
+          new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) { initBlackboxDemo(); } else { stopBlackboxDemo(); }
+            });
+          }, { threshold: 0.3 }).observe(bbContainer);
+        }
+        var pgContainer = document.getElementById('pg-demo-container');
+        if (pgContainer) {
+          new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) { initPGDemo(); } else { stopPGDemo(); }
+            });
+          }, { threshold: 0.3 }).observe(pgContainer);
+        }
       }
     })();
   </script>
-</body>
 
+  <!-- Founder modal logic -->
+  <script>
+    (function () {
+      var overlay = document.getElementById('founder-modal');
+      if (!overlay) return;
+      var modalImg = document.getElementById('modal-img');
+      var modalName = document.getElementById('modal-name');
+      var modalRole = document.getElementById('modal-role');
+      var modalBio = document.getElementById('modal-bio');
+      var modalLinkedin = document.getElementById('modal-linkedin');
+      var modalTwitter = document.getElementById('modal-twitter');
+
+      function openModal(card) {
+        modalImg.src = card.dataset.img;
+        modalImg.alt = card.dataset.name;
+        modalName.textContent = card.dataset.name;
+        modalRole.innerHTML = card.dataset.role;
+        modalBio.textContent = card.dataset.bio;
+        modalLinkedin.href = card.dataset.linkedin || '#';
+        modalTwitter.href = card.dataset.twitter || '#';
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.founder-card').forEach(function (card) {
+        card.addEventListener('click', function (e) {
+          if (e.target.closest('.founder-socials a')) return;
+          openModal(this);
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(this); }
+        });
+      });
+
+      overlay.querySelector('.modal-close').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+    })();
+  </script>
+
+  <script src="js/yat-manifold.js" defer></script>
+
+
+</body>
 </html>

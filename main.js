@@ -485,3 +485,101 @@ const App = (function () {
 // ============================================
 App.init();
 
+// ============================================
+// FEATURE: Scroll Reveal
+// ============================================
+(function () {
+    'use strict';
+    if (!window.IntersectionObserver) return;
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    function attachReveal() {
+        document.querySelectorAll('.reveal').forEach(function (el) {
+            observer.observe(el);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachReveal);
+    } else {
+        attachReveal();
+    }
+})();
+
+// ============================================
+// FEATURE: Home-page Flywheel Animation
+// ============================================
+(function () {
+    'use strict';
+    var svg = document.getElementById('flywheel-svg');
+    if (!svg) return;
+
+    var nodes = [0, 1, 2, 3, 4, 5];
+    var edges = ['fw-e01', 'fw-e12', 'fw-e23', 'fw-e34', 'fw-e45', 'fw-e50'];
+    var current = 0;
+    var timer = null;
+    var STEP = 1800;
+
+    function activate(idx) {
+        nodes.forEach(function (i) {
+            var n = document.getElementById('fw-node-' + i);
+            if (n) n.classList.remove('fw-active');
+        });
+        edges.forEach(function (id) {
+            var e = document.getElementById(id);
+            if (e) e.classList.remove('fw-active');
+        });
+        var node = document.getElementById('fw-node-' + idx);
+        if (node) node.classList.add('fw-active');
+        var edgeEl = document.getElementById(edges[(idx + 5) % 6]);
+        if (edgeEl) edgeEl.classList.add('fw-active');
+    }
+
+    function start() {
+        if (timer) return;
+        activate(current);
+        timer = setInterval(function () {
+            current = (current + 1) % 6;
+            activate(current);
+        }, STEP);
+    }
+
+    function stop() {
+        clearInterval(timer);
+        timer = null;
+    }
+
+    if (window.IntersectionObserver) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) { start(); } else { stop(); }
+            });
+        }, { threshold: 0.2 });
+        observer.observe(svg);
+    } else {
+        start();
+    }
+})();
+
+// ============================================
+// FEATURE: Flip Card Keyboard Support
+// ============================================
+(function () {
+    'use strict';
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        var el = document.activeElement;
+        if (el && el.classList.contains('flip-card')) {
+            e.preventDefault();
+            el.classList.toggle('is-flipped');
+        }
+    });
+})();
+
