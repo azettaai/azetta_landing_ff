@@ -495,13 +495,14 @@ App.init();
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+            } else {
+                entry.target.classList.remove('revealed');
             }
         });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
     function attachReveal() {
-        document.querySelectorAll('.reveal').forEach(function (el) {
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) {
             observer.observe(el);
         });
     }

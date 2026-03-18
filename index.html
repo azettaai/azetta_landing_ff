@@ -81,7 +81,7 @@
   <!-- Primary Meta Tags -->
   <title>Azetta.ai — Physics Grounded AI Research Lab</title>
   <meta name="title" content="Azetta.ai — Physics Grounded AI Research Lab" />
-  <meta name="description" content="The only AI that explains every decision it makes. Building AI that is interpretable, steerable, efficient, and state of the art." />
+  <meta name="description" content="The only AI that explains every decision it makes. Building state of the art AI that is interpretable, steerable, and efficient." />
   <meta name="keywords" content="AI, Artificial Intelligence, Explainable AI, Physics Grounded AI, Interpretable AI, Machine Learning, ICML 2026, Azetta" />
   <meta name="author" content="Azetta.ai" />
   <meta name="robots" content="index, follow" />
@@ -184,7 +184,7 @@
         <!-- Brand -->
         <h1 class="hero-brand-title">azetta ai</h1>
         <p class="hero-pitch">Physics Grounded AI Research Lab.</p>
-        <p class="hero-subtitle">Building AI that is interpretable, steerable, efficient, and state of the art.</p>
+        <p class="hero-subtitle">Building state of the art AI that is interpretable, steerable, and efficient.</p>
 
       </div>
 
@@ -203,15 +203,22 @@
         <p class="flow-subtitle reveal">// OUR MISSION</p>
         <h2 id="problem-title" class="flow-title reveal">AI Should Be Safe, Transparent, and Sustainable.</h2>
       </div>
-      <div class="problem-layout">
-        <div class="problem-text">
+      <!-- Full-width Dario quote -->
+      <div class="problem-quote-wrap reveal">
+        <div class="dario-quote-box">
           <blockquote class="dario-quote">
             <p>"People outside the field are often surprised to learn that we do not understand how our own AI creations work. This lack of understanding is unprecedented in the history of technology."</p>
             <cite>— Dario Amodei, CEO Anthropic · 2025</cite>
           </blockquote>
+        </div>
+      </div>
+
+      <div class="problem-layout">
+        <div class="problem-text reveal-left">
+          <p class="mission-sub-header">&#9654; The Black Box Problem</p>
           <p class="about-lead" style="font-size:0.9rem;">Today's AI is a black box running on brute force. Models grow larger every year, yet no one can explain why they hallucinate, discriminate, or fail; bias lives inside weights beyond our reach and attempts from the Frontier Labs at reverse engineering AI are extremely inefficient. Anthropic itself admits that, to fully understand models using their approaches, they would have to use <strong> much more compute than the total compute needed to train the underlying models.</strong> We belive this happens because the current frontier models are fundamentally opaque, and that a viable, scalable solution needs to go back to the foundations. Our mission is to rebuild AI so that every decision is explainable, every behaviour is correctable, and models are able to improve and scale in much more efficient and smart ways.</p>
         </div>
-        <div class="problem-viz">
+        <div class="problem-viz reveal-right">
           <div class="blackbox-demo" id="bb-demo-container">
             <div class="bb-prompt-wrap">
               <div class="bb-prompt-row"><span class="bb-io-label">Prompt</span><span class="bb-prompt-text">"the capital of Mexico is"</span></div>
@@ -244,9 +251,9 @@
           <div class="mission-bottom-row">
           <div class="mission-risks">
           <p class="mission-sub-header">&#9654; Every Major AI Risk Traces Back to Interpretability</p>
-          <div class="risk-grid">
+          <div class="risk-grid stagger-parent">
 
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Alignment — click to reveal detail">
+            <div class="flip-card reveal" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Alignment — click to reveal detail">
               <div class="flip-inner">
                 <div class="flip-front">
                   <svg class="flip-icon" style="color:#e84545;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>
@@ -259,7 +266,7 @@
               </div>
             </div>
 
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Hallucinations — click to reveal detail">
+            <div class="flip-card reveal" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Hallucinations — click to reveal detail">
               <div class="flip-inner">
                 <div class="flip-front">
                   <svg class="flip-icon" style="color:#e8a02a;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -272,10 +279,10 @@
               </div>
             </div>
 
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Bias and Fairness — click to reveal detail">
+            <div class="flip-card reveal" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Bias and Fairness — click to reveal detail">
               <div class="flip-inner">
                 <div class="flip-front">
-                  <svg class="flip-icon" style="color:#a050ff;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="5 8 12 5 19 8"/><path d="M5 8l-2 5a5 5 0 0 0 10 0l-2-5"/><path d="M11 18.5a5 5 0 0 0 10 0l-2-5"/></svg>
+                  <svg class="flip-icon" style="color:#a050ff;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M6 22h12"/><polyline points="5 8 12 5 19 8"/><path d="M5 8l-3.5 4a3.5 3.5 0 0 0 7 0l-3.5-4"/><path d="M19 8l-3.5 4a3.5 3.5 0 0 0 7 0l-3.5-4"/></svg>
                   <p class="flip-name">Bias &amp; Fairness</p>
                   <span class="flip-hint">click to reveal</span>
                 </div>
@@ -285,7 +292,7 @@
               </div>
             </div>
 
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Privacy Leakage — click to reveal detail">
+            <div class="flip-card reveal" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Privacy Leakage — click to reveal detail">
               <div class="flip-inner">
                 <div class="flip-front">
                   <svg class="flip-icon" style="color:#38c9c4;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -298,7 +305,7 @@
               </div>
             </div>
 
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="IP Exposure — click to reveal detail">
+            <div class="flip-card reveal" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="IP Exposure — click to reveal detail">
               <div class="flip-inner">
                 <div class="flip-front">
                   <svg class="flip-icon" style="color:#e8c42a;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/><line x1="12" y1="13" x2="12" y2="17"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
@@ -311,7 +318,7 @@
               </div>
             </div>
 
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Harmful Use — click to reveal detail">
+            <div class="flip-card reveal" onclick="this.classList.toggle('is-flipped')" role="button" tabindex="0" aria-label="Harmful Use — click to reveal detail">
               <div class="flip-inner">
                 <div class="flip-front">
                   <svg class="flip-icon" style="color:#e84587;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
@@ -366,7 +373,7 @@
         <h2 id="approach-title" class="flow-title reveal">Reimagining AI Through a Physics Lens.</h2>
       </div>
       <div class="approach-layout">
-        <div class="approach-viz">
+        <div class="approach-viz reveal-left">
           <div class="pg-demo-wrap" id="pg-demo-container">
             <div class="pg-demo-header">
               <span class="pg-demo-kicker">⬡ GLASS BOX</span>
@@ -391,8 +398,8 @@
             <div class="pg-trail" id="pg-trail"></div>
           </div>
         </div>
-        <div class="approach-text">
-          <p class="about-lead">We believe information has its own physics. Reimagining AI through this lens reveals a fundamental mathematical structure — and building based on it gives us models that are interpretable, steerable, efficient and performant -- by design.</p>
+        <div class="approach-text reveal-right">
+          <p class="about-lead">We believe information has its own physics. Reimagining AI through this lens reveals a fundamental mathematical structure — and building based on it gives us models that are interpretable, steerable and efficient by design.</p>
           <dl class="pillar-list">
             <div class="pillar-item"><dt>Interpretable</dt><dd>One neuron, one concept. Full audit trail from input to output.</dd></div>
             <div class="pillar-item"><dt>Steerable</dt><dd>Target specific neurons. Correct behaviour directly — no retraining.</dd></div>
@@ -410,21 +417,20 @@
     <section class="flywheel-section" id="research" aria-labelledby="research-title">
       <div class="section-shell">
         <p class="flow-subtitle reveal">// OUR RESEARCH</p>
-        <h2 id="research-title" class="flow-title reveal">Intelligence Has a Fundamental Structure. We Find It.</h2>
+        <h2 id="research-title" class="flow-title reveal">Pioneering the Field of Physics Grounded AI.</h2>
 
         <!-- YAT split layout: copy left, canvas right -->
         <div class="yat-container">
 
-          <div class="yat-content reveal">
+          <div class="yat-content reveal-left">
 
             <div>
               <p class="yat-title">YAT KERNEL</p>
-              <p class="yat-subtitle">Yet Another Transform — a physics-grounded similarity metric that creates gravity wells in representation space</p>
+              <p class="yat-subtitle">The Yat Kernel is a physics-grounded mercer kernel that captures both alignment and proximity to create highly efficient gravity wells in representation space</p>
             </div>
 
             <div class="yat-formula-box">
               <div>
-                <span class="formula-label">// Core metric — powers NoMoreDelulu &amp; SLAY Attention</span>
                 <p class="yat-formula">ⵟ(x, w) = (x·w)² / ‖x − w‖²</p>
               </div>
             </div>
@@ -434,7 +440,7 @@
 
           </div>
 
-          <div class="yat-viz-wrapper reveal">
+          <div class="yat-viz-wrapper reveal-right">
             <div class="yat-viz-header">
               <span class="viz-label">ⵟ — YAT Kernel Manifold</span>
               <span class="viz-hint">click to add neurons · up to 5</span>
@@ -446,16 +452,16 @@
 
         <!-- Paper cards -->
         <div class="paper-grid">
-          <a class="paper-card reveal" href="https://openreview.net/pdf?id=1AFenZBIcW" target="_blank" rel="noopener">
-            <span class="paper-venue">ICML 2026 · OpenReview</span>
+          <a class="paper-card reveal" href="https://arxiv.org/abs/2603.12276" target="_blank" rel="noopener">
+            <span class="paper-venue">ICML 2026 · arXiv</span>
             <h3 class="paper-title">NoMoreDelulu</h3>
-            <p class="paper-desc">SOTA performance at 10× fewer parameters. Foundational research for Physics Grounded AI.</p>
+            <p class="paper-desc">Foundational research for Physics Grounded AI; Neural-Matter Networks outperform traditional architectures.</p>
             <span class="paper-link">Read paper →</span>
           </a>
           <a class="paper-card reveal" href="https://arxiv.org/pdf/2602.04915" target="_blank" rel="noopener">
             <span class="paper-venue">ICML 2026 · arXiv</span>
             <h3 class="paper-title">SLAY Attention</h3>
-            <p class="paper-desc">Linear-time attention mechanism that outperforms standard softmax attention.</p>
+            <p class="paper-desc">Linear-time YAT-powered attention mechanism that outperforms standard softmax attention.</p>
             <span class="paper-link">Read paper →</span>
           </a>
         </div>
@@ -486,7 +492,7 @@
 
       <!-- Periodica spotlight -->
       <div class="periodica-grid">
-        <div class="periodica-content reveal">
+        <div class="periodica-content reveal-left">
           <h2 class="periodica-title">PERIODICA</h2>
           <p class="periodica-subtitle">// The first MLOps platform built for interpretability</p>
 
@@ -506,7 +512,7 @@
           </div>
         </div>
 
-        <div id="periodica-demo" class="pd-demo reveal">
+        <div id="periodica-demo" class="pd-demo reveal-right">
 
           <!-- Premium status banner -->
           <div class="pd-premium-banner" id="pd-premium-banner" style="display:none;">
@@ -594,10 +600,10 @@
       </div><!-- /periodica-grid -->
 
       <!-- Aether Models -->
-      <div class="aether-grid reveal">
+      <div class="aether-grid">
 
         <!-- LEFT: comparison table -->
-        <div class="aether-compare">
+        <div class="aether-compare reveal-left">
           <div class="ac-header">
             <div class="ac-metric-spacer"></div>
             <div class="ac-col-label ac-sota-label">SOTA Models</div>
@@ -656,10 +662,10 @@
         </div>
 
         <!-- RIGHT: content, right-aligned -->
-        <div class="aether-content">
+        <div class="aether-content reveal-right">
           <h2 class="aether-title">Aether Models</h2>
           <p class="periodica-subtitle">// Fully interpretable SOTA models, available via API</p>
-          <p class="periodica-desc">Aether models are Physics Grounded AI in production. Every neuron maps to one concept. Every decision carries a full audit trail. Better performance, a fraction of the cost and 10× fewer parameters than current SOTA models.</p>
+          <p class="periodica-desc">Aether models are Physics Grounded AI in production. Fully interpretable and steerable models with State of the Art Performance with ~10X less parameters.</p>
           <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.25rem 0;justify-content:flex-end;">
             <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">Fully Interpretable</span>
             <span class="pill-tag" style="font-size:0.7rem;padding:0.25rem 0.75rem;">10× Smaller</span>
@@ -686,38 +692,35 @@
         <h2 id="team-title" class="flow-title reveal">The Founding Team.</h2>
         <p class="about-lead reveal" style="max-width:800px;">Mathematical rigour, entrepreneurial experience, and product acumen.</p>
 
-        <div class="founders-grid">
+        <div class="founders-grid stagger-parent">
 
           <!-- Taha Bouhsine — CEO -->
-          <div class="founder-card reveal" tabindex="0"
+          <div class="founder-card reveal-scale" tabindex="0"
             data-name="Taha Bouhsine" data-role="Co-Founder &amp; CEO" data-img="assets/taha.jpg"
-            data-bio="Mathematician and architect of the Physics Grounded AI framework. Authored the core interpretability methodology now under ICML 2026 review."
-            data-linkedin="#" data-twitter="#" data-github="#">
+            data-bio="Mathematician and architect of the Physics Grounded AI framework. Authored the core interpretability methodology now under ICML 2026 review. AI JAX Google Developer Expert, creator of Physics-Grounded AI — mathematician, engineer, and computer scientist."
+            data-linkedin="https://www.linkedin.com/in/tahabsn/" data-twitter="#" data-github="#">
             <div class="founder-avatar">
               <img src="assets/taha.jpg" alt="Taha Bouhsine">
             </div>
             <h3 class="founder-name">Taha Bouhsine</h3>
             <p class="founder-role">Co-Founder &amp; CEO</p>
             <div class="founder-tags">
+              <span class="founder-tag">AI RESEARCHER</span>
               <span class="founder-tag">GOOGLE DEV</span>
-              <span class="founder-tag">MATHEMATICIAN</span>
             </div>
-            <p class="founder-bio">Architect of the Physics Grounded AI framework. Published AI researcher and Google Developer Expert. Authored core Physics-grounded AI methodology, now under ICML 2026 review.</p>
+            <p class="founder-bio">Mathematician and architect of the Physics Grounded AI framework. Authored the core interpretability methodology now under ICML 2026 review. AI JAX Google Developer Expert, mathematician, engineer, and computer scientist.</p>
             <div class="founder-socials">
-              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/tahabsn/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
               </a>
             </div>
           </div>
 
           <!-- Douglas Seo — CTO -->
-          <div class="founder-card reveal" tabindex="0"
+          <div class="founder-card reveal-scale" tabindex="0"
             data-name="Douglas Seo" data-role="Co-Founder &amp; CTO" data-img="assets/doug.jpg"
-            data-bio="Third-time founder. Built and scaled two previous ventures through the Founders Inc. portfolio network. Deep enterprise GTM experience."
-            data-linkedin="#" data-twitter="#" data-github="#">
+            data-bio="Third-time founder and lead engineer. Popper CEO (Founders Inc. Cold Start); Werkflow CTO/Lead Founding Engineer ($1.5M VC backed). Berkeley Electrical Engineering + Computer Science."
+            data-linkedin="https://www.linkedin.com/in/douglas-seo-337133186/" data-twitter="#" data-github="#">
             <div class="founder-avatar">
               <img src="assets/doug.jpg" alt="Douglas Seo">
             </div>
@@ -725,25 +728,22 @@
             <p class="founder-role">Co-Founder &amp; CTO</p>
             <div class="founder-tags">
               <span class="founder-tag">FOUNDERS INC</span>
-              <span class="founder-tag">2× FOUNDER</span>
-              <span class="founder-tag">BERKELEY CS</span>
+              <span class="founder-tag">3× FOUNDER</span>
+              <span class="founder-tag">BERKELEY EE+CS</span>
             </div>
-            <p class="founder-bio">Second-time founder. Built and scaled two previous ventures, the latest of which was part of the Founders Inc. portfolio network. Deep product engineering experience.</p>
+            <p class="founder-bio">Third-time founder and lead engineer at Azetta AI. <a href="https://popper.social" target="_blank" rel="noopener" style="color:var(--primary);">Popper</a> CEO (Founders Inc. Cold Start); Werkflow CTO/Lead Founding Engineer ($1.5M VC backed). UC Berkeley Electrical Engineering + Computer Science.</p>
             <div class="founder-socials">
-              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/douglas-seo-337133186/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
               </a>
             </div>
           </div>
 
           <!-- Jose Miguel Luna — CPO -->
-          <div class="founder-card reveal" tabindex="0"
+          <div class="founder-card reveal-scale" tabindex="0"
             data-name="Jose Miguel Luna" data-role="Co-Founder &amp; CPO" data-img="assets/jose.jpg"
             data-bio="Ex-Apple Product Leader. Shipped AI/ML features to hundreds of millions of users. Columbia MBA + MS in AI/ML."
-            data-linkedin="#" data-twitter="#" data-github="#">
+            data-linkedin="https://www.linkedin.com/in/jose-miguel-luna-mugica/" data-twitter="#" data-github="#">
             <div class="founder-avatar">
               <img src="assets/jose.jpg" alt="Jose Miguel Luna">
             </div>
@@ -751,15 +751,12 @@
             <p class="founder-role">Co-Founder &amp; CPO</p>
             <div class="founder-tags">
               <span class="founder-tag">EX-APPLE</span>
-              <span class="founder-tag">MBA + MS AI/ML</span>
+              <span class="founder-tag">COLUMBIA MBA + MS AI/ML</span>
             </div>
-            <p class="founder-bio">Ex-Apple Engineering Product Manager. Led Product, Data and Tech teams at YC-backed startup. Has shipped AI/ML features to millions of users. Schwarzman Scholar and Columbia MBA + MS in AI/ML.</p>
+            <p class="founder-bio">Ex-Apple Engineering Product Manager for AI/ML products. Founding team at YC-backed startup, leading Product, Data and Tech teams. Schwarzman Scholar and Columbia MBA + MS in AI/ML (co-author of ICML publication).</p>
             <div class="founder-socials">
-              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/jose-miguel-luna-mugica/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l11.733 16h4.267l-11.733-16zM4 20l6.768-6.768M20 4l-6.768 6.768"/></svg>
               </a>
             </div>
           </div>
@@ -798,7 +795,10 @@
           Interested? Reach out!
         </h2>
         <p class="cta-subtitle">
-          We are looking for researchers, engineers, investors and partners who want to build safe AI with us. If that sounds like you, shoot us an email!
+          We are looking for researchers, engineers, investors and partners who want to build safe AI with us.
+        </p>
+        <p class="cta-subtitle">
+          If that sounds like you, shoot us an email!
         </p>
         <nav class="cta-buttons" aria-label="Call to action buttons">
           <a class="btn btn-primary" href="mailto:contact@azetta.ai" aria-label="Get in Touch">Get in touch</a>

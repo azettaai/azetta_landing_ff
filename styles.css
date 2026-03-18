@@ -251,8 +251,8 @@ svg {
 }
 
 .nav-logo {
-    width: 26px;
-    height: 26px;
+    width: 45px;
+    height: 45px;
     flex-shrink: 0;
 }
 
@@ -347,6 +347,13 @@ svg {
     font-size: 0.78rem;
 }
 
+.nav-cta .btn-primary {
+    background: var(--primary);
+    font-weight: 900;
+    position: relative;
+    z-index: 10000;
+}
+
 /* ============================================
    HERO SECTION
    ============================================ */
@@ -355,7 +362,8 @@ svg {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-top: clamp(0.25rem, 0.5vh, 0.5rem);
     position: relative;
     overflow: hidden;
 }
@@ -2380,9 +2388,10 @@ svg {
 }
 
 .footer-nav {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    display: flex;
+    gap: 3rem;
+    justify-content: flex-end;
+    padding-right: 4rem;
 }
 
 .footer-nav-group h4 {
@@ -2625,7 +2634,7 @@ svg {
     }
 
     .footer-nav {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 2rem;
     }
 
@@ -3878,7 +3887,7 @@ a.series-title:hover {
    ABOUT SECTION
    ============================================ */
 .about-section {
-    padding: 6rem 2rem;
+    padding: 3rem 2rem;
     position: relative;
     z-index: 1;
 }
@@ -5246,13 +5255,53 @@ a.series-title:hover {
    ============================================ */
 .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(32px);
+    transition: opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .reveal.revealed {
     opacity: 1;
     transform: none;
 }
+
+/* Directional slide variants */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-70px);
+    transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal-right {
+    opacity: 0;
+    transform: translateX(70px);
+    transition: opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.93) translateY(20px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal-left.revealed,
+.reveal-right.revealed,
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: none;
+}
+
+/* Stagger delays for direct children of .stagger-parent */
+.stagger-parent > .reveal:nth-child(1),
+.stagger-parent > .reveal-scale:nth-child(1) { transition-delay: 0ms; }
+.stagger-parent > .reveal:nth-child(2),
+.stagger-parent > .reveal-scale:nth-child(2) { transition-delay: 110ms; }
+.stagger-parent > .reveal:nth-child(3),
+.stagger-parent > .reveal-scale:nth-child(3) { transition-delay: 220ms; }
+.stagger-parent > .reveal:nth-child(4),
+.stagger-parent > .reveal-scale:nth-child(4) { transition-delay: 330ms; }
+.stagger-parent > .reveal:nth-child(5),
+.stagger-parent > .reveal-scale:nth-child(5) { transition-delay: 440ms; }
+.stagger-parent > .reveal:nth-child(6),
+.stagger-parent > .reveal-scale:nth-child(6) { transition-delay: 550ms; }
 
 /* ============================================
    PROBLEM SECTION — RISK CARDS
@@ -5636,7 +5685,7 @@ a.series-title:hover {
   color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.5rem;
 }
 
 /* ── Side-by-side row ── */
@@ -5823,13 +5872,7 @@ a.series-title:hover {
 }
 
 /* Reuse mission-sub-header for the risk section header */
-.mission-sub-header {
-  font-family: var(--font-mono);
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
-  font-weight: 700;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+.mission-bottom .mission-sub-header {
   margin: 0 0 1.5rem;
 }
 
@@ -5865,7 +5908,7 @@ a.series-title:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: 0.75rem;
   position: relative;
 }
 
@@ -5926,29 +5969,44 @@ a.series-title:hover {
 }
 
 /* Dario quote — large, dramatic */
+.problem-quote-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem clamp(2rem, 6vw, 6rem);
+}
+
+.dario-quote-box {
+  max-width: 1250px;
+  width: 100%;
+  padding: 2rem 2.5rem;
+  border: 1.5px solid rgba(120, 196, 164, 0.2);
+  border-left: 3px solid var(--primary);
+  background: rgba(7, 14, 9, 0.7);
+}
+
 .dario-quote {
   border: none;
-  padding: 0.5rem 0;
+  padding: 0;
   margin: 0;
   background: none;
   text-align: center;
 }
 
 .dario-quote p {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  font-style: italic;
+  font-size: clamp(0.95rem, 1.7vw, 1.25rem);
+  font-style: bold;
   color: var(--light);
-  line-height: 1.7;
-  margin: 0 0 0.65rem;
-  opacity: 0.9;
+  line-height: 1.65;
+  margin: 0 0 0.6rem;
 }
 
 .dario-quote cite {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
+  font-size: 0.78rem;
+  color: var(--primary);
   font-style: normal;
-  font-family: var(--font-primary);
-  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
   display: block;
 }
 
